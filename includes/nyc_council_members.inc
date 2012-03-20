@@ -67,7 +67,7 @@ $council_members = array(
   ),
   17 => array(
     'name' => 'Maria del Carmen  Arroyo',
-    'email' => '',
+    'email' => 'marroyo@council.nyc.gov',
   ),
   18 => array(
     'name' => 'Annabel Palma',
@@ -87,7 +87,7 @@ $council_members = array(
   ),
   22 => array(
     'name' => 'Peter F. Vallone, Jr.',
-    'email' => '',
+    'email' => 'vallone@council.nyc.ny.us',
   ),
   23 => array(
     'name' => 'Mark Weprin',
@@ -127,15 +127,15 @@ $council_members = array(
   ),
   32 => array(
     'name' => 'Eric Ulrich',
-    'email' => '',
+    'email' => 'eulrich@council.nyc.gov',
   ),
   33 => array(
     'name' => 'Stephen Levin',
-    'email' => '',
+    'email' => 'slevin@council.nyc.gov',
   ),
   34 => array(
     'name' => 'Diana Reyna',
-    'email' => '',
+    'email' => 'bbaruch@council.nyc.gov',
   ),
   35 => array(
     'name' => 'Letitia James',
@@ -155,7 +155,7 @@ $council_members = array(
   ),
   39 => array(
     'name' => 'Bradford S. Lander',
-    'email' => '',
+    'email' => 'lander@council.nyc.gov',
   ),
   40 => array(
     'name' => 'Mathieu Eugene',
@@ -167,7 +167,7 @@ $council_members = array(
   ),
   42 => array(
     'name' => 'Charles Barron',
-    'email' => '',
+    'email' => 'cbarron@council.nyc.gov',
   ),
   43 => array(
     'name' => 'Vincent J. Gentile',
@@ -179,7 +179,7 @@ $council_members = array(
   ),
   45 => array(
     'name' => 'Jumaane D. Williams',
-    'email' => '',
+    'email' => 'jwilliams@council.nyc.gov',
   ),
   46 => array(
     'name' => 'Lewis Fidler',
