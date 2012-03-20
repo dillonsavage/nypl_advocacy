@@ -18,7 +18,7 @@ function nypl_advocacy_schema() {
         'default' => '',
       ),
       'date' => array(
-        'type' => 'date',
+        'type' => 'datetime',
       ),
       'location' => array(
         'type' => 'varchar',
