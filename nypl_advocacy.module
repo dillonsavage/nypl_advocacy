@@ -87,33 +87,35 @@ function nypl_advocacy_letters_map() {
      * 0-500: small red
      * 500-1000: small purple
      * 1000-2000: green
-     * 2000+: big blue
+     * 2000+: blue
      */
     $letters_sent_q = db_query('SELECT SUM(emails_sent)+SUM(letters_sent) AS letters_total
       FROM {nypl_advocacy}
       WHERE location = %d', $bounds->tid);
     $letters_sent = db_result($letters_sent_q);
-    
-    if ($letters_sent > 0 && $letters_sent <= 500) {
+
+    if ($letters_sent) {
+      if ($letters_sent > 500 && $letters_sent <= 1000) {
+        $marker = 'small purple';
+      }
+      else if ($letters_sent > 1000 && $letters_sent <= 2000) {
+        $marker = 'green';
+      }
+      else if ($letters_sent > 2000) {
+        $marker = 'blue';
+      }
+    }
+    else {
       $marker = 'small red';
     }
-    else if ($letters_sent > 500 && $letters_sent <= 1000) {
-      $marker = 'small purple';
-    }
-    else if ($letters_sent > 1000 && $letters_sent <= 2000) {
-      $marker = 'green';
-    }
-    else if ($letters_sent > 2000) {
-      $marker = 'big blue';
-    }
-  
+      
     $marker = array(
       'options' => array(),
       'opts' => array('title' => $bounds->name),
       'longitude' => $bounds->longitude,
       'latitude' => $bounds->latitude,
       'text' => $text,
-      'markername' => isset($marker) ? $marker : 'small red',
+      'markername' => $marker,
      );
      array_push($all_markers, $marker);
      unset($text);
