@@ -276,8 +276,8 @@ function nypl_advocacy_form_alter(&$form, &$form_state, $form_id) {
 /**
  * Implementation of hook_mail_alter()
  */
-function nypl_content_mail_alter(&$message) {
-  watchdog('nypl_content', '<pre>' . var_export($message, true) . '</pre>');
+function nypl_advocacy_mail_alter(&$message) {
+  watchdog('nypl_advocacy', '<pre>' . var_export($message, true) . '</pre>');
   // todo: grab cm email value from form submission data;
   // if this matches $message['to'], CC ($message['headers']['CC']) to mayor and speaker
 }
