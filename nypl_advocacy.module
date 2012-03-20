@@ -289,7 +289,6 @@ function nypl_advocacy_mail_alter(&$message) {
 function nypl_advocacy_email_stats($form, &$form_state) {
   // need a less wonky way to get location...
   $location = $form_state['values']['submitted'][18];
-  watchdog('nypl_advocacy', 'location = ' . $location);
   $campaign_name = variable_get('nypl_advocacy_campaign');
   $date_today = date('Y-m-d');
   $stats_q = db_query("SELECT emails_sent FROM {nypl_advocacy} WHERE campaign_name = '%s' AND date = '%s' AND location = '%s'",
