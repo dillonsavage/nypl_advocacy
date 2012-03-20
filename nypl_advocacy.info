@@ -1,0 +1,8 @@
+; $Id$
+name = NYPL Advocacy
+description = Custom module for collecting and displaying NYPL eAdvocacy data.
+package = NYPL Modules
+core = 6.x
+php = 5.x
+version = 6.x-1.x-dev
+dependencies[] = webform, locations, gmap

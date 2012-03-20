@@ -1,0 +1,48 @@
+<?php
+// $Id$
+
+function nypl_advocacy_install() {
+  drupal_install_schema('nypl_advocacy');
+}
+
+function nypl_advocacy_schema() {
+  $schema['nypl_advocacy'] = array(
+    'fields' => array(
+      'sid' => array(
+        'type' => 'serial',
+      ),
+      'campaign_name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'date' => array(
+        'type' => 'date',
+      ),
+      'location' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'letters_sent' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'emails_sent' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('sid'),
+  );
+
+  return $schema;
+}
+
+function nypl_advocacy_uninstall() {
+  drupal_uninstall_schema('nypl_advocacy');
+}

@@ -1,0 +1,415 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * @brief NYPL Advocacy data and settings
+ */
+ 
+ 
+/**
+ * Implementation of hook_perm()
+ */
+function nypl_advocacy_perm() {
+  return array('administer NYPL advocacy');
+}
+
+/**
+ * Implementation of hook_menu()
+ *
+ * @return $items
+ *  An associative array of menu items to be registered with Drupal which handles administrative
+ *  and display paths.
+ */
+function nypl_advocacy_menu() {
+  $items['admin/settings/nypl_advocacy'] = array(
+    'title' => t('NYPL Advocacy'),
+    'type' => MENU_NORMAL_ITEM,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nypl_advocacy_admin_form'),
+    'access arguments' => array('administer NYPL advocacy'),
+    'weight' => 0,
+  );
+  $items['admin/settings/nypl_advocacy/stats_add'] = array(
+    'title' => t('Enter statistics'),
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nypl_advocacy_stats_form'),
+    'access arguments' => array('administer NYPL advocacy'),
+    'weight' => 0,
+  );
+  $items['data_export/advocacy/%'] = array(
+    'title' => '(data export)',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'nypl_advocacy_stats',
+    'page arguments' => array(2),
+    'access arguments' => array('administer NYPL advocacy'),
+  );
+  
+  return $items;
+}
+
+/**
+ * Implementation of hook_block()
+ */
+function nypl_advocacy_block($op = 'list', $delta = 0, $edit = array()) {
+  if ($op == 'list') {
+    $blocks[0] = array(
+      'info' => t('advocacy letters gmap'),
+      'region' => 'content',
+      'visibility' => 1,
+      'pages' => 'advocacy/thankyou',
+    );
+    return $blocks;
+  }
+  else if ($op == 'view' && $delta == 0) {
+    $block['content'] = nypl_advocacy_letters_map();
+    return $block;
+  }
+}
+
+/**
+ * Generate a map of all locations with different markers based on amt of letters per location
+ * Adapted from locations_gmap_all()
+ */
+function nypl_advocacy_letters_map() {
+  $locations_gis = _locations_get_bounds();
+  $all_markers = array();
+
+  foreach ($locations_gis as $key => $bounds) {
+    $text = l(t($bounds->name), 'locations/tid/'. $bounds->tid) .'<br />';
+    $text .= $bounds->address .'<br />';
+    $text .= $bounds->city .', NY '. locations_format_zipcode($bounds->zipcode) .'<br />';
+    // $text .= ($bounds->hours != 'Closed') ? 'Open today: '. $bounds->hours : 'Closed today';
+  
+    /**
+     * these values will change
+     * 0-500: small red
+     * 500-1000: small purple
+     * 1000-2000: green
+     * 2000+: big blue
+     */
+    $letters_sent_q = db_query('SELECT SUM(emails_sent)+SUM(letters_sent) AS letters_total
+      FROM {nypl_advocacy}
+      WHERE location = %d', $bounds->tid);
+    $letters_sent = db_result($letters_sent_q);
+    
+    if ($letters_sent > 0 && $letters_sent <= 500) {
+      $marker = 'small red';
+    }
+    else if ($letters_sent > 500 && $letters_sent <= 1000) {
+      $marker = 'small purple';
+    }
+    else if ($letters_sent > 1000 && $letters_sent <= 2000) {
+      $marker = 'green';
+    }
+    else {
+      $marker = 'big blue';
+    }
+  
+    $marker = array(
+      'options' => array(),
+      'opts' => array('title' => $bounds->name),
+      'longitude' => $bounds->longitude,
+      'latitude' => $bounds->latitude,
+      'text' => $text,
+      'markername' => isset($marker) ? $marker : 'small red',
+     );
+     array_push($all_markers, $marker);
+     unset($text);
+  }
+  
+  $locations_all_map = array(
+    'id' => 'all_locations',
+    'width' => '500px',
+    'height' => '500px',
+    'zoom' => 12,
+    'maxzoom' => 17,
+    'markers' => $all_markers,
+  );
+  
+  return theme('gmap', array('#settings' => $locations_all_map)); 
+}
+
+/**
+ * Advocacy admin area
+ */
+function nypl_advocacy_admin_form() {
+  $form = array();
+  
+  $form['campaign_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Name of campaign'),
+    '#default_value' => variable_get('nypl_advocacy_campaign', 'Advocacy 2012'),
+    '#maxlength' => 255
+  );
+  $form['wf_nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Advocacy form nid'),
+    '#default_value' => variable_get('nypl_advocacy_wf_nid', 134093),
+    '#size' => 7,
+    '#maxlength' => 7
+  );
+  $form['nyt_key'] = array(
+    '#type' => 'textfield',
+    '#title' => t('NYTimes API key'),
+    '#default_value' => variable_get('nypl_advocacy_districts_key', 'dab838a64853702416d25e052d3174ae:17:65636627'),
+    '#size' => 50,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+  );
+  
+  return $form;
+}
+
+/**
+ * Advocacy admin form submission
+ */
+function nypl_advocacy_admin_form_submit($form, &$form_state) {
+  $sys_vars = array(
+    'nypl_advocacy_campaign' => check_plain($form_state['values']['campaign_name']),
+    'nypl_advocacy_wf_nid' => check_plain($form_state['values']['wf_nid']),
+    'nypl_advocacy_districts_key' => check_plain($form_state['values']['nyt_key']),
+  );
+  foreach ($sys_vars as $name => $value) {
+    if (variable_get($name, $value) != $value) {
+      variable_set($name, $value);
+    }
+  }
+  drupal_set_message('Changes saved.');
+}
+
+/**
+ * Form for entering advocacy statistics
+ */
+function nypl_advocacy_stats_form() {
+  $form = array();
+  
+  // get locations for select list
+  $locations_list = locations_master_list();
+  foreach (array_keys($locations_list) as $tid) {
+    $has_parent = db_result(db_query('SELECT parent FROM {term_hierarchy} WHERE tid = %d', $tid));
+    if ($has_parent) {
+      unset($locations_list[$tid]);
+    }
+  }
+  
+  $form['campaign'] = array(
+    '#type' => 'hidden',
+    '#default_value' => variable_get('nypl_advocacy_campaign', '2012 Advocacy'),
+  );
+  $form['date'] = array(
+    '#type' => 'date',
+    '#title' => t('Date'),
+    '#default_value' => array(
+      'month' => format_date(time(), 'custom', 'n'),
+      'day' => format_date(time(), 'custom', 'd'),
+      'year' => format_date(time(), 'custom', 'Y'),
+    ),
+  );
+  $form['library_location'] = array(
+    '#title' => 'Library location',
+    '#type' => 'select',
+    '#options' => $locations_list,
+  );
+  $form['letters_sent'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Letters sent'),
+    '#size' => 10,
+    '#maxlength' => 10,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+  );
+  
+  return $form;
+}
+
+/**
+ * Stats form submission
+ */
+function nypl_advocacy_stats_form_submit($form, &$form_state) {
+  $form_values = $form_state['values'];
+  $campaign_name = variable_get('nypl_advocacy_campaign', '2012 Advocacy');
+  $date = $form_values['date']['year'] . '-' . $form_values['date']['month'] . '-' . $form_values['date']['day'];
+  $location = $form_values['library_location'];
+  $letters_sent = $form_values['letters_sent'];
+  $insert_sql = "INSERT INTO {nypl_advocacy} (campaign_name, date, location, letters_sent) VALUES ('%s', '%s', '%s', %d)";
+  db_query($insert_sql, $campaign_name, $date, $location, $letters_sent);
+  drupal_set_message('Changes saved.');
+}
+
+/**
+ * Implementation of hook_form_alter()
+ */
+function nypl_advocacy_form_alter(&$form, &$form_state, $form_id) {
+  $wf_nid = variable_get('nypl_advocacy_wf_nid', 134093);
+  $wf_id = 'webform_client_form_' . $wf_nid;
+  if ($form_id == $wf_id) {
+    if ($form_state['webform']['page_num'] == 2) {
+      $submitted_tree = $form_state['values']['submitted_tree'];
+      //_advocacy_email_stats($submitted_tree['library']);
+      $council_member = _advocacy_get_council_member($submitted_tree);
+      $cm_email = !empty($council_member['email']) ? $council_member['email'] : '';
+      $addr_markup = $submitted_tree['title'] . ' ' . $submitted_tree['first_name'] . ' ' . $submitted_tree['last_name'] . '<br />';
+      $addr_markup .= $submitted_tree['address_1'] . '<br />';
+      $addr_markup .= $submitted_tree['address_2'] ? $submitted_tree['address_2'] . '<br/>' : '';
+      $addr_markup .= $submitted_tree['city_town'] . ', ' . $submitted_tree['state_province_region'] . ' ' . $submitted_tree['zip_postal_code'];
+      $form['submitted']['council_member']['#value'] = '<b>Dear ';
+      if (!empty($council_member['name']) && $council_member['name'] != 'Christine Quinn') {
+        $form['submitted']['council_member']['#value'] .= $council_member['name'] . ', ';
+      }
+      $form['submitted']['council_member']['#value'] .= 'Mayor Bloomberg and Speaker Quinn,</b>';
+      $form['submitted']['cm_greeting']['#value'] = strip_tags($form['submitted']['council_member']['#value']);
+      $form['submitted']['address']['#value'] = '<b>' . $addr_markup . '</b>';
+      $form['submitted']['email_to']['#value'] = $cm_email;
+      $form['#submit'][] = 'nypl_advocacy_email_stats';
+    }
+  }
+}
+
+/**
+ * Implementation of hook_mail_alter()
+ */
+function nypl_content_mail_alter(&$message) {
+  watchdog('nypl_content', '<pre>' . var_export($message, true) . '</pre>');
+  // todo: grab cm email value from form submission data;
+  // if this matches $message['to'], CC ($message['headers']['CC']) to mayor and speaker
+}
+
+/**
+ * Advocacy form submisison
+ * Make sure email stats are submitted/updated...
+ */
+function nypl_advocacy_email_stats($form, &$form_state) {
+  // need a less wonky way to get location...
+  $location = $form_state['values']['submitted'][18];
+  watchdog('nypl_advocacy', 'location = ' . $location);
+  $campaign_name = variable_get('nypl_advocacy_campaign');
+  $date_today = date('Y-m-d');
+  $stats_q = db_query("SELECT emails_sent FROM {nypl_advocacy} WHERE campaign_name = '%s' AND date = '%s' AND location = '%s'",
+    $campaign_name, $date_today, $location);
+  // increment emails_sent if this location, date, and campaign exist in the db
+  if ($stats_r = db_result($stats_q)) {
+    $emails_sent = $stats_r['emails_sent'] + 1;
+    db_query("UPDATE {nypl_advocacy} SET emails_sent = %d WHERE campaign_name = '%s' AND date = '%s' AND location = %d",
+      $emails_sent, $campaign_name, $date_today, $location);
+  }
+  // otherwise, create a new entry with emails_sent = 1
+  else {
+    db_query("INSERT INTO {nypl_advocacy} (campaign_name, date, location, letters_sent, emails_sent)
+      VALUES ('%s', '%s', %d, 0, 1)", $campaign_name, $date_today, $location);
+  }
+}
+
+/**
+ * Helper function to get council member using submitted address fields
+ */
+function _advocacy_get_council_member($address_form_values) {
+  $addr_fields = array('address_1', 'city_town', 'state_province_region', 'zip_postal_code');
+  $addr_full = '';
+  foreach ($addr_fields as $field_id) {
+    $addr_full .= $address_form_values[$field_id];
+    if ($field_no == 'state_province_region') {
+      $addr_full .= ' ';
+    }
+    else if ($field_no != 'zip_postal_code') {
+      $addr_full .= ', ';
+    }
+  }
+  $geocode = gmap_geocode($addr_full);
+  // if we got a geocode result, send lat and lng to nytimes API to get district info
+  if ($geocode['status'] == 200) {
+    $lat = $geocode['latitude'];
+    $lng = $geocode['longitude'];
+    $nyt_districts_api_key = variable_get('nypl_advocacy_districts_key', 'dab838a64853702416d25e052d3174ae:17:65636627');
+    $nyt_districts_api_url = 'http://api.nytimes.com/svc/politics/v2/districts.json?lat=' . $lat . '&lng=' . $lng . '&api-key=' . $nyt_districts_api_key;
+    $http_response = drupal_http_request($nyt_districts_api_url);
+    $response_obj = json_decode($http_response->data);
+    // have to look at each result, since we don't know what position city council will be in
+    foreach ($response_obj->results as $json_result) {
+      if ($json_result->level == 'City Council') {
+        $council_district = $json_result->district;
+        break;
+      }
+    }
+    if ($council_district) {
+      // load our array of council member names
+      require_once(drupal_get_path('module', 'nypl_advocacy') . '/includes/nyc_council_members.inc');
+      $council_member = $council_members[$council_district];
+    }
+  }
+  return isset($council_member) ? $council_member : FALSE;
+}
+
+/**
+ * Advocacy statistics
+ */
+function nypl_advocacy_stats($var_id) {
+  $wf_nid = variable_get('nypl_advocacy_wf_nid', 154437);
+  drupal_set_header('Content-Type: text/csv');
+  
+  switch ($var_id) {
+    case 'newsletter':
+      $output = 'prefix,first_name,last_name,addr_1,addr_2,city,state,zip,country,email,library,phone';
+      $sid_q = db_query('SELECT DISTINCT sid FROM {webform_submitted_data}
+        WHERE cid = 21 AND data = 1 AND nid = %d', $wf_nid);
+      while ($sid_r = db_fetch_array($sid_q)) {
+        $sid = $sid_r['sid'];
+        $data_q = db_query('SELECT DISTINCT (SELECT data FROM {webform_submitted_data} WHERE cid = 14 AND sid = %d) AS prefix,
+          (SELECT data FROM {webform_submitted_data} WHERE cid = 15 AND sid = %d) AS first_name,
+          (SELECT data FROM {webform_submitted_data} WHERE cid = 16 AND sid = %d) AS last_name,
+          (SELECT data FROM {webform_submitted_data} WHERE cid = 1 AND sid = %d) AS addr_1,
+          (SELECT data FROM {webform_submitted_data} WHERE cid = 2 AND sid = %d) AS addr_2,
+          (SELECT data FROM {webform_submitted_data} WHERE cid = 3 AND sid = %d) AS city,
+          (SELECT data FROM {webform_submitted_data} WHERE cid = 4 AND sid = %d) AS state,
+          (SELECT data FROM {webform_submitted_data} WHERE cid = 5 AND sid = %d) AS zip,
+          (SELECT data FROM {webform_submitted_data} WHERE cid = 6 AND sid = %d) AS country,
+          (SELECT data FROM {webform_submitted_data} WHERE cid = 7 AND sid = %d) AS email,
+          (SELECT data FROM {webform_submitted_data} WHERE cid = 18 AND sid = %d) AS library,
+          (SELECT data FROM {webform_submitted_data} WHERE cid = 20 AND sid = %d) AS phone
+          FROM {webform_submitted_data} WHERE sid = %d',
+          $sid, $sid, $sid, $sid, $sid, $sid, $sid, $sid, $sid, $sid, $sid, $sid, $sid);
+        $data_r = db_fetch_array($data_q);
+        if (!empty($data_r)) {
+          $output .= "\n";
+          foreach ($data_r as $i => $r) {
+            if ($i == 'library') {
+              $lib_q = 'SELECT name FROM {term_data} WHERE tid = %d';
+              $r = db_result(db_query($lib_q, $r));
+            }
+            $output .= $i == 'phone' ? '"' . $r . '"' : '"' . $r . '"' . ',';
+          }
+        } 
+      }
+      print $output;
+    break;
+    case 'letters':
+      $output = 'Location,Physical letters,Emails,Total' . "\n";
+      $current_campaign = variable_get('nypl_advocacy_campaign', NULL);
+      // need to add behavior for no campaign/nid entered?
+      $letters_q = db_query("SELECT td.name AS location_name,
+        na.location AS location_tid,
+        SUM(letters_sent) AS letters_sent,
+        SUM(emails_sent) AS emails_sent
+        FROM {nypl_advocacy} na
+        JOIN {term_data} td ON na.location = td.tid
+        WHERE na.campaign_name = '%s'
+        GROUP BY location", $current_campaign);
+      while ($letters_r = db_fetch_array($letters_q)) {
+        $location_name = '"' . $letters_r['location_name'] . '"';
+        $letters_sent = $letters_r['letters_sent'];
+        $location_tid = $letters_r['location_tid'];
+        //$emails_q = 'SELECT count(*) FROM {webform_submitted_data} WHERE nid = %d AND cid = 18 AND data = %d';
+        //$emails_sent = db_result(db_query($emails_q, $wf_nid, $location_tid));
+        $emails_sent = $letters_r['emails_sent'];
+        $total_sent = $letters_sent + $emails_sent;
+        $output .= implode(',', array($location_name, $letters_sent, $emails_sent, $total_sent)) . "\n";
+      }
+      print $output;
+    break;
+  }
+}
