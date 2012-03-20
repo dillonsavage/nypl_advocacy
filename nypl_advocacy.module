@@ -103,7 +103,7 @@ function nypl_advocacy_letters_map() {
     else if ($letters_sent > 1000 && $letters_sent <= 2000) {
       $marker = 'green';
     }
-    else {
+    else if ($letters_sent > 2000) {
       $marker = 'big blue';
     }
   
