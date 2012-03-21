@@ -190,12 +190,13 @@ function nypl_advocacy_stats_form() {
   $form = array();
   
   // get locations for select list
-  $locations_list = locations_master_list();
-  foreach (array_keys($locations_list) as $tid) {
-    $has_parent = db_result(db_query('SELECT parent FROM {term_hierarchy} WHERE tid = %d', $tid));
-    if ($has_parent) {
-      unset($locations_list[$tid]);
-    }
+  $locations_list = array();
+  $locations_list_q = db_query("SELECT lt.tid, td.name from {locations_term} lt
+    JOIN {locations} l on lt.lid = l.lid
+    JOIN {term_data} td on lt.tid = td.tid
+    WHERE l.name = '<main>'");
+  while ($locations_list_r = db_fetch_array($locations_list_q)) {
+    $locations_list[$locations_list_r['tid']] = $locations_list_r['name'];
   }
   
   $form['campaign'] = array(
