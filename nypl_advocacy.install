@@ -3,6 +3,11 @@
 
 function nypl_advocacy_install() {
   drupal_install_schema('nypl_advocacy');
+  
+  // create the variables we'll use
+  variable_set('nypl_advocacy_campaign', '');
+  variable_set('nypl_advocacy_wf_nid', '');
+  variable_set('nypl_advocacy_districts_key', '');
 }
 
 function nypl_advocacy_schema() {
