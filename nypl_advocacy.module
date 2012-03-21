@@ -153,6 +153,13 @@ function nypl_advocacy_admin_form() {
     '#size' => 7,
     '#maxlength' => 7
   );
+  $form['tf_nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Tell a Friend form nid'),
+    '#default_value' => variable_get('nypl_advocacy_tell_friend_nid', 134568),
+    '#size' => 7,
+    '#maxlength' => 7,
+  );
   $form['nyt_key'] = array(
     '#type' => 'textfield',
     '#title' => t('NYTimes API key'),
@@ -250,8 +257,10 @@ function nypl_advocacy_stats_form_submit($form, &$form_state) {
  * Implementation of hook_form_alter()
  */
 function nypl_advocacy_form_alter(&$form, &$form_state, $form_id) {
-  $wf_nid = variable_get('nypl_advocacy_wf_nid', 134093);
+  $wf_nid = variable_get('nypl_advocacy_wf_nid', NULL);
+  $tf_nid = variable_get('nypl_advocacy_tell_friend_nid', NULL);
   $wf_id = 'webform_client_form_' . $wf_nid;
+  $tf_id = 'webform_client_form_' . $tf_nid;
   if ($form_id == $wf_id) {
     if ($form_state['webform']['page_num'] == 2) {
       $submitted_tree = $form_state['values']['submitted_tree'];
@@ -273,6 +282,9 @@ function nypl_advocacy_form_alter(&$form, &$form_state, $form_id) {
       $form['#submit'][] = 'nypl_advocacy_email_stats';
     }
   }
+  else if ($form_id == $tf_id) {
+    $form['#validate'][] = 'nypl_advocacy_tell_a_friend';
+  }
 }
 
 /**
@@ -283,6 +295,31 @@ function nypl_advocacy_mail_alter(&$message) {
   // todo: grab cm email value from form submission data;
   // if this matches $message['to'], CC ($message['headers']['CC']) to mayor and speaker
 }
+
+/**
+ * Form validation for "Tell a Friend"
+ */
+function nypl_advocacy_tell_a_friend(&$form, &$form_state) {
+  $send_to = $form_state['values']['submitted']['send_to'];
+  $form_state['values']['submitted']['email_to'] = '';
+  if (strpos($send_to, ',')) {
+    $emails_delim = ',';
+  }
+  else if (strpos($send_to, "\n")) {
+    $emails_delim = "\n";
+  }
+  $emails_arr = isset($emails_delim) ? explode($emails_delim, $send_to) : array($send_to);
+  foreach ($emails_arr as $id => $email) {
+    $email = trim($emails_arr[$id]);
+    if (!valid_email_address(trim($email))) {
+      form_set_error('send_to', 'Please provide a valid list of e-mail addresses.');
+    }
+    else {
+      $form_state['values']['submitted']['email_to'] .= $email == end($emails_arr) ? $email : $email . ', ';
+    }
+  }
+}
+
 
 /**
  * Advocacy form submisison
