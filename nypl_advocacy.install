@@ -8,6 +8,8 @@ function nypl_advocacy_install() {
   variable_set('nypl_advocacy_campaign', '');
   variable_set('nypl_advocacy_wf_nid', '');
   variable_set('nypl_advocacy_districts_key', '');
+  
+  // todo: set up permissions? create webform?
 }
 
 function nypl_advocacy_schema() {

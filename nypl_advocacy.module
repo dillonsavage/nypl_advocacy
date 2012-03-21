@@ -56,7 +56,7 @@ function nypl_advocacy_block($op = 'list', $delta = 0, $edit = array()) {
   if ($op == 'list') {
     $blocks[0] = array(
       'info' => t('advocacy letters gmap'),
-      'status' = 1,
+      'status' => 1,
       'region' => 'content',
       'visibility' => 1,
       'pages' => 'advocacy/thankyou',
