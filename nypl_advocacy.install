@@ -7,6 +7,7 @@ function nypl_advocacy_install() {
   // create the variables we'll use
   variable_set('nypl_advocacy_campaign', '');
   variable_set('nypl_advocacy_wf_nid', '');
+  variable_set('nypl_advocacy_tell_friend_nid', '');
   variable_set('nypl_advocacy_districts_key', '');
   
   // todo: set up permissions? create webform?

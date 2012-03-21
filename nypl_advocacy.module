@@ -185,9 +185,9 @@ function nypl_advocacy_admin_form_submit($form, &$form_state) {
     'nypl_advocacy_districts_key' => check_plain($form_state['values']['nyt_key']),
   );
   foreach ($sys_vars as $name => $value) {
-    if (variable_get($name, $value) != $value) {
+//    if (variable_get($name, $value) != $value) {
       variable_set($name, $value);
-    }
+//    }
   }
   drupal_set_message('Changes saved.');
 }
