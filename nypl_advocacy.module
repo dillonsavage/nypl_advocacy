@@ -30,11 +30,11 @@ function nypl_advocacy_menu() {
     'access arguments' => array('administer NYPL advocacy'),
     'weight' => 0,
   );
-  $items['admin/settings/nypl_advocacy/stats_add'] = array(
+  $items['admin/settings/nypl_advocacy/letters'] = array(
     'title' => t('Enter statistics'),
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('nypl_advocacy_stats_form'),
+    'page arguments' => array('nypl_advocacy_letters_form'),
     'access arguments' => array('administer NYPL advocacy'),
     'weight' => 0,
   );
@@ -193,9 +193,9 @@ function nypl_advocacy_admin_form_submit($form, &$form_state) {
 }
 
 /**
- * Form for entering advocacy statistics
+ * Form for entering advocacy letters statistics
  */
-function nypl_advocacy_stats_form() {
+function nypl_advocacy_letters_form() {
   $form = array();
   
   // get locations for select list
@@ -243,7 +243,7 @@ function nypl_advocacy_stats_form() {
 /**
  * Stats form submission
  */
-function nypl_advocacy_stats_form_submit($form, &$form_state) {
+function nypl_advocacy_letters_form_submit($form, &$form_state) {
   $form_values = $form_state['values'];
   $campaign_name = variable_get('nypl_advocacy_campaign', '2012 Advocacy');
   $date = $form_values['date']['year'] . '-' . $form_values['date']['month'] . '-' . $form_values['date']['day'];
