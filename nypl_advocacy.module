@@ -78,11 +78,6 @@ function nypl_advocacy_letters_map() {
   $all_markers = array();
 
   foreach ($locations_gis as $key => $bounds) {
-    $text = l(t($bounds->name), 'locations/tid/'. $bounds->tid) .'<br />';
-    $text .= $bounds->address .'<br />';
-    $text .= $bounds->city .', NY '. locations_format_zipcode($bounds->zipcode) .'<br />';
-    // $text .= ($bounds->hours != 'Closed') ? 'Open today: '. $bounds->hours : 'Closed today';
-  
     /**
      * these values will change
      * 0-500: small red
@@ -109,7 +104,12 @@ function nypl_advocacy_letters_map() {
     else {
       $marker = 'small red';
     }
-      
+    
+    $text = l(t($bounds->name), 'locations/tid/'. $bounds->tid) .'<br />';
+    $text .= $bounds->address .'<br />';
+    $text .= $bounds->city .', NY '. locations_format_zipcode($bounds->zipcode) .'<br />';
+    $text .= $letters_sent . ' letters sent<br />';
+
     $marker = array(
       'options' => array(),
       'opts' => array('title' => $bounds->name),
