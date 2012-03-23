@@ -102,6 +102,7 @@ function nypl_advocacy_letters_map() {
       }
     }
     else {
+      $letters_sent = 0;
       $marker = 'small red';
     }
     
