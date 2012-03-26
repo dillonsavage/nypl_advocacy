@@ -379,9 +379,12 @@ function _advocacy_get_council_member($address_form_values) {
       }
     }
     if ($council_district) {
-      // load our array of council member names
-      require_once(drupal_get_path('module', 'nypl_advocacy') . '/includes/nyc_council_members.inc');
-      $council_member = $council_members[$council_district];
+      $cm_q = db_query('SELECT n.title AS name, cm.field_cc_email_email AS email
+        FROM {content_type_council_member} cm
+        JOIN {node} n ON n.nid = cm.nid
+        WHERE cm.field_council_district_value = %d', $council_district);
+      $cm_r = db_fetch_array($cm_q);
+      $council_member = array('name' => $cm_r['name'], 'email' => $cm_r['email']); 
     }
   }
   return isset($council_member) ? $council_member : FALSE;
