@@ -396,10 +396,11 @@ function _advocacy_get_council_member($address_form_values) {
 function nypl_advocacy_stats($var_id) {
   $wf_nid = variable_get('nypl_advocacy_wf_nid', 154437);
   drupal_set_header('Content-Type: text/csv');
+  $outstream = fopen('php://output', 'w');
   
   switch ($var_id) {
     case 'newsletter':
-      $output = 'prefix,first_name,last_name,addr_1,addr_2,city,state,zip,country,email,library,phone';
+      fwrite($outstream, "prefix,first_name,last_name,addr_1,addr_2,city,state,zip,country,email,library,phone\n");
       $sid_q = db_query('SELECT DISTINCT sid FROM {webform_submitted_data}
         WHERE cid = 21 AND data = 1 AND nid = %d', $wf_nid);
       while ($sid_r = db_fetch_array($sid_q)) {
@@ -420,20 +421,18 @@ function nypl_advocacy_stats($var_id) {
           $sid, $sid, $sid, $sid, $sid, $sid, $sid, $sid, $sid, $sid, $sid, $sid, $sid);
         $data_r = db_fetch_array($data_q);
         if (!empty($data_r)) {
-          $output .= "\n";
           foreach ($data_r as $i => $r) {
             if ($i == 'library') {
               $lib_q = 'SELECT name FROM {term_data} WHERE tid = %d';
               $r = db_result(db_query($lib_q, $r));
             }
-            $output .= $i == 'phone' ? '"' . $r . '"' : '"' . $r . '"' . ',';
+            fputcsv($outstream, $r);
           }
         } 
       }
-      print $output;
     break;
     case 'letters':
-      $output = 'Location,Physical letters,Emails,Total' . "\n";
+      fwrite($outstream, "Location,Physical letters,Emails,Total\n");
       $current_campaign = variable_get('nypl_advocacy_campaign', NULL);
       // need to add behavior for no campaign/nid entered?
       $letters_q = db_query("SELECT td.name AS location_name,
@@ -445,16 +444,12 @@ function nypl_advocacy_stats($var_id) {
         WHERE na.campaign_name = '%s'
         GROUP BY location", $current_campaign);
       while ($letters_r = db_fetch_array($letters_q)) {
-        $location_name = '"' . $letters_r['location_name'] . '"';
         $letters_sent = $letters_r['letters_sent'];
-        $location_tid = $letters_r['location_tid'];
-        //$emails_q = 'SELECT count(*) FROM {webform_submitted_data} WHERE nid = %d AND cid = 18 AND data = %d';
-        //$emails_sent = db_result(db_query($emails_q, $wf_nid, $location_tid));
         $emails_sent = $letters_r['emails_sent'];
         $total_sent = $letters_sent + $emails_sent;
-        $output .= implode(',', array($location_name, $letters_sent, $emails_sent, $total_sent)) . "\n";
+        fputcsv($outstream, array($letters_r['location_name'], $letters_sent, $emails_sent, $total_sent));
       }
-      print $output;
     break;
   }
+  fclose($outstream);
 }
