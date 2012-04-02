@@ -426,8 +426,8 @@ function nypl_advocacy_stats($var_id) {
               $lib_q = 'SELECT name FROM {term_data} WHERE tid = %d';
               $r = db_result(db_query($lib_q, $r));
             }
-            fputcsv($outstream, $r);
           }
+          fputcsv($outstream, $r);
         } 
       }
     break;
