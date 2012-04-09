@@ -2,16 +2,34 @@
 // $Id$
 
 function nypl_advocacy_install() {
+  include 'includes/nyc_council_members.inc';
+  include 'includes/webform_nodes.inc';
+
   drupal_install_schema('nypl_advocacy');
   
-  // create the variables we'll use
-  variable_set('nypl_advocacy_campaign', '');
-  variable_set('nypl_advocacy_wf_nid', '');
-  variable_set('nypl_advocacy_tell_friend_nid', '');
-  variable_set('nypl_advocacy_districts_key', '');
+  // create the city council and tell a friend forms
+  $cc_node = (object)$city_council;
+  $tf_node = (object)$tell_a_friend;
+  node_save($cc_node);
+  node_save($tf_node);
+  $latest_nids_q = db_query('SELECT nid FROM {node} ORDER BY nid DESC LIMIT 2');
+  $i = 0;
+  while ($nids = db_fetch_array($latest_nids_q)) {
+    if (!$i) {
+      $cc_nid = $nids['nid'];
+      $i++;
+      continue;
+    }
+    $tf_nid = $nids['nid'];
+  }
+  
+  // create the variables we'll use and set default values
+  variable_set('nypl_advocacy_campaign', '2012');
+  variable_set('nypl_advocacy_city_council_nid', $cc_nid);
+  variable_set('nypl_advocacy_tell_friend_nid', $tf_nid);
+  variable_set('nypl_advocacy_districts_key', 'dab838a64853702416d25e052d3174ae:17:65636627');
   
   // create council member nodes
-  include 'includes/nyc_council_members.inc';
   foreach ($council_members as $district => $cm_data) {
     $node = new stdClass();
     $cm_name = $cm_data['name'];
