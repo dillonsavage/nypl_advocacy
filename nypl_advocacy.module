@@ -22,13 +22,19 @@ function nypl_advocacy_perm() {
  *  and display paths.
  */
 function nypl_advocacy_menu() {
+  $items['data_export/advocacy/%'] = array(
+    'title' => '(data export)',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'nypl_advocacy_stats',
+    'page arguments' => array(2),
+    'access arguments' => array('administer NYPL advocacy'),
+  );
   $items['admin/settings/nypl_advocacy'] = array(
     'title' => t('NYPL Advocacy'),
     'type' => MENU_NORMAL_ITEM,
     'page callback' => 'drupal_get_form',
     'page arguments' => array('nypl_advocacy_admin_form'),
     'access arguments' => array('administer NYPL advocacy'),
-    'weight' => 0,
   );
   $items['admin/settings/nypl_advocacy/letters'] = array(
     'title' => t('Enter statistics'),
@@ -36,13 +42,19 @@ function nypl_advocacy_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('nypl_advocacy_letters_form'),
     'access arguments' => array('administer NYPL advocacy'),
-    'weight' => 0,
   );
-  $items['data_export/advocacy/%'] = array(
-    'title' => '(data export)',
-    'type' => MENU_CALLBACK,
+  $items['admin/settings/nypl_advocacy/data_export/newsletter'] = array(
+    'title' => t('Newsletter opt-in exoprt'),
+    'type' => MENU_LOCAL_TASK,
     'page callback' => 'nypl_advocacy_stats',
-    'page arguments' => array(2),
+    'page arguments' => array(4),
+    'access arguments' => array('administer NYPL advocacy'),
+  );
+  $items['admin/settings/nypl_advocacy/data_export/letters'] = array(
+    'title' => t('Letters exoprt'),
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'nypl_advocacy_stats',
+    'page arguments' => array(4),
     'access arguments' => array('administer NYPL advocacy'),
   );
   
@@ -79,7 +91,6 @@ function nypl_advocacy_letters_map() {
 
   foreach ($locations_gis as $key => $bounds) {
     /**
-     * these values will change
      * 0-500: small red
      * 500-1000: small purple
      * 1000-2000: green
@@ -164,7 +175,7 @@ function nypl_advocacy_admin_form() {
   $form['nyt_key'] = array(
     '#type' => 'textfield',
     '#title' => t('NYTimes API key'),
-    '#default_value' => variable_get('nypl_advocacy_districts_key', 'dab838a64853702416d25e052d3174ae:17:65636627'),
+    '#default_value' => variable_get('nypl_advocacy_districts_key', ''),
     '#size' => 50,
   );
   $form['submit'] = array(
@@ -246,7 +257,7 @@ function nypl_advocacy_letters_form() {
  */
 function nypl_advocacy_letters_form_submit($form, &$form_state) {
   $form_values = $form_state['values'];
-  $campaign_name = variable_get('nypl_advocacy_campaign', '2012 Advocacy');
+  $campaign_name = variable_get('nypl_advocacy_campaign', '');
   $date = $form_values['date']['year'] . '-' . $form_values['date']['month'] . '-' . $form_values['date']['day'];
   $location = $form_values['library_location'];
   $letters_sent = $form_values['letters_sent'];
@@ -266,7 +277,7 @@ function nypl_advocacy_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == $wf_id) {
     if ($form_state['webform']['page_num'] == 2) {
       $submitted_tree = $form_state['values']['submitted_tree'];
-      //_advocacy_email_stats($submitted_tree['library']);
+      // populate markup fields: council member greeting, patron address
       $council_member = _advocacy_get_council_member($submitted_tree);
       $cm_email = !empty($council_member['email']) ? $council_member['email'] : '';
       $addr_markup = $submitted_tree['title'] . ' ' . $submitted_tree['first_name'] . ' ' . $submitted_tree['last_name'] . '<br />';
@@ -287,15 +298,6 @@ function nypl_advocacy_form_alter(&$form, &$form_state, $form_id) {
   else if ($form_id == $tf_id) {
     $form['#validate'][] = 'nypl_advocacy_tell_a_friend';
   }
-}
-
-/**
- * Implementation of hook_mail_alter()
- */
-function nypl_advocacy_mail_alter(&$message) {
-  watchdog('nypl_advocacy', '<pre>' . var_export($message, true) . '</pre>');
-  // todo: grab cm email value from form submission data;
-  // if this matches $message['to'], CC ($message['headers']['CC']) to mayor and speaker
 }
 
 /**
@@ -322,9 +324,8 @@ function nypl_advocacy_tell_a_friend(&$form, &$form_state) {
   }
 }
 
-
 /**
- * Advocacy form submisison
+ * Advocacy form submission
  * Make sure email stats are submitted/updated...
  */
 function nypl_advocacy_email_stats($form, &$form_state) {
