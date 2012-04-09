@@ -158,10 +158,10 @@ function nypl_advocacy_admin_form() {
     '#default_value' => variable_get('nypl_advocacy_campaign', 'Advocacy 2012'),
     '#maxlength' => 255
   );
-  $form['wf_nid'] = array(
+  $form['cc_nid'] = array(
     '#type' => 'textfield',
     '#title' => t('Advocacy form nid'),
-    '#default_value' => variable_get('nypl_advocacy_wf_nid', ''),
+    '#default_value' => variable_get('nypl_advocacy_city_council_nid', ''),
     '#size' => 7,
     '#maxlength' => 7
   );
@@ -192,7 +192,7 @@ function nypl_advocacy_admin_form() {
 function nypl_advocacy_admin_form_submit($form, &$form_state) {
   $sys_vars = array(
     'nypl_advocacy_campaign' => check_plain($form_state['values']['campaign_name']),
-    'nypl_advocacy_wf_nid' => check_plain($form_state['values']['wf_nid']),
+    'nypl_advocacy_city_council_nid' => check_plain($form_state['values']['cc_nid']),
     'nypl_advocacy_tell_friend_nid' => check_plain($form_state['values']['tf_nid']),
     'nypl_advocacy_districts_key' => check_plain($form_state['values']['nyt_key']),
   );
@@ -270,11 +270,11 @@ function nypl_advocacy_letters_form_submit($form, &$form_state) {
  * Implementation of hook_form_alter()
  */
 function nypl_advocacy_form_alter(&$form, &$form_state, $form_id) {
-  $wf_nid = variable_get('nypl_advocacy_wf_nid', NULL);
+  $cc_nid = variable_get('nypl_advocacy_city_council_nid', NULL);
   $tf_nid = variable_get('nypl_advocacy_tell_friend_nid', NULL);
-  $wf_id = 'webform_client_form_' . $wf_nid;
+  $cc_id = 'webform_client_form_' . $cc_nid;
   $tf_id = 'webform_client_form_' . $tf_nid;
-  if ($form_id == $wf_id) {
+  if ($form_id == $cc_id) {
     if ($form_state['webform']['page_num'] == 2) {
       $submitted_tree = $form_state['values']['submitted_tree'];
       // populate markup fields: council member greeting, patron address
@@ -395,7 +395,7 @@ function _advocacy_get_council_member($address_form_values) {
  * Advocacy statistics
  */
 function nypl_advocacy_stats($var_id) {
-  $wf_nid = variable_get('nypl_advocacy_wf_nid', 154437);
+  $cc_nid = variable_get('nypl_advocacy_city_council_nid', NULL);
   drupal_set_header('Content-Type: text/csv');
   $outstream = fopen('php://output', 'w');
   
@@ -403,7 +403,7 @@ function nypl_advocacy_stats($var_id) {
     case 'newsletter':
       fwrite($outstream, "prefix,first_name,last_name,addr_1,addr_2,city,state,zip,country,email,library,phone\n");
       $sid_q = db_query('SELECT DISTINCT sid FROM {webform_submitted_data}
-        WHERE cid = 21 AND data = 1 AND nid = %d', $wf_nid);
+        WHERE cid = 21 AND data = 1 AND nid = %d', $cc_nid);
       while ($sid_r = db_fetch_array($sid_q)) {
         $sid = $sid_r['sid'];
         $data_q = db_query('SELECT DISTINCT (SELECT data FROM {webform_submitted_data} WHERE cid = 14 AND sid = %d) AS prefix,
