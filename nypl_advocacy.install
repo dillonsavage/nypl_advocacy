@@ -10,7 +10,23 @@ function nypl_advocacy_install() {
   variable_set('nypl_advocacy_tell_friend_nid', '');
   variable_set('nypl_advocacy_districts_key', '');
   
-  // todo: set up permissions? create webform?
+  // create council member nodes
+  include 'includes/nyc_council_members.inc';
+  foreach ($council_members as $district => $cm_data) {
+    $node = new stdClass();
+    $cm_name = $cm_data['name'];
+    $cm_email = $cm_data['email'];
+    $node->type = 'council_member';
+    $node->title = $cm_name;
+    $node->field_cc_email[0]['email'] = $cm_email;
+    $node->field_council_district[0]['value'] = $district;
+    $node->name = 'dillonsavage@nypl.org';
+    $node->uid = 1069;
+    $node->op = t('Save');
+    content_presave($node);
+    node_save($node);
+    content_insert($node);
+  }
 }
 
 function nypl_advocacy_schema() {

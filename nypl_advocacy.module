@@ -32,7 +32,7 @@ function nypl_advocacy_menu() {
   );
   $items['admin/settings/nypl_advocacy/letters'] = array(
     'title' => t('Enter statistics'),
-    'type' => MENU_LOCAL_TASK,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
     'page callback' => 'drupal_get_form',
     'page arguments' => array('nypl_advocacy_letters_form'),
     'access arguments' => array('administer NYPL advocacy'),
@@ -150,14 +150,14 @@ function nypl_advocacy_admin_form() {
   $form['wf_nid'] = array(
     '#type' => 'textfield',
     '#title' => t('Advocacy form nid'),
-    '#default_value' => variable_get('nypl_advocacy_wf_nid', 134093),
+    '#default_value' => variable_get('nypl_advocacy_wf_nid', ''),
     '#size' => 7,
     '#maxlength' => 7
   );
   $form['tf_nid'] = array(
     '#type' => 'textfield',
     '#title' => t('Tell a Friend form nid'),
-    '#default_value' => variable_get('nypl_advocacy_tell_friend_nid', 134568),
+    '#default_value' => variable_get('nypl_advocacy_tell_friend_nid', ''),
     '#size' => 7,
     '#maxlength' => 7,
   );
