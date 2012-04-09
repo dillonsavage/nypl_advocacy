@@ -16,11 +16,11 @@ function nypl_advocacy_install() {
   $i = 0;
   while ($nids = db_fetch_array($latest_nids_q)) {
     if (!$i) {
-      $cc_nid = $nids['nid'];
+      $tf_nid = $nids['nid'];
       $i++;
       continue;
     }
-    $tf_nid = $nids['nid'];
+    $cc_nid = $nids['nid'];
   }
   
   // create the variables we'll use and set default values
