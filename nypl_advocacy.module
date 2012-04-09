@@ -44,14 +44,14 @@ function nypl_advocacy_menu() {
     'access arguments' => array('administer NYPL advocacy'),
   );
   $items['admin/settings/nypl_advocacy/data_export/newsletter'] = array(
-    'title' => t('Newsletter opt-in exoprt'),
+    'title' => t('Newsletter opt-in export'),
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'nypl_advocacy_stats',
     'page arguments' => array(4),
     'access arguments' => array('administer NYPL advocacy'),
   );
   $items['admin/settings/nypl_advocacy/data_export/letters'] = array(
-    'title' => t('Letters exoprt'),
+    'title' => t('Letters export'),
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'nypl_advocacy_stats',
     'page arguments' => array(4),
