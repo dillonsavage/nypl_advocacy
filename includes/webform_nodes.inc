@@ -48,8 +48,8 @@ $city_council = array(
         'eid' => '1',
         'email' => '7',
         'subject' => '8',
-        'from_name' => '%value[first_name] %value[last_name]',
-        'from_address' => '7',
+        'from_name' => 'default',
+        'from_address' => 'default',
         'template' => '%value[cm_greeting]
 
 %value[body_text]
@@ -70,8 +70,8 @@ $city_council = array(
         'eid' => '2',
         'email' => '2010nypl@gmail.com',
         'subject' => '8',
-        'from_name' => '%value[first_name] %value[last_name]',
-        'from_address' => '7',
+        'from_name' => 'default',
+        'from_address' => 'default',
         'template' => '%value[cm_greeting]
 
 %value[body_text]
@@ -870,7 +870,7 @@ ZW|Zimbabwe',
         'extra' => array(
           'title_display' => 'none',
           'private' => 0,
-          'width' => '25',
+          'width' => '50',
           'disabled' => 0,
           'unique' => 0,
           'conditional_operator' => '=',
