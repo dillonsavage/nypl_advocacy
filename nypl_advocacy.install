@@ -30,7 +30,7 @@ function nypl_advocacy_install() {
   variable_set('nypl_advocacy_districts_key', 'dab838a64853702416d25e052d3174ae:17:65636627');
   
   // create council member nodes
-  foreach ($council_members as $district => $cm_data) {
+  /*foreach ($council_members as $district => $cm_data) {
     $node = new stdClass();
     $cm_name = $cm_data['name'];
     $cm_email = $cm_data['email'];
@@ -44,7 +44,7 @@ function nypl_advocacy_install() {
     content_presave($node);
     node_save($node);
     content_insert($node);
-  }
+  }*/
 }
 
 function nypl_advocacy_schema() {
