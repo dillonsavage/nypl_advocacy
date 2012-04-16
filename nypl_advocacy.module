@@ -99,28 +99,25 @@ function nypl_advocacy_letters_map() {
     $letters_sent_q = db_query('SELECT SUM(emails_sent)+SUM(letters_sent) AS letters_total
       FROM {nypl_advocacy}
       WHERE location = %d', $bounds->tid);
-    $letters_sent = db_result($letters_sent_q);
+    $letters_sent = db_result($letters_sent_q) ?: 0;
 
-    if ($letters_sent) {
-      if ($letters_sent > 500 && $letters_sent <= 1000) {
-        $marker = 'small purple';
-      }
-      else if ($letters_sent > 1000 && $letters_sent <= 2000) {
-        $marker = 'green';
-      }
-      else if ($letters_sent > 2000) {
-        $marker = 'blue';
-      }
+    if ($letters_sent > 500 && $letters_sent <= 1000) {
+      $marker = 'small purple';
+    }
+    else if ($letters_sent > 1000 && $letters_sent <= 2000) {
+      $marker = 'green';
+    }
+    else if ($letters_sent > 2000) {
+      $marker = 'blue';
     }
     else {
-      $letters_sent = 0;
       $marker = 'small red';
     }
     
     $text = l(t($bounds->name), 'locations/tid/'. $bounds->tid) .'<br />';
     $text .= $bounds->address .'<br />';
     $text .= $bounds->city .', NY '. locations_format_zipcode($bounds->zipcode) .'<br />';
-    $text .= $letters_sent . ' letters sent<br />';
+    $text .= $letters_sent . ' ' . format_plural($letters_sent, 'letter', 'letters') . ' sent<br />';
 
     $marker = array(
       'options' => array(),
