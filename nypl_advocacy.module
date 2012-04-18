@@ -217,6 +217,7 @@ function nypl_advocacy_letters_form() {
   while ($locations_list_r = db_fetch_array($locations_list_q)) {
     $locations_list[$locations_list_r['tid']] = $locations_list_r['name'];
   }
+  sort($locations_list);
   
   $form['campaign'] = array(
     '#type' => 'hidden',
@@ -234,7 +235,7 @@ function nypl_advocacy_letters_form() {
   $form['library_location'] = array(
     '#title' => 'Library location',
     '#type' => 'select',
-    '#options' => sort($locations_list),
+    '#options' => $locations_list,
   );
   $form['letters_sent'] = array(
     '#type' => 'textfield',
