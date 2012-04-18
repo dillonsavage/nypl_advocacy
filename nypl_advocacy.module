@@ -212,7 +212,8 @@ function nypl_advocacy_letters_form() {
   $locations_list_q = db_query("SELECT lt.tid, td.name from {locations_term} lt
     JOIN {locations} l on lt.lid = l.lid
     JOIN {term_data} td on lt.tid = td.tid
-    WHERE l.name = '<main>'");
+    WHERE l.name = '<main>'
+    AND l.symbol <> 'DLC'");
   while ($locations_list_r = db_fetch_array($locations_list_q)) {
     $locations_list[$locations_list_r['tid']] = $locations_list_r['name'];
   }
@@ -233,7 +234,7 @@ function nypl_advocacy_letters_form() {
   $form['library_location'] = array(
     '#title' => 'Library location',
     '#type' => 'select',
-    '#options' => $locations_list,
+    '#options' => sort($locations_list),
   );
   $form['letters_sent'] = array(
     '#type' => 'textfield',
