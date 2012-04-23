@@ -395,7 +395,9 @@ function _advocacy_get_council_member($address_form_values) {
  */
 function nypl_advocacy_stats($var_id) {
   $cc_nid = variable_get('nypl_advocacy_city_council_nid', NULL);
+  $filename = 'nypl_advocacy-' . $var_id . '-' . date('m-d-Y') . '.csv';
   drupal_set_header('Content-Type: text/csv');
+  drupal_set_header('Content-Disposition: attachment; filename=' . $filename);
   $outstream = fopen('php://output', 'w');
   
   switch ($var_id) {
