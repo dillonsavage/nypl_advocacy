@@ -64,6 +64,7 @@ function nypl_advocacy_menu() {
     'page arguments' => array('nypl_advocacy_admin_images_form'),
     'access arguments' => array('administer NYPL advocacy'),
     'file' => 'includes/nypl_advocacy_image_upload_form.inc',
+	'weight' => 50,
   );
   return $items;
 }
