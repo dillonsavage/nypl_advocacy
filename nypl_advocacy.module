@@ -219,11 +219,11 @@ function nypl_advocacy_letters_form() {
   while ($locations_list_r = db_fetch_array($locations_list_q)) {
     $locations_list[$locations_list_r['tid']] = $locations_list_r['name'];
   }
-  sort($locations_list);
+  asort($locations_list);
   
   $form['campaign'] = array(
     '#type' => 'hidden',
-    '#default_value' => variable_get('nypl_advocacy_campaign', '2012 Advocacy'),
+    '#default_value' => variable_get('nypl_advocacy_campaign', ''),
   );
   $form['date'] = array(
     '#type' => 'date',
@@ -262,7 +262,7 @@ function nypl_advocacy_letters_form_submit($form, &$form_state) {
   $date = $form_values['date']['year'] . '-' . $form_values['date']['month'] . '-' . $form_values['date']['day'];
   $location = $form_values['library_location'];
   $letters_sent = $form_values['letters_sent'];
-  $insert_sql = "INSERT INTO {nypl_advocacy} (campaign_name, date, location, letters_sent) VALUES ('%s', '%s', '%s', %d)";
+  $insert_sql = "INSERT INTO {nypl_advocacy} (campaign_name, date, location, letters_sent) VALUES ('%s', '%s', %d, %d)";
   db_query($insert_sql, $campaign_name, $date, $location, $letters_sent);
   drupal_set_message('Changes saved.');
 }
