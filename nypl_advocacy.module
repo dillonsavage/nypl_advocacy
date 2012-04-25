@@ -57,7 +57,14 @@ function nypl_advocacy_menu() {
     'page arguments' => array(4),
     'access arguments' => array('administer NYPL advocacy'),
   );
-  
+  $items['admin/settings/nypl_advocacy/images'] = array(
+    'title' => t('Advocacy Images'),
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nypl_advocacy_admin_images_form'),
+    'access arguments' => array('administer NYPL advocacy'),
+    'file' => 'includes/nypl_advocacy_image_upload_form.inc',
+  );
   return $items;
 }
 
