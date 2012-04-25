@@ -95,7 +95,7 @@ function nypl_advocacy_letters_map() {
      * 1000-2000: green
      * 2000+: blue
      */
-    $letters_sent_q = db_queryd("SELECT SUM(emails_sent)+SUM(letters_sent) AS letters_total
+    $letters_sent_q = db_query("SELECT SUM(emails_sent)+SUM(letters_sent) AS letters_total
       FROM {nypl_advocacy}
       WHERE location = %d
       AND campaign_name = '%s'", $bounds->tid, $campaign_name);
