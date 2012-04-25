@@ -105,10 +105,10 @@ function nypl_advocacy_letters_map() {
       $marker = 'small purple';
     }
     else if ($letters_sent > 1000 && $letters_sent <= 2000) {
-      $marker = 'green';
+      $marker = 'blue';
     }
     else if ($letters_sent > 2000) {
-      $marker = 'blue';
+      $marker = 'green';
     }
     else {
       $marker = 'small red';
@@ -132,10 +132,12 @@ function nypl_advocacy_letters_map() {
   }
   
   $locations_all_map = array(
-    'id' => 'all_locations',
-    'width' => '180px',
-    'height' => '180px',
-    'zoom' => 12,
+    'id' => 'advocacy',
+    'width' => '200px',
+    'height' => '200px',
+    'type' => 'Map',
+    'control' => 'None',
+    'zoom' => 7,
     'maxzoom' => 17,
     'markers' => $all_markers,
   );
