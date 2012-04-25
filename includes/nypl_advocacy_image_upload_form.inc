@@ -57,4 +57,11 @@ function nypl_advocacy_admin_images_form($form_state) {
     return $form;
 }
 
+function  nypl_advocacy_admin_images_form_submit($form, $form_state) {
+    $validators = array();
+    $file = file_save_upload('file', $validators, 'path');
+    file_set_status($file, FILE_STATUS_PERMANENT);
+}
+
+
 ?>
