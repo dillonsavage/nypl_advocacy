@@ -25,6 +25,8 @@ function nypl_advocacy_socialmedia_form() {
     '#type' => 'submit',
     '#value' => t('Save'),
   );
+  
+  return $form;
 }
 
 function nypl_advocacy_socialmedia_form_submit($form, &$form_state) {
