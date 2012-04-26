@@ -1,6 +1,6 @@
 <?php
 
-function nypl_advocacy_socialmedia() {
+function nypl_advocacy_socialmedia_form() {
   $form = array();
 
   $form['tweet_txt'] = array(
@@ -27,7 +27,7 @@ function nypl_advocacy_socialmedia() {
   );
 }
 
-function nypl_advocacy_socialmedia_submit($form, &$form_state) {
+function nypl_advocacy_socialmedia_form_submit($form, &$form_state) {
   nypl_advocacy_admin_form_submit($form, $form_state, 'socialmedia');
 }
 
