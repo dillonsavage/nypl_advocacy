@@ -16,7 +16,7 @@ function nypl_advocacy_socialmedia_form() {
     '#rows' => 3,
   );
   $form['fb_url'] = array(
-    '#type' => 'text',
+    '#type' => 'textfield',
     '#title' => t('Facebook URL'),
     '#default_value' => variable_get('nypl_advocacy_fb_url', ''),
     '$size' => 50,
