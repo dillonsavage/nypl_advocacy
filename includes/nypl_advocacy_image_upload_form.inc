@@ -1,6 +1,6 @@
 <?php
 function nypl_advocacy_admin_images_form($form_state) {
-	variable_set('nypl_advocacy_img_path', '/Users/hcnewsom/Sites/drupal6/sites/default/files/advocacy');
+	variable_set('nypl_advocacy_img_path', '/www/sites/new.nypl.org/files/advocacy');
 	$button = _get_button_image();
     $form = array('#attributes' => array('enctype' => 'multipart/form-data'));
     $form['leading_branches'] = array(
