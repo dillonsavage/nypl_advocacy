@@ -2,33 +2,36 @@
 function nypl_advocacy_admin_images_form($form_state) {
     $form = array('#attributes' => array('enctype' => 'multipart/form-data'));
     $form['leading_branches'] = array(
-	      '#type' => 'fieldset', 
-	      '#title' => t('Designate top 3 leading Branches'), 
-	      '#weight' => 5, 
-	      '#collapsible' => FALSE, 
-	      '#collapsed' => FALSE,
+	  '#type' => 'fieldset', 
+	  '#title' => t('Designate top 3 leading Branches'), 
+	  '#weight' => 5, 
+	  '#collapsible' => FALSE, 
+	  '#collapsed' => FALSE,
 	);
 	$form['leading_branches']['manhattan_branch'] = array(
-        '#type' => 'select',
-        '#title' => t('Leading Manhattan Branch'),
-        '#options' => _get_branches('New York'),	
+      '#type' => 'select',
+      '#title' => t('Leading Manhattan Branch'),
+      '#options' => _get_branches('New York'),
+      '#default_value' => variable_get('leading_manhattan_branch',''),	
 	);
 	$form['leading_branches']['bronx_branch'] = array(
-        '#type' => 'select',
-        '#title' => t('Leading Bronx Branch'),
-        '#options' => _get_branches('Bronx'),	
+      '#type' => 'select',
+      '#title' => t('Leading Bronx Branch'),
+      '#options' => _get_branches('Bronx'),
+  	  '#default_value' => variable_get('leading_bronx_branch',''),	
 	);
 	$form['leading_branches']['staten_island_branch'] = array(
-        '#type' => 'select',
-        '#title' => t('Leading Staten Island Branch'),
-        '#options' => _get_branches('Staten Island'),	
-	);		
+      '#type' => 'select',
+      '#title' => t('Leading Staten Island Branch'),
+      '#options' => _get_branches('Staten Island'),	
+	  '#default_value' => variable_get('leading_staten_island_branch',''),
+	);			
 	$form['campaign_assets'] = array(
-	      '#type' => 'fieldset', 
-	      '#title' => t('Campaign Assets'), 
-	      '#weight' => 5, 
-	      '#collapsible' => FALSE, 
-	      '#collapsed' => FALSE,
+	  '#type' => 'fieldset', 
+	  '#title' => t('Campaign Assets'), 
+	  '#weight' => 5, 
+	  '#collapsible' => FALSE, 
+	  '#collapsed' => FALSE,
 	);
 	$form['campaign_assets']['donate_button'] = array(
         '#type' => 'file',
@@ -54,6 +57,10 @@ function nypl_advocacy_admin_images_form($form_state) {
         '#size' => 48,
         '#description' => t('Add donate button link.'),
     );
+	$form['submit'] = array(
+		'#type' => 'submit', 
+		'#value' => t('Save')
+	);
     return $form;
 }
 
