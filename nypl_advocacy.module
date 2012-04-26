@@ -72,7 +72,6 @@ function nypl_advocacy_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('nypl_advocacy_socialmedia_form'),
     'access arguments' => array('administer NYPL advocacy'),
-    'file' => 'includes/nypl_advocacy_socialmedia.inc',
   );
   return $items;
 }
@@ -204,23 +203,14 @@ function nypl_advocacy_admin_form() {
 /**
  * Advocacy admin form submission
  */
-function nypl_advocacy_admin_form_submit($form, &$form_state, $op = NULL) {
-  if ($op == 'socialmedia') {
-    $sys_vars = array(
-      'nypl_advocacy_tweet_txt' => check_plain($form_state['values']['tweet_txt']),
-      'nypl_advocacy_fb_description' => check_plain($form_state['values']['fb_description']),
-      'nypl_advocacy_fb_url' => check_plain($form_state['values']['fb_url']),
-    );
-  }
-  else {
-    $sys_vars = array(
-      'nypl_advocacy_campaign' => check_plain($form_state['values']['campaign_name']),
-      'nypl_advocacy_city_council_nid' => check_plain($form_state['values']['cc_nid']),
-      'nypl_advocacy_tell_friend_nid' => check_plain($form_state['values']['tf_nid']),
-      'nypl_advocacy_districts_key' => check_plain($form_state['values']['nyt_key']),
-      'nypl_advocacy_tweet_txt' => check_plain($form_state['values']['tweet_txt']),
-    );
-  }
+function nypl_advocacy_admin_form_submit($form, &$form_state) {
+  $sys_vars = array(
+    'nypl_advocacy_campaign' => check_plain($form_state['values']['campaign_name']),
+    'nypl_advocacy_city_council_nid' => check_plain($form_state['values']['cc_nid']),
+    'nypl_advocacy_tell_friend_nid' => check_plain($form_state['values']['tf_nid']),
+    'nypl_advocacy_districts_key' => check_plain($form_state['values']['nyt_key']),
+    'nypl_advocacy_tweet_txt' => check_plain($form_state['values']['tweet_txt']),
+  );
   foreach ($sys_vars as $name => $value) {
     if (variable_get($name, $value) != $value) {
       variable_set($name, $value);
@@ -292,6 +282,51 @@ function nypl_advocacy_letters_form_submit($form, &$form_state) {
   db_query($insert_sql, $campaign_name, $date, $location, $letters_sent);
   drupal_set_message('Changes saved.');
 }
+
+/**
+ * Social media settings form
+ */
+function nypl_advocacy_socialmedia_form() {
+  $form = array();
+
+  $form['tweet_txt'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Tweet Text'),
+    '#default_value' => variable_get('nypl_advocacy_tweet_txt', ''),
+    '#rows' => 3,
+  );
+  $form['fb_description'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Facebook Description'),
+    '#default_value' => variable_get('nypl_advocacy_fb_description', ''),
+    '#rows' => 3,
+  );
+  $form['fb_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Facebook URL'),
+    '#default_value' => variable_get('nypl_advocacy_fb_url', ''),
+    '$size' => 50,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+  );
+  return $form;
+}
+
+/**
+ * Social media for submission
+ */
+function nypl_advocacy_socialmedia_form_submit($form, &$form_state) {
+  $tweet_txt = check_plain($form_state['values']['tweet_txt']);
+  $fb_description = check_plain($form_state['values']['fb_description']);
+  $fb_url = check_plain($form_state['values']['fb_url']);
+  variable_set('nypl_advocacy_tweet_txt', $tweet_txt);
+  variable_set('nypl_advocacy_fb_description', $fb_description);
+  variable_set('nypl_advocacy_fb_url', $fb_url);
+  drupal_set_message('Changes saved.');
+}
+
 
 /**
  * Implementation of hook_form_alter()
