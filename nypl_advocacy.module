@@ -66,6 +66,14 @@ function nypl_advocacy_menu() {
     'file' => 'includes/nypl_advocacy_image_upload_form.inc',
 	'weight' => 50,
   );
+  $items['admin/settings/nypl_advocacy/socialmedia'] = array(
+    'title' => t('Social Media'),
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nypl_advocacy_socialmedia_form'),
+    'access arguments' => array('administer NYPL advocacy'),
+    'file' => 'includes/nypl_advocacy_socialmedia.inc',
+  );
   return $items;
 }
 
@@ -185,12 +193,6 @@ function nypl_advocacy_admin_form() {
     '#default_value' => variable_get('nypl_advocacy_districts_key', ''),
     '#size' => 50,
   );
-  $form['tweet_txt'] = array(
-    '#type' => 'textarea',
-    '#title' => t('Tweet Text'),
-    '#default_value' => variable_get('nypl_advocacy_tweet_txt', ''),
-    '#rows' => 3,
-  );
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save'),
@@ -202,14 +204,23 @@ function nypl_advocacy_admin_form() {
 /**
  * Advocacy admin form submission
  */
-function nypl_advocacy_admin_form_submit($form, &$form_state) {
-  $sys_vars = array(
-    'nypl_advocacy_campaign' => check_plain($form_state['values']['campaign_name']),
-    'nypl_advocacy_city_council_nid' => check_plain($form_state['values']['cc_nid']),
-    'nypl_advocacy_tell_friend_nid' => check_plain($form_state['values']['tf_nid']),
-    'nypl_advocacy_districts_key' => check_plain($form_state['values']['nyt_key']),
-    'nypl_advocacy_tweet_txt' => check_plain($form_state['values']['tweet_txt']),
-  );
+function nypl_advocacy_admin_form_submit($form, &$form_state, $op = NULL) {
+  if ($op == 'socialmedia') {
+    $sys_vars = array(
+      'nypl_advocacy_tweet_txt' => check_plain($form_state['values']['tweet_txt']),
+      'nypl_advocacy_fb_description' => check_plain($form_state['values']['fb_description']),
+      'nypl_advocacy_fb_url' => check_plain($form_state['values']['fb_url']),
+    );
+  }
+  else {
+    $sys_vars = array(
+      'nypl_advocacy_campaign' => check_plain($form_state['values']['campaign_name']),
+      'nypl_advocacy_city_council_nid' => check_plain($form_state['values']['cc_nid']),
+      'nypl_advocacy_tell_friend_nid' => check_plain($form_state['values']['tf_nid']),
+      'nypl_advocacy_districts_key' => check_plain($form_state['values']['nyt_key']),
+      'nypl_advocacy_tweet_txt' => check_plain($form_state['values']['tweet_txt']),
+    );
+  }
   foreach ($sys_vars as $name => $value) {
     if (variable_get($name, $value) != $value) {
       variable_set($name, $value);
