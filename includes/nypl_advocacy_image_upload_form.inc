@@ -79,8 +79,8 @@ function _get_branches($city){
 	while($row = db_fetch_array($result)){
 		$list[$row['location_symbol']] = $row['location_name']; 
 	}
-	return $list;
+	$location_list = array(array("id" => "all", "description" => "All Locations"));
+	return array('none' => '--- Please Select ---') + $list;
 }
-
 
 ?>
