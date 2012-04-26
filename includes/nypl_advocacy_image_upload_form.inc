@@ -34,32 +34,33 @@ function nypl_advocacy_admin_images_form($form_state) {
 	  '#collapsed' => FALSE,
 	);
 	$form['campaign_assets']['donate_button'] = array(
-        '#type' => 'file',
-        '#title' => t('"Donate" Button Image'),
-        '#size' => 48,
-        '#description' => t('Upload Donate button image.'),
+      '#type' => 'file',
+      '#title' => t('"Donate" Button Image'),
+      '#size' => 48,
+      '#description' => t('Upload Donate button image.'),
     );
 	$form['campaign_assets']['donate_link'] = array(
-        '#type' => 'textfield',
-        '#title' => t('"Donate" Button Link'),
-        '#size' => 48,
-        '#description' => t('Add donate button link.'),
+      '#type' => 'textfield',
+      '#title' => t('"Donate" Button Link'),
+      '#size' => 48,
+      '#description' => t('Add donate button link.'),
     );
 	$form['campaign_assets']['write_button'] = array(
-        '#type' => 'file',
-        '#title' => t('"Write" Button Image'),
-        '#size' => 48,
-        '#description' => t('Upload Donate button image.'),
+      '#type' => 'file',
+      '#title' => t('"Write" Button Image'),
+      '#size' => 48,
+      '#description' => t('Upload Donate button image.'),
     );
 	$form['campaign_assets']['write_link'] = array(
-        '#type' => 'textfield',
-        '#title' => t('"write" Button Link'),
-        '#size' => 48,
-        '#description' => t('Add donate button link.'),
+      '#type' => 'textfield',
+      '#title' => t('"write" Button Link'),
+      '#size' => 48,
+      '#description' => t('Add donate button link.'),
     );
 	$form['submit'] = array(
-		'#type' => 'submit', 
-		'#value' => t('Save')
+      '#type' => 'submit', 
+	  '#value' => t('Save'),
+	  '#weight' => 50,
 	);
     return $form;
 }
