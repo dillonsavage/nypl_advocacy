@@ -76,7 +76,7 @@ function _get_branches($city){
 
 	$result = db_query($sql, $city);
 	$list = array();		
-	while($row = db_fetch($result)){
+	while($row = db_fetch_array($result)){
 		$list[$row['location_symbol']] = $row['location_name']; 
 	}
 	return $list;
