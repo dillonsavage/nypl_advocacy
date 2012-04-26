@@ -12,19 +12,19 @@ function nypl_advocacy_admin_images_form($form_state) {
       '#type' => 'select',
       '#title' => t('Leading Manhattan Branch'),
       '#options' => _get_branches('New York'),
-      '#default_value' => variable_get('leading_manhattan_branch',''),	
+      '#default_value' => variable_get('nypl_advocacy_leading_manhattan_branch',''),	
 	);
 	$form['leading_branches']['bronx_branch'] = array(
       '#type' => 'select',
       '#title' => t('Leading Bronx Branch'),
       '#options' => _get_branches('Bronx'),
-  	  '#default_value' => variable_get('leading_bronx_branch',''),	
+  	  '#default_value' => variable_get('nypl_advocacy_leading_bronx_branch',''),	
 	);
 	$form['leading_branches']['staten_island_branch'] = array(
       '#type' => 'select',
       '#title' => t('Leading Staten Island Branch'),
       '#options' => _get_branches('Staten Island'),	
-	  '#default_value' => variable_get('leading_staten_island_branch',''),
+	  '#default_value' => variable_get('nypl_advocacy_leading_staten_island_branch',''),
 	);			
 	$form['campaign_assets'] = array(
 	  '#type' => 'fieldset', 
@@ -44,18 +44,20 @@ function nypl_advocacy_admin_images_form($form_state) {
       '#title' => t('"Donate" Button Link'),
       '#size' => 48,
       '#description' => t('Add donate button link.'),
+	  '#default_value' => variable_get('nypl_advocacy_donate_button_path', ''),
     );
 	$form['campaign_assets']['write_button'] = array(
       '#type' => 'file',
       '#title' => t('"Write" Button Image'),
       '#size' => 48,
       '#description' => t('Upload Donate button image.'),
-    );
+	);
 	$form['campaign_assets']['write_link'] = array(
       '#type' => 'textfield',
       '#title' => t('"write" Button Link'),
       '#size' => 48,
       '#description' => t('Add donate button link.'),
+      '#default_value' => variable_get('nypl_advocacy_write_button_link', ''),
     );
 	$form['submit'] = array(
       '#type' => 'submit', 
