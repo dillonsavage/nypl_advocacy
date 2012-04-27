@@ -306,9 +306,10 @@ function nypl_advocacy_admin_thankyou_form() {
     '#rows' => 3,
   );
   $form['ty_donate_url'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Donate URL'),
+    '#type' => 'textarea',
+    '#title' => t('Donate code'),
     '#default_value' => variable_get('nypl_advocacy_ty_donate', ''),
+    '#rows' => 3,
   );
   $form['ty_twitter_code'] = array(
     '#type' => 'textarea',
