@@ -1,4 +1,6 @@
 <?php
+module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
+
 function nypl_advocacy_admin_images_form($form_state) {
   //variable_set('nypl_advocacy_img_path', '/Users/hcnewsom/Sites/drupal6/sites/default/files/advocacy');
   variable_set('nypl_advocacy_img_path', '/www/sites/new.nypl.org/sites/default/files/advocacy');
@@ -137,7 +139,7 @@ function _get_branches($city){
 	db_set_active('default');
 	return array('none' => '--- Please Select ---') + $list;
 }
-
+/*
 function _get_button_image(){
 	$dir = variable_get('nypl_advocacy_img_path','');
 	$files = scandir($dir);	
@@ -163,3 +165,4 @@ function _get_button_image(){
 	}
 	//var_dump($my_files['donate-button']['link']);
 }
+*/
