@@ -192,13 +192,6 @@ function nypl_advocacy_admin_form() {
     '#size' => 7,
     '#maxlength' => 7,
   );
-  $form['ty_nid'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Thank You page nid'),
-    '#default_value' => variable_get('nypl_advocacy_thank_you_nid', ''),
-    '#size' => 7,
-    '#maxlength' => 7,
-  );
   $form['nyt_key'] = array(
     '#type' => 'textfield',
     '#title' => t('NYTimes API key'),
@@ -221,7 +214,6 @@ function nypl_advocacy_admin_form_submit($form, &$form_state) {
     'nypl_advocacy_campaign' => check_plain($form_state['values']['campaign_name']),
     'nypl_advocacy_city_council_nid' => check_plain($form_state['values']['cc_nid']),
     'nypl_advocacy_tell_friend_nid' => check_plain($form_state['values']['tf_nid']),
-    'nypl_advocacy_thank_you_nid'=> check_plain($form_state['values']['ty_nid']),
     'nypl_advocacy_districts_key' => check_plain($form_state['values']['nyt_key']),
   );
   foreach ($sys_vars as $name => $value) {
@@ -320,19 +312,19 @@ function nypl_advocacy_admin_thankyou_form() {
   );
   $form['ty_twitter_code'] = array(
     '#type' => 'textarea',
-    '#title' => t('Body text'),
+    '#title' => t('Twitter code'),
     '#default_value' => variable_get('nypl_advocacy_ty_twitter', ''),
     '#rows' => 3,
   );
   $form['ty_fb_code'] = array(
     '#type' => 'textarea',
-    '#title' => t('Body text'),
+    '#title' => t('Facebook code'),
     '#default_value' => variable_get('nypl_avocacy_ty_fb', ''),
     '#rows' => 3,
   );
   $form['ty_pinterest_code'] = array(
     '#type' => 'textarea',
-    '#title' => t('Body text'),
+    '#title' => t('Pinterest code'),
     '#default_value' => variable_get('nypl_advocacy_ty_pinterest', ''),
     '#rows' => 3,
   );
