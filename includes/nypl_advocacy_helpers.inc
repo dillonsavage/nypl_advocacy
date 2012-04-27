@@ -18,7 +18,7 @@ function _get_button_image(){
 		foreach($info as $i){
 			$my_files[$i['filename']] = array(
 				'link' => $base_url . '/sites/default/files/advocacy/' . $i['basename'],
-				'tag' =>  '<img class="' . $i['file-name'] . '" src = "'. $base_url . '/sites/default/files/advocacy/' . $i['basename'] . '" alt="' . $i['filename'] . '"/>',		
+				'tag' =>  '<img class="' . $i['filename'] . '" src = "'. $base_url . '/sites/default/files/advocacy/' . $i['basename'] . '" alt="' . $i['filename'] . '"/>',		
 			);
 		}
 		return $my_files;
