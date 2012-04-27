@@ -159,8 +159,8 @@ function nypl_advocacy_letters_map() {
   
   $locations_all_map = array(
     'id' => 'advocacy',
-    'width' => '200px',
-    'height' => '350px',
+    'width' => '220px',
+    'height' => '290px',
     'type' => 'Map',
     'controltype' => 'None',
     'zoom' => 12,
