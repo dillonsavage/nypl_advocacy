@@ -63,28 +63,29 @@ function nypl_advocacy_admin_images_form($form_state) {
 }
 
 function nypl_advocacy_admin_images_form_submit($form, $form_state) {
-	if(isset($form_state['values'])){
-		$form_values = $form_state['values'];
-		variable_set('nypl_advocacy_leading_manhattan_branch',$form_values['manhattan_branch']);
-		variable_set('nypl_advocacy_leading_bronx_branch',$form_values['bronx_branch']);
-		variable_set('nypl_advocacy_leading_staten_island_branch',$form_values['staten_island_branch']);
-		variable_set('nypl_advocacy_donate_button_filename', $form_values['donate_button']);
-		variable_set('nypl_advocacy_write_button_filename', $form_values['write_button']);	
-		$validators = array(
-      'file_validate_is_image' => array(), 
-    );
+  if(isset($form_state['values'])){
+    $form_values = $form_state['values'];
+    variable_set('nypl_advocacy_leading_manhattan_branch',$form_values['manhattan_branch']);
+    variable_set('nypl_advocacy_leading_bronx_branch',$form_values['bronx_branch']);
+    variable_set('nypl_advocacy_leading_staten_island_branch',$form_values['staten_island_branch']);
+    variable_set('nypl_advocacy_donate_button_filename', $form_values['donate_button']);
+    variable_set('nypl_advocacy_write_button_filename', $form_values['write_button']);	
+    $validators = array(
+			'file_validate_is_image' => array(), 
+			);
     
     if ($file1 = file_save_upload('donate_button', $validators)) {	  
-			//var_dump($form_state['values']['donate_button']->picture);
+      //var_dump($form_state['values']['donate_button']->picture);
       if (isset($form_state['values']['donate_button']->picture) && file_exists($form_state['values']['donate_button']->picture)) {
         $form_state['values']['donate_button']->picture;
       }
       
-			$info1 = image_get_info($file1->filepath);
+      $info1 = image_get_info($file1->filepath);
       $destination1 = variable_get('nypl_advocacy_img_path', 'files') . '/donate-button.' . $info1['extension'];
       if (file_copy($file1, $destination1, FILE_EXISTS_REPLACE)) {
         $form_state['values']['donate_button'] = $file1->filepath;
-				drupal_set_message('File, %file has been saved.', array('%file' => $file1->filepath));
+	drupal_set_message('Your file(s) have been saved.');
+	//drupal_set_message('File, %file has been saved.', array('%file' => $file1->filepath));
       }
       else {
         form_set_error('button_image_upload', t("Failed to upload the picture image; the %directory directory doesn't exist or is not writable.", array('%directory' => variable_get('nypl_advocacy_picture_path', 'pictures'))));
@@ -96,17 +97,18 @@ function nypl_advocacy_admin_images_form_submit($form, $form_state) {
         file_delete($form_state['values']['write_button']->picture);
       }
       
-			$info2 = image_get_info($file2->filepath);
+      $info2 = image_get_info($file2->filepath);
       $destination2 = variable_get('nypl_advocacy_img_path', 'files') . '/write-button.' . $info2['extension'];
       if (file_copy($file2, $destination2, FILE_EXISTS_REPLACE)) {
         $form_state['values']['write_button'] = $file2->filepath;
-        drupal_set_message('File, %file has been saved.', array('%file' => $file2->filepath));	
+	drupal_set_message('Your file(s) have been saved.');
+        //drupal_set_message('File, %file has been saved.', array('%file' => $file2->filepath));	
       }
       else {
         form_set_error('button_image_upload', t("Failed to upload the picture image; the %directory directory doesn't exist or is not writable.", array('%directory' => variable_get('nypl_advocacy_picture_path', 'pictures'))));
       }
     }
-	}
+  }
 }
 
 function _get_branches($city){
