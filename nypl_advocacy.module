@@ -29,6 +29,12 @@ function nypl_advocacy_menu() {
     'page arguments' => array(2),
     'access arguments' => array('administer NYPL advocacy'),
   );
+  $items['speakout/thankyou'] = array(
+  'title' => 'Thank You',
+  'type' => MENU_CALLBACK,
+  'page callback' => 'nypl_advocacy_thankyou',
+  'access arguments' => array('access content'),
+  );
   $items['admin/settings/nypl_advocacy'] = array(
     'title' => t('NYPL Advocacy'),
     'type' => MENU_NORMAL_ITEM,
