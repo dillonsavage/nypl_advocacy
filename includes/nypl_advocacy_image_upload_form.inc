@@ -35,6 +35,7 @@ function nypl_advocacy_admin_images_form($form_state) {
     '#weight' => 5, 
     '#collapsible' => FALSE, 
     '#collapsed' => FALSE,
+    '#description' => t('Note: you must refresh the page in order to see the most recent button uploads.'),
   );
   $form['campaign_assets']['donate_button'] = array(
     '#type' => 'file',
