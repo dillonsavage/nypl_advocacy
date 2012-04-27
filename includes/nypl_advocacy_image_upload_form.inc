@@ -109,7 +109,9 @@ function nypl_advocacy_admin_images_form_submit($form, $form_state) {
       }
     }
   }
-  _get_button_image();
+  $button_images = _get_button_image();
+  $form_state['values']['current_write_button'] = $button_images['tag']['write-button'];
+  $form_state['values']['current_donate_button'] = $button_images['tag']['donate-button'];
 }
 
 function _get_branches($city){
