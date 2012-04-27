@@ -1,7 +1,7 @@
 <?php
 function nypl_advocacy_admin_images_form($form_state) {
   //variable_set('nypl_advocacy_img_path', '/Users/hcnewsom/Sites/drupal6/sites/default/files/advocacy');
-  variable_set('nypl_advocacy_img_path', '/sites/default/files/advocacy');
+  variable_set('nypl_advocacy_img_path', '/www/sites/new.nypl.org/sites/default/files/advocacy');
   $button = _get_button_image();
   $form = array('#attributes' => array('enctype' => 'multipart/form-data'));
   $form['leading_branches'] = array(
@@ -12,53 +12,53 @@ function nypl_advocacy_admin_images_form($form_state) {
     '#collapsed' => FALSE,
   );
   $form['leading_branches']['manhattan_branch'] = array(
-							'#type' => 'select',
-							'#title' => t('Leading Manhattan Branch'),
+    '#type' => 'select',
+    '#title' => t('Leading Manhattan Branch'),
     '#options' => _get_branches('New York'),
-    '#default_value' => variable_get('nypl_advocacy_leading_manhattan_branch',''),	
-	);
-	$form['leading_branches']['bronx_branch'] = array(
+    '#default_value' => variable_get('nypl_advocacy_leading_manhattan_branch',''),		
+  );
+  $form['leading_branches']['bronx_branch'] = array(
     '#type' => 'select',
     '#title' => t('Leading Bronx Branch'),
     '#options' => _get_branches('Bronx'),
     '#default_value' => variable_get('nypl_advocacy_leading_bronx_branch',''),	
   );
-	$form['leading_branches']['staten_island_branch'] = array(
+  $form['leading_branches']['staten_island_branch'] = array(
     '#type' => 'select',
     '#title' => t('Leading Staten Island Branch'),
     '#options' => _get_branches('Staten Island'),	
-	  '#default_value' => variable_get('nypl_advocacy_leading_staten_island_branch',''),
-	);			
-	$form['campaign_assets'] = array(
-	  '#type' => 'fieldset', 
-	  '#title' => t('Campaign Assets'), 
-	  '#weight' => 5, 
-	  '#collapsible' => FALSE, 
-	  '#collapsed' => FALSE,
-	);
-	$form['campaign_assets']['donate_button'] = array(
+    '#default_value' => variable_get('nypl_advocacy_leading_staten_island_branch',''),
+  );			
+  $form['campaign_assets'] = array(
+    '#type' => 'fieldset', 
+    '#title' => t('Campaign Assets'), 
+    '#weight' => 5, 
+    '#collapsible' => FALSE, 
+    '#collapsed' => FALSE,
+  );
+  $form['campaign_assets']['donate_button'] = array(
     '#type' => 'file',
     '#title' => t('"Donate" Button Image'),
     '#size' => 48,
     '#description' => t('Upload Donate button image (jpg only).'),
   );
-	$form['campaign_assets']['current_donate_button'] = array(
-	  '#value' =>  '<p>' . $button['donate-button']['tag'] . '</p>',
+  $form['campaign_assets']['current_donate_button'] = array(
+    '#value' =>  '<p>' . $button['donate-button']['tag'] . '</p>',
   );
-	$form['campaign_assets']['write_button'] = array(
+  $form['campaign_assets']['write_button'] = array(
     '#type' => 'file',
     '#title' => t('"Write" Button Image'),
     '#size' => 48,
     '#description' => t('Upload Donate button image (jpg only).'),
-	);
-	$form['campaign_assets']['current_write_button'] = array(
-	  '#value' => '<p>' . $button['write-button']['tag'] . '</p>',
   );
-	$form['submit'] = array(
+  $form['campaign_assets']['current_write_button'] = array(
+    '#value' => '<p>' . $button['write-button']['tag'] . '</p>',
+  );
+  $form['submit'] = array(
     '#type' => 'submit', 
-	  '#value' => t('Save'),
-	  '#weight' => 50,
-	);
+    '#value' => t('Save'),
+    '#weight' => 50,
+  );
   return $form;
 }
 
