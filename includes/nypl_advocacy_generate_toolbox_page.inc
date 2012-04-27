@@ -2,10 +2,12 @@
 module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
 function _generate_toolbox_page(){
   $content = '';
-
+  
   $bronx = _get_branches_page('Bronx');
   $manhattan = _get_branches_page('New York');
   $staten_island = _get_branches_page('Staten Island');
+  
+  $content .='<span id ="toolbox-anchors"><a href="#Bronx">Bronx</a> <a href="#Manhattan">Manhattan</a> <a href="#Staten Island">Staten Island</a></span>';
 
   $content .= '<strong>'. t('Bronx') . '</strong><br/>';
   foreach($bronx as $b){
