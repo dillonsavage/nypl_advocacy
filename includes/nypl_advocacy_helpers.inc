@@ -84,7 +84,15 @@ function _get_branches_page($city){
 }
 
 function _download_image($symbol){
-  $path = '/sites/default/files/advocacy/badges/';
+  $path = '/sites/default/files/advocacy/badges/' . $symbol  . '.jpg';
+  header('Content-Description: File Transfer');
   header('Content-type: application/octet-stream');
-  header('Content-Disposition: attachment; filename="' . $path . $symbol . '.jpg"');
+  header('Content-Disposition: attachment; filename="' . basename($path) . '"');
+  header('Expires: 0');
+  header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+  header('Pragma: public');
+  ob_clean();
+  flush();
+  readfile($file);
+  exit;
 }
