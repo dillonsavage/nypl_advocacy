@@ -12,7 +12,7 @@ module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
  * Implementation of hook_perm()
  */
 function nypl_advocacy_perm() {
-  return array('administer NYPL advocacy');
+  return array('administer NYPL advocacy', 'access NYPL advocacy');
 }
 
 /**
@@ -79,6 +79,23 @@ function nypl_advocacy_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('nypl_advocacy_admin_thankyou_form'),
     'access arguments' => array('administer NYPL advocacy'),
+  );
+  $items['admin/settings/nypl_advocacy/toolbox'] = array(
+    'title' => t('Toolbox Node Settings'),
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nypl_advocacy_admin_toolbox_form'),
+    'access arguments' => array('administer NYPL advocacy'),
+    'file' => 'includes/nypl_advocacy_toolbox_form.inc',
+	  'weight' => 50,
+  );
+  $items['speakout/toolbox'] = array(
+    'title' => t('Advocacy Toolbox'),
+    'type' => MENU_CALLBACK,
+    'page callback' => '_generate_toolbox_page',
+    'access arguments' => array('access NYPL advocacy'),
+    'file' => 'includes/nypl_advocacy_generate_toolbox_page.inc',
+	  'weight' => 50,
   );
   return $items;
 }
