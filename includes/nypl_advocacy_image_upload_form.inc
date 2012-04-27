@@ -1,18 +1,19 @@
 <?php
 function nypl_advocacy_admin_images_form($form_state) {
-	variable_set('nypl_advocacy_img_path', '/Users/hcnewsom/Sites/drupal6/sites/default/files/advocacy');
-	$button = _get_button_image();
+  //variable_set('nypl_advocacy_img_path', '/Users/hcnewsom/Sites/drupal6/sites/default/files/advocacy');
+  variable_set('nypl_advocacy_img_path', '/sites/default/files/advocacy');
+  $button = _get_button_image();
   $form = array('#attributes' => array('enctype' => 'multipart/form-data'));
   $form['leading_branches'] = array(
-	  '#type' => 'fieldset', 
-	  '#title' => t('Designate top 3 leading Branches'), 
-	  '#weight' => 5, 
-	  '#collapsible' => FALSE, 
-	  '#collapsed' => FALSE,
+    '#type' => 'fieldset', 
+    '#title' => t('Designate top 3 leading Branches'), 
+    '#weight' => 5, 
+    '#collapsible' => FALSE, 
+    '#collapsed' => FALSE,
   );
-	$form['leading_branches']['manhattan_branch'] = array(
-    '#type' => 'select',
-    '#title' => t('Leading Manhattan Branch'),
+  $form['leading_branches']['manhattan_branch'] = array(
+							'#type' => 'select',
+							'#title' => t('Leading Manhattan Branch'),
     '#options' => _get_branches('New York'),
     '#default_value' => variable_get('nypl_advocacy_leading_manhattan_branch',''),	
 	);
