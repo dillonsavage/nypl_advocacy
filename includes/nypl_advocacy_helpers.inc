@@ -32,6 +32,6 @@ function _get_button_image(){
 function _nypl_advocacy_leading_library_badge($city){
   global $base_url;
   $symbol = variable_get('nypl_advocacy_leading_'.$city.'_branch','default');
-  return '<img class="' . preg_replace('_','-',$city) . '-badge" src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $symbol . '.jpg" alt="Leading library in ' . ucfirst(preg_replace('_',' ',$city)) . '"/>';
+  return '<img class="' . $city . '-badge" src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $symbol . '.jpg" alt="Leading library in ' . ucfirst($city) . '"/>';
 }
 
