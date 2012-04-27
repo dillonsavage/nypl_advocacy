@@ -314,19 +314,19 @@ function nypl_advocacy_admin_thankyou_form() {
   );
   $form['ty_twitter_code'] = array(
     '#type' => 'textarea',
-    '#title' => t('Twitter code'),
+    '#title' => t('Twitter button URL'),
     '#default_value' => variable_get('nypl_advocacy_ty_twitter', ''),
     '#rows' => 3,
   );
   $form['ty_fb_code'] = array(
     '#type' => 'textarea',
-    '#title' => t('Facebook code'),
+    '#title' => t('FB button URL'),
     '#default_value' => variable_get('nypl_advocacy_ty_fb', ''),
     '#rows' => 3,
   );
   $form['ty_pinterest_code'] = array(
     '#type' => 'textarea',
-    '#title' => t('Pinterest code'),
+    '#title' => t('Pinterest button URL'),
     '#default_value' => variable_get('nypl_advocacy_ty_pinterest', ''),
     '#rows' => 3,
   );
@@ -550,15 +550,13 @@ function nypl_advocacy_stats($var_id) {
  * Thankyou page callback
  */
 function nypl_advocacy_thankyou() {
-  $title = variable_get('nypl_advocacy_ty_title', 'Thank You');
   $body = variable_get('nypl_advocacy_ty_body', '');
   $donate_url = variable_get('nypl_advocacy_ty_donate', '');
   $buttons = _get_button_image();
   $donate_button = l($buttons['write-button']['tag'], $donate_url, array('html' => TRUE));
-  $twitter = variable_get('nypl_advocacy_ty_twitter', '');
-  $fb = variable_get('nypl_avocacy_ty_fb', '');
-  $pinterest = variable_get('nypl_advocacy_ty_pinterest', '');
-  $output = '<h1 class="title">' . $title . '</h1>';
+  $twitter = l('twitter', variable_get('nypl_advocacy_ty_twitter', ''), array('html' => TRUE));
+  $fb = l('fb', variable_get('nypl_avocacy_ty_fb', ''), array('html' => TRUE));
+  $pinterest = l('pinterest', variable_get('nypl_advocacy_ty_pinterest', ''), array('html' => TRUE));
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button;
   $output .= '<span id="nypl-advocacy-learnmore">' . l('LEARN MORE', 'speakout') . '</span>';
