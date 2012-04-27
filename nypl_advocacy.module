@@ -5,13 +5,14 @@
  * @file
  * @brief NYPL Advocacy data and settings
  */
- 
+
+module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
  
 /**
  * Implementation of hook_perm()
  */
 function nypl_advocacy_perm() {
-  return array('administer NYPL advocacy', 'access NYPL advocacy');
+  return array('administer NYPL advocacy');
 }
 
 /**
@@ -30,10 +31,10 @@ function nypl_advocacy_menu() {
     'access arguments' => array('administer NYPL advocacy'),
   );
   $items['speakout/thankyou'] = array(
-  'title' => 'Thank You',
-  'type' => MENU_CALLBACK,
-  'page callback' => 'nypl_advocacy_thankyou',
-  'access arguments' => array('access content'),
+    'title' => 'Thank You',
+    'type' => MENU_CALLBACK,
+    'page callback' => 'nypl_advocacy_thankyou',
+    'access arguments' => array('access content'),
   );
   $items['admin/settings/nypl_advocacy'] = array(
     'title' => t('NYPL Advocacy'),
@@ -70,26 +71,15 @@ function nypl_advocacy_menu() {
     'page arguments' => array('nypl_advocacy_admin_images_form'),
     'access arguments' => array('administer NYPL advocacy'),
     'file' => 'includes/nypl_advocacy_image_upload_form.inc',
-	  'weight' => 50,
+	'weight' => 50,
   );
-  $items['admin/settings/nypl_advocacy/toolbox'] = array(
-    'title' => t('Toolbox Node Settings'),
+  $items['admin/settings/nypl_advocacy/thankyou'] = array(
+    'title' => t('Thank You page'),
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('nypl_advocacy_admin_toolbox_form'),
+    'page arguments' => array('nypl_advocacy_admin_thankyou_form'),
     'access arguments' => array('administer NYPL advocacy'),
-    'file' => 'includes/nypl_advocacy_toolbox_form.inc',
-	  'weight' => 50,
   );
-  $items['speakout/toolbox'] = array(
-    'title' => t('Advocacy Toolbox'),
-    'type' => MENU_CALLBACK,
-    'page callback' => '_generate_toolbox_page',
-    'access arguments' => array('access NYPL advocacy'),
-    'file' => 'includes/nypl_advocacy_generate_toolbox_page.inc',
-	  'weight' => 50,
-  );
- 
   return $items;
 }
 
@@ -165,8 +155,8 @@ function nypl_advocacy_letters_map() {
   
   $locations_all_map = array(
     'id' => 'advocacy',
-    'width' => '220px',
-    'height' => '290px',
+    'width' => '200px',
+    'height' => '350px',
     'type' => 'Map',
     'controltype' => 'None',
     'zoom' => 12,
@@ -203,13 +193,6 @@ function nypl_advocacy_admin_form() {
     '#size' => 7,
     '#maxlength' => 7,
   );
-  $form['ty_nid'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Thank You page nid'),
-    '#default_value' => variable_get('nypl_advocacy_thank_you_nid', ''),
-    '#size' => 7,
-    '#maxlength' => 7,
-  );
   $form['nyt_key'] = array(
     '#type' => 'textfield',
     '#title' => t('NYTimes API key'),
@@ -232,7 +215,6 @@ function nypl_advocacy_admin_form_submit($form, &$form_state) {
     'nypl_advocacy_campaign' => check_plain($form_state['values']['campaign_name']),
     'nypl_advocacy_city_council_nid' => check_plain($form_state['values']['cc_nid']),
     'nypl_advocacy_tell_friend_nid' => check_plain($form_state['values']['tf_nid']),
-    'nypl_advocacy_thank_you_nid'=> check_plain($form_state['values']['ty_nid']),
     'nypl_advocacy_districts_key' => check_plain($form_state['values']['nyt_key']),
   );
   foreach ($sys_vars as $name => $value) {
@@ -304,6 +286,63 @@ function nypl_advocacy_letters_form_submit($form, &$form_state) {
   $letters_sent = $form_values['letters_sent'];
   $insert_sql = "INSERT INTO {nypl_advocacy} (campaign_name, date, location, letters_sent) VALUES ('%s', '%s', %d, %d)";
   db_query($insert_sql, $campaign_name, $date, $location, $letters_sent);
+  drupal_set_message('Changes saved.');
+}
+
+/**
+ * Form for entering thankyou page stuff
+ */
+function nypl_advocacy_admin_thankyou_form() {
+  $form = array();
+  
+  $form['ty_body_txt'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Body text'),
+    '#default_value' => variable_get('nypl_advocacy_ty_body', ''),
+    '#rows' => 3,
+  );
+  $form['ty_donate_url'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Donate code'),
+    '#default_value' => variable_get('nypl_advocacy_ty_donate', ''),
+    '#rows' => 3,
+  );
+  $form['ty_twitter_code'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Twitter code'),
+    '#default_value' => variable_get('nypl_advocacy_ty_twitter', ''),
+    '#rows' => 3,
+  );
+  $form['ty_fb_code'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Facebook code'),
+    '#default_value' => variable_get('nypl_advocacy_ty_fb', ''),
+    '#rows' => 3,
+  );
+  $form['ty_pinterest_code'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Pinterest code'),
+    '#default_value' => variable_get('nypl_advocacy_ty_pinterest', ''),
+    '#rows' => 3,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+  );
+  
+  return $form;
+}
+
+/**
+ * Thankyou settings form submission
+ */
+function nypl_advocacy_admin_thankyou_form_submit($form, &$form_state) {
+  variable_set('nypl_advocacy_ty_title', $form_state['values']['ty_title']);
+  variable_set('nypl_advocacy_ty_body', $form_state['values']['ty_body_txt']);
+  variable_set('nypl_advocacy_ty_donate', $form_state['values']['ty_donate_url']);
+  variable_set('nypl_advocacy_ty_twitter', $form_state['values']['ty_twitter_code']);
+  variable_set('nypl_advocacy_ty_fb', $form_state['values']['ty_fb_code']);
+  variable_set('nypl_advocacy_ty_pinterest', $form_state['values']['ty_pinterest_code']);
   drupal_set_message('Changes saved.');
 }
 
@@ -500,4 +539,27 @@ function nypl_advocacy_stats($var_id) {
     break;
   }
   fclose($outstream);
+}
+
+/**
+ * Thankyou page callback
+ */
+function nypl_advocacy_thankyou() {
+  $body = variable_get('nypl_advocacy_ty_body', '');
+  $donate_url = variable_get('nypl_advocacy_ty_donate', '');
+  $buttons = _get_button_image();
+  $donate_button = l($buttons['write-button']['tag'], $donate_url, array('html' => TRUE));
+  $twitter = variable_get('nypl_advocacy_ty_twitter', '');
+  $fb = variable_get('nypl_advocacy_ty_fb', '');
+  $pinterest = variable_get('nypl_advocacy_ty_pinterest', '');
+  $badge = $_GET['sid'] ? _nypl_advocacy_get_badge($_GET['sid']) : NULL;
+  $output .= '<p>' . $body . '</p>';
+  $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button;
+  $output .= '<span id="nypl-advocacy-learnmore">' . l('LEARN MORE', 'speakout') . '</span>';
+  $output .= '</div>';
+  $output .= '<div id="nypl-advocacy-thankyou-socialmedia">' . $twitter . $fb . $pinterest . '</div>';
+  if ($badge) {
+    $output .= '<div id="nypl-advocacy-thankyou-badge"><img src="' . $badge . '" /></div>';
+  }
+  return $output; 
 }
