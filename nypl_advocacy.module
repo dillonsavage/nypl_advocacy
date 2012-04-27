@@ -508,19 +508,22 @@ function nypl_advocacy_stats($var_id) {
       fwrite($outstream, "Location,Physical letters,Emails,Total\n");
       $current_campaign = variable_get('nypl_advocacy_campaign', NULL);
       // need to add behavior for no campaign/nid entered?
-      $letters_q = db_query("SELECT td.name AS location_name,
+      $letters_q = db_query("SELECT ls.name AS location_name,
+        REPLACE(ls.city, 'New York', 'Manhattan') as borough,
         na.location AS location_tid,
         SUM(letters_sent) AS letters_sent,
         SUM(emails_sent) AS emails_sent
         FROM {nypl_advocacy} na
-        JOIN {term_data} td ON na.location = td.tid
+        JOIN {locations_term} lt ON lt.tid = na.location
+        JOIN {locations} l ON l.lid = lt.lid
+        JOIN {locations_spaces} ls ON ls.sid = l.sid
         WHERE na.campaign_name = '%s'
         GROUP BY location", $current_campaign);
       while ($letters_r = db_fetch_array($letters_q)) {
         $letters_sent = $letters_r['letters_sent'];
         $emails_sent = $letters_r['emails_sent'];
         $total_sent = $letters_sent + $emails_sent;
-        fputcsv($outstream, array($letters_r['location_name'], $letters_sent, $emails_sent, $total_sent));
+        fputcsv($outstream, array($letters_r['location_name'], $letters_r['borough'], $letters_sent, $emails_sent, $total_sent));
       }
     break;
   }
