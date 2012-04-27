@@ -66,18 +66,19 @@ function _get_branch_sql(){
 }
 
 function _get_branches_page($city){
+  global $base_url;
   $sql = _get_branch_sql();
-	db_set_active('nypl');	
-	$result = db_query($sql, $city);
-	$list = array();		
-	while($row = db_fetch_array($result)){
-		$list[$row['location_symbol']] = array(
-      'branch_name' => $row['location_name'],
-      'badge_image' => '<img class="' . preg_replace('/_/','-',$city) . '-badge" src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $row['location_symbol'] . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>',
-      'letter_download' => '<span class="letter-download">'. l('DOWNLOAD YOUR LETTER','') . "</span>",
-      'badge_download' => '<span class="badge-download">'. l('DOWNLOAD', $base_url .'/speakout/toolbox/download/' . $row['location_symbol']) . "</span>",
-    ); 
-	}
+  db_set_active('nypl');	
+  $result = db_query($sql, $city);
+  $list = array();		
+  while($row = db_fetch_array($result)){
+    $list[$row['location_symbol']] = array(
+					   'branch_name' => $row['location_name'],
+					   'badge_image' => '<img class="' . preg_replace('/_/','-',$city) . '-badge" src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $row['location_symbol'] . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>',
+					   'letter_download' => '<span class="letter-download">'. l('DOWNLOAD YOUR LETTER','') . "</span>",
+					   'badge_download' => '<span class="badge-download">'. l('DOWNLOAD', $base_url .'/speakout/toolbox/download/' . $row['location_symbol']) . "</span>",
+					   ); 
+  }
   db_set_active('default');
   return $list;
 }
