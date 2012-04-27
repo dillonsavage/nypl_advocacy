@@ -505,7 +505,7 @@ function nypl_advocacy_stats($var_id) {
       }
     break;
     case 'letters':
-      fwrite($outstream, "Location,Physical letters,Emails,Total\n");
+      fwrite($outstream, "Location,Borough,Physical letters,Emails,Total\n");
       $current_campaign = variable_get('nypl_advocacy_campaign', NULL);
       // need to add behavior for no campaign/nid entered?
       $letters_q = db_query("SELECT ls.name AS location_name,
