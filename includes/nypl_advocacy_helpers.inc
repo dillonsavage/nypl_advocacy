@@ -35,6 +35,22 @@ function _nypl_advocacy_leading_library_badge($city){
   return '<img class="' . preg_replace('/_/','-',$city) . '-badge" src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $symbol . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>';
 }
 
+function _nypl_advocacy_get_badge($sid) {
+  $symbol_q = db_query('SELECT symbol FROM {locations} l
+    LEFT JOIN {locations_term} lt ON l.lid = lt.lid
+    LEFT JOIN {webform_submitted_data} wd ON wd.data = lt.tid
+    WHERE wd.cid = 18 AND wd.sid = %d', $sid);
+  if ($symbol = db_result($symbol_q)) {
+    $extension = '.jpg';
+    // generate location badge filename
+    $badge_filename = '/sites/default/files/advocacy/badges/' . $symbol . $extension;
+  }
+  else {
+    return NULL;
+  }
+  return $badge_filename;
+}
+
 function _get_branch_sql(){
 	$sql = 'SELECT locations.symbol AS location_symbol, locations_term.vid, term_hierarchy.tid, term_data.name AS location_name
 			FROM locations
