@@ -32,9 +32,8 @@ function nypl_advocacy_menu() {
   $items['speakout/thankyou'] = array(
     'title' => 'Thank You',
     'type' => MENU_CALLBACK,
-    'page arguments' => array(),
     'page callback' => 'nypl_advocacy_thankyou',
-    'access arguments' => array('view content'),
+    'access arguments' => array('access content'),
   );
   $items['admin/settings/nypl_advocacy'] = array(
     'title' => t('NYPL Advocacy'),
