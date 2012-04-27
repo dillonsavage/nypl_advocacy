@@ -109,7 +109,7 @@ function nypl_advocacy_admin_images_form_submit($form, $form_state) {
       }
     }
   }
-  _button_get_image();
+  _get_button_image();
 }
 
 function _get_branches($city){
