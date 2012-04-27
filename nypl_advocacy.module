@@ -97,6 +97,15 @@ function nypl_advocacy_menu() {
     'file' => 'includes/nypl_advocacy_generate_toolbox_page.inc',
 	  'weight' => 50,
   );
+  $items['speakout/toolbox/download/%'] = array(
+    'title' => t('Advocacy Toolbox Image Download'),
+    'type' => MENU_CALLBACK,
+    'page callback' => '_download_image',
+    'page arguments' => array(3),
+    'access arguments' => array('access NYPL advocacy'),
+    'file' => 'includes/nypl_advocacy_helpers.inc',
+	  'weight' => 50,
+  );
   return $items;
 }
 
