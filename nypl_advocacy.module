@@ -5,7 +5,8 @@
  * @file
  * @brief NYPL Advocacy data and settings
  */
- 
+
+module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
  
 /**
  * Implementation of hook_perm()
