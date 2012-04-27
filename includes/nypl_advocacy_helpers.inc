@@ -35,19 +35,33 @@ function _nypl_advocacy_leading_library_badge($city){
   return '<img class="' . preg_replace('/_/','-',$city) . '-badge" src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $symbol . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>';
 }
 
-function _nypl_advocacy_get_badge($sid) {
-  $symbol_q = db_query('SELECT symbol FROM {locations} l
-    LEFT JOIN {locations_term} lt ON l.lid = lt.lid
-    LEFT JOIN {webform_submitted_data} wd ON wd.data = lt.tid
-    WHERE wd.cid = 18 AND wd.sid = %d', $sid);
-  if ($symbol = db_result($symbol_q)) {
-    $extension = '.jpg';
-    // generate location badge filename
-    $badge_filename = '/sites/default/files/advocacy/badges/' . $symbol . $extension;
-  }
-  else {
-    return NULL;
-  }
-  return $badge_filename;
+function _get_branch_sql(){
+	$sql = 'SELECT locations.symbol AS location_symbol, locations_term.vid, term_hierarchy.tid, term_data.name AS location_name
+			FROM locations
+			JOIN locations_spaces ON locations.sid = locations_spaces.sid
+			JOIN locations_term ON locations.lid = locations_term.lid
+			JOIN term_hierarchy ON locations_term.tid = term_hierarchy.tid
+			JOIN term_data ON locations_term.tid = term_data.tid
+			WHERE locations_spaces.city = "%s"
+			AND term_hierarchy.parent = 0
+			AND locations_term.vid = 2';
+
+  return $sql;
 }
 
+function _get_branches_page($city){
+  $sql = _get_branch_sql();
+	db_set_active('nypl');	
+	$result = db_query($sql, $city);
+	$list = array();		
+	while($row = db_fetch_array($result)){
+		$list[$row['location_symbol']] = array(
+      'branch_name' => $row['location_name'],
+      'badge_image' => '<img class="' . preg_replace('/_/','-',$city) . '-badge" src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $row['location_symbol'] . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>',
+      'letter_download' => '<span class="letter-download">'. l('DOWNLOAD YOUR LETTER','') . "</span>",
+      'badge_download' => '<span class="badge-download">'. l('DOWNLOAD', $base_url .'/advocacy/toolbox/download/' . $row['location_symbol']) . "</span>",
+    ); 
+	}
+  db_set_active('default');
+  return $list;
+}

@@ -2,8 +2,8 @@
 module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
 
 function nypl_advocacy_admin_images_form($form_state) {
-  //variable_set('nypl_advocacy_img_path', '/Users/hcnewsom/Sites/drupal6/sites/default/files/advocacy');
-  variable_set('nypl_advocacy_img_path', '/www/sites/new.nypl.org/sites/default/files/advocacy');
+  variable_set('nypl_advocacy_img_path', '/Users/hcnewsom/Sites/drupal6/sites/default/files/advocacy');
+  //variable_set('nypl_advocacy_img_path', '/www/sites/new.nypl.org/sites/default/files/advocacy');
   $button = _get_button_image();
   $form = array('#attributes' => array('enctype' => 'multipart/form-data'));
   $form['leading_branches'] = array(
@@ -16,19 +16,19 @@ function nypl_advocacy_admin_images_form($form_state) {
   $form['leading_branches']['manhattan_branch'] = array(
     '#type' => 'select',
     '#title' => t('Leading Manhattan Branch'),
-    '#options' => _get_branches('New York'),
+    '#options' => _get_branches_select_box('New York'),
     '#default_value' => variable_get('nypl_advocacy_leading_manhattan_branch',''),		
   );
   $form['leading_branches']['bronx_branch'] = array(
     '#type' => 'select',
     '#title' => t('Leading Bronx Branch'),
-    '#options' => _get_branches('Bronx'),
+    '#options' => _get_branches_select_box('Bronx'),
     '#default_value' => variable_get('nypl_advocacy_leading_bronx_branch',''),	
   );
   $form['leading_branches']['staten_island_branch'] = array(
     '#type' => 'select',
     '#title' => t('Leading Staten Island Branch'),
-    '#options' => _get_branches('Staten Island'),	
+    '#options' => _get_branches_select_box('Staten Island'),	
     '#default_value' => variable_get('nypl_advocacy_leading_staten_island_branch',''),
   );			
   $form['campaign_assets'] = array(
@@ -118,17 +118,8 @@ function nypl_advocacy_admin_images_form_submit($form, $form_state) {
   $form_state['values']['current_donate_button'] = $button_images['tag']['donate-button'];
 }
 
-function _get_branches($city){
-	$sql = 'SELECT locations.symbol AS location_symbol, locations_term.vid, term_hierarchy.tid, term_data.name AS location_name
-			FROM locations
-			JOIN locations_spaces ON locations.sid = locations_spaces.sid
-			JOIN locations_term ON locations.lid = locations_term.lid
-			JOIN term_hierarchy ON locations_term.tid = term_hierarchy.tid
-			JOIN term_data ON locations_term.tid = term_data.tid
-			WHERE locations_spaces.city = "%s"
-			AND term_hierarchy.parent = 0
-			AND locations_term.vid = 2';
-
+function _get_branches_select_box($city){
+  $sql = _get_branch_sql();
 	db_set_active('nypl');	
 	$result = db_query($sql, $city);
 	$list = array();		
@@ -139,8 +130,9 @@ function _get_branches($city){
 	db_set_active('default');
 	return array('none' => '--- Please Select ---') + $list;
 }
+
 /*
-function _get_button_image(){
+function _get_bton_image(){
 	$dir = variable_get('nypl_advocacy_img_path','');
 	$files = scandir($dir);	
 	$my_files = array();
