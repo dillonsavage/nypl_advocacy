@@ -320,7 +320,7 @@ function nypl_advocacy_admin_thankyou_form() {
   $form['ty_fb_code'] = array(
     '#type' => 'textarea',
     '#title' => t('Facebook code'),
-    '#default_value' => variable_get('nypl_avocacy_ty_fb', ''),
+    '#default_value' => variable_get('nypl_advocacy_ty_fb', ''),
     '#rows' => 3,
   );
   $form['ty_pinterest_code'] = array(
