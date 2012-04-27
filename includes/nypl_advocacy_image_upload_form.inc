@@ -59,7 +59,7 @@ function nypl_advocacy_admin_images_form($form_state) {
     '#type' => 'submit', 
     '#value' => t('Save'),
     '#weight' => 50,
-    '#attributes' => array('onclick' => 'alert("Hello!");'),
+    '#attributes' => array('onclick' => 'window.location.reload();'),
   );
   return $form;
 }
