@@ -58,6 +58,12 @@ function nypl_advocacy_admin_images_form($form_state) {
     '#type' => 'submit', 
     '#value' => t('Save'),
     '#weight' => 50,
+    '#ahah' => array(
+		     //'path' => 'tuition-cost-calculator/calculate',
+		     //'wrapper' => 'tuition-results',
+		     //'method' => 'replace',
+		     //'effect' => 'fade',
+      'rebuild' => true,
   );
   return $form;
 }
