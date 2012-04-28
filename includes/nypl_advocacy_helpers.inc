@@ -87,7 +87,7 @@ function _download_image($symbol){
   $path = '/sites/default/files/advocacy/badges/' . $symbol  . '.jpg';
   header('Content-Description: File Transfer');
   header('Content-type: application/octet-stream');
-  header('Content-Disposition: attachment; filename="' . basename($path) . '"');
+  header('Content-Disposition: attachment; filename="' . basename($symbol . '.jpg') . '"');
   header('Expires: 0');
   header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
   header('Pragma: public');
