@@ -93,6 +93,6 @@ function _download_image($symbol){
   header('Pragma: public');
   ob_clean();
   flush();
-  readfile($file);
+  readfile($path);
   exit;
 }
