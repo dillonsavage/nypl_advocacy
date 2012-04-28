@@ -7,25 +7,28 @@ function _generate_toolbox_page(){
   $manhattan = _get_branches_page('New York');
   $staten_island = _get_branches_page('Staten Island');
   
-  $content .='<span id ="toolbox-anchors"><a href="#bronx">Bronx</a> <a href="#manhattan">Manhattan</a> <a href="#staten-island">Staten Island</a></span><br />';
+  $content .='<ul id ="toolbox-anchors"><li><a href="#bronx">Bronx</a></li> <li><a href="#manhattan">Manhattan</a></li> <li><a href="#staten-island">Staten Island</a></li></ul>';
 
-  $content .= '<a name=bronx"><strong>'. t('Bronx') . '</strong></a><br/>';
+  //Bronx
+  $content .= '<ul><a name=bronx"><strong>'. t('Bronx') . '</strong></a>';
   foreach($bronx as $b){
-    $bronx_string .= $b['badge_image'] .$b['badge_download'] . $b['branch_name'] . $b['letter_download'] . '<br/>';
+    $bronx_string .= '<li>'. $b['badge_image'] . $b['badge_download'] . $b['branch_name'] . $b['letter_download'] . '</li>';
   }
-  $content .= $bronx_string;
+  $content .= $bronx_string . '</ul>';
 
-  $content .= '<a name="manhattan"><strong>'. t('Manhattan') . '</strong></a><br/>';
+  //Manhattan
+  $content .= '<ul><a name="manhattan"><strong>'. t('Manhattan') . '</strong></a>';
   foreach($manhattan as $m){
-    $manhattan_string .= $m['badge_image'] . $m['badge_download'] . $m['branch_name'] . $m['letter_download'] . '<br/>';
+    $manhattan_string .= '<li>' . $m['badge_image'] . $m['badge_download'] . $m['branch_name'] . $m['letter_download'] . '</li>';
   }
-  $content .= $manhattan_string;
+  $content .= $manhattan_string . '</ul>';
 
-  $content .= '<a name="staten-island"><strong>'. t('Staten Island') . '</strong></a><br/>';
+  //Staten Island
+  $content .= '<ul><a name="staten-island"><strong>'. t('Staten Island') . '</strong></a>';
   foreach($staten_island as $s){
-    $staten_island_string .= $s['badge_image'] . $s['badge_download'] . $s['branch_name'] . $s['letter_download'] . '<br/>';
+    $staten_island_string .= '<li>'. $s['badge_image'] . $s['badge_download'] . $s['branch_name'] . $s['letter_download'] . '</li>';
   }
-  $content .= $staten_island_string;
+  $content .= $staten_island_string . '</ul>';
 
   return $content;
 }
