@@ -12,13 +12,12 @@ function nypl_advocacy_admin_toolbox_form($form_state){
 	$form['submit'] = array(
     	'#type' => 'submit', 
     	'#value' => t('Save'),
-    	'#weight' => 50,
-    	'#attributes' => array('onclick' => 'window.location.reload();'),
+    	'#weight' => 10,
   	);
 	return $form;
 }
 
-function nypl_advocacy_admin_toolbox_form_submit($form_state){
+function nypl_advocacy_admin_toolbox_form_submit($form, $form_state){
   var_dump($form_state);
 	variable_set('nypl_advocacy_toolbox_page_text', $form_state['values']['toolbox_instructions_text']);
 }
