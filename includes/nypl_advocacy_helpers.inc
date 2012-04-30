@@ -100,5 +100,5 @@ function _download_image($symbol, $location_name){
 }
 
 function _get_toolbox_page_text(){
-  return '<p id="toolbox-text">' . variable_set('nypl_advocacy_toolbox_page_text', '') . '</p>';
+  return '<p id="toolbox-text">' . variable_get('nypl_advocacy_toolbox_page_text', '') . '</p>';
 }

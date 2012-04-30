@@ -1,6 +1,7 @@
 <?php
 module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
 function _generate_toolbox_page(){
+
   $content = '';
 
   $bronx = _get_branches_page('Bronx');
