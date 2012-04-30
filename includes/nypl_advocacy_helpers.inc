@@ -35,21 +35,40 @@ function _nypl_advocacy_leading_library_badge($city){
   return '<img class="' . preg_replace('/_/','-',$city) . '-badge" src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $symbol . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>';
 }
 
-function _nypl_advocacy_get_badge($sid) {
-  $symbol_q = db_query('SELECT symbol FROM {locations} l
+function _nypl_advocacy_get_badge($sid = NULL) {
+  $symbol_sql = 'SELECT symbol FROM {locations} l
     LEFT JOIN {locations_term} lt ON l.lid = lt.lid
     LEFT JOIN {webform_submitted_data} wd ON wd.data = lt.tid
-    WHERE wd.cid = 18 AND wd.sid = %d', $sid);
-  if ($symbol = db_result($symbol_q)) {
-    $extension = '.jpg';
+    WHERE wd.cid = 18 AND wd.sid = %d';
+  if ($sid && $symbol = db_result(db_query($symbol_sql, $sid))) {
     // generate location badge filename
-    $badge_filename = '/sites/default/files/advocacy/badges/' . $symbol . $extension;
+    $badge_filename = '/sites/default/files/advocacy/badges/' . $symbol . '.jpg';
   }
   else {
     // default badge
     $badge_filename = '/sites/default/files/advocacy/badges/Library.jpg';
   }
   return $badge_filename;
+}
+
+function _nypl_advocacy_replace_pinterest($pinterest_code, $sid = NULL) {
+  global $base_url;
+  $img_search = 'REPLACE_WITH_RESPECTIVE_BRANCH_BUTTON';
+  $txt_search = 'NYPL%27s%20LIBRARY_NAME';
+  $badge_img = _nypl_advocacy_get_badge($sid);
+  $badge_replace = $base_url . $badge_img; 
+  $branch_symbol = str_replace('.jpg', '', array_pop(explode('/', $badge_img)));
+  $branch_name_q = db_query("SELECT ls.name FROM {locations_spaces} ls
+    JOIN {locations} l ON l.sid = ls.sid
+    WHERE l.symbol = '%s'", $branch_symbol);
+  if ($branch_name_r = db_result($branch_name_q)) {
+    $txt_replace = 'NYPL%27s%20' . tr_replace(' ', '_', strtoupper($branch_name_r));
+  }
+  else {
+    $txt_replace = 'NYPL';
+  }
+  $pinterest_code = str_replace(array($img_search, $txt_search), array($badge_replace, $txt_replace), $pinterest_code);
+  return $pinterest_code;
 }
 
 function _get_branch_sql(){
