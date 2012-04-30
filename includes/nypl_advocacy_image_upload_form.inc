@@ -1,6 +1,14 @@
 <?php
+
+/**
+ * @file
+ * @brief misc. advocacy administrative settings. 
+ */
 module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
 
+/**
+ * Implementation of hook_form()
+ */
 function nypl_advocacy_admin_images_form($form_state) {
   variable_set('nypl_advocacy_img_path', '/Users/hcnewsom/Sites/drupal6/sites/default/files/advocacy');
   //variable_set('nypl_advocacy_img_path', '/www/sites/new.nypl.org/sites/default/files/advocacy');
@@ -66,6 +74,10 @@ function nypl_advocacy_admin_images_form($form_state) {
   return $form;
 }
 
+/**
+ * Submit handler
+ */
+
 function nypl_advocacy_admin_images_form_submit($form, $form_state) {
   if(isset($form_state['values'])){
     $form_values = $form_state['values'];
@@ -88,8 +100,8 @@ function nypl_advocacy_admin_images_form_submit($form, $form_state) {
       $destination1 = variable_get('nypl_advocacy_img_path', 'files') . '/donate-button.' . $info1['extension'];
       if (file_copy($file1, $destination1, FILE_EXISTS_REPLACE)) {
         $form_state['values']['donate_button'] = $file1->filepath;
-	drupal_set_message('Your file(s) have been saved.');
-	//drupal_set_message('File, %file has been saved.', array('%file' => $file1->filepath));
+	      drupal_set_message('Your file(s) have been saved.');
+	      //drupal_set_message('File, %file has been saved.', array('%file' => $file1->filepath));
       }
       else {
         form_set_error('button_image_upload', t("Failed to upload the picture image; the %directory directory doesn't exist or is not writable.", array('%directory' => variable_get('nypl_advocacy_picture_path', 'pictures'))));
@@ -130,31 +142,3 @@ function _get_branches_select_box($city){
 	db_set_active('default');
 	return array('none' => '--- Please Select ---') + $list;
 }
-
-/*
-function _get_bton_image(){
-	$dir = variable_get('nypl_advocacy_img_path','');
-	$files = scandir($dir);	
-	$my_files = array();
-	global $base_url;	
-	foreach($files as $img){
-		if(preg_match("/write-button/",$img) || preg_match("/donate-button/", $img)){
-			$info[] = pathinfo($dir . "/" . $img);
-		}		
-	}
-	if(isset($info)){
-		foreach($info as $i){
-			$my_files[$i['filename']] = array(
-				'link' => $base_url . '/sites/default/files/advocacy/' . $i['basename'],
-				'tag' =>  '<img src = "'. $base_url . '/sites/default/files/advocacy/' . $i['basename'] . '" alt="' . $i['filename'] . '"/>',		
-			);
-		}
-		return $my_files;
-	}else{
-    //return;
-		$empty_tag = '<img src="" alt="no-image"/>';
-		return array('donate-button' => array('tag' => $empty_tag), 'write-button' => array('tag' => $empty_tag));
-	}
-	//var_dump($my_files['donate-button']['link']);
-}
-*/
