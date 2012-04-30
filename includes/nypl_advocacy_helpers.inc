@@ -46,7 +46,8 @@ function _nypl_advocacy_get_badge($sid) {
     $badge_filename = '/sites/default/files/advocacy/badges/' . $symbol . $extension;
   }
   else {
-    return NULL;
+    // default badge
+    $badge_filename = '/sites/default/files/advocacy/badges/library.jpg';
   }
   return $badge_filename;
 }
