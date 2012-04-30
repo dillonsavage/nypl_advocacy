@@ -19,5 +19,6 @@ function nypl_advocacy_admin_toolbox_form($form_state){
 }
 
 function nypl_advocacy_admin_toolbox_form_submit($form_state){
+  var_dump($form_state);
 	variable_set('nypl_advocacy_toolbox_page_text', $form_state['values']['toolbox_instructions_text']);
 }
