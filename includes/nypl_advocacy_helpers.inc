@@ -67,8 +67,8 @@ function _nypl_advocacy_replace_pinterest($pinterest_code, $sid = NULL) {
   else {
     $txt_replace = 'NYPL';
   }
-  $pinterest_code = str_replace(array($img_search, $txt_search), array($badge_replace, $txt_replace), $pinterest_code);
-  return $pinterest_code;
+  $output = str_replace(array($img_search, $txt_search), array($badge_replace, $txt_replace), $pinterest_code);
+  return $output;
 }
 
 function _get_branch_sql(){
