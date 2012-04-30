@@ -8,7 +8,7 @@ function _generate_toolbox_page(){
   $manhattan = _get_branches_page('New York');
   $staten_island = _get_branches_page('Staten Island');
   
-  $content .= _get_toolbox_page_text();
+  $content .= '<p id ="toolbox-text">' . variable_get('nypl_advocacy_toolbox_page_text', '') . '</p>';
   $content .= '<ul id ="toolbox-anchors"><li><a href="#bronx">Bronx</a></li> <li><a href="#manhattan">Manhattan</a></li> <li><a href="#staten-island">Staten Island</a></li></ul>';
 
   //Bronx

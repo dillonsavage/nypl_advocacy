@@ -98,8 +98,3 @@ function _download_image($symbol, $location_name){
   readfile($path);
   exit;
 }
-
-function _get_toolbox_page_text(){
-  $content = '<p id="toolbox-text">' . variable_get('nypl_advocacy_toolbox_page_text', '') . '</p>';
-  return $content;
-}
