@@ -1,0 +1,17 @@
+<?php
+/**
+ * Implementation of hook_form()
+ */
+function nypl_advocacy_admin_toolbox_form($form_state){
+	  $form['toolbox_instructions_text'] = array(
+        '#type' => 'textarea', 
+    	'#title' => t('Add text to appear on ') . l('speakout/toolbox', 'speakout/toolbox'),  
+    	'#size' => 25,
+    	'#default' => variable_get('nypl_advocacy_toolbox_page_text', '');
+  	  );
+	  return $form;
+}
+
+function nypl_advocacy_admin_toolbox_form_submit($form_state){
+	variable_set('nypl_advocacy_toolbox_page_text', $form_state['values']['toolbox_instructions_text']);
+}
