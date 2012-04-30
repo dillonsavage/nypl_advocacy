@@ -7,7 +7,7 @@ function nypl_advocacy_admin_toolbox_form($form_state){
 		'#type' => 'textarea', 
     	'#title' => t('Add text to appear on ') . l('speakout/toolbox', 'speakout/toolbox'),  
     	'#size' => 25,
-    	'#default' => variable_get('nypl_advocacy_toolbox_page_text', '');
+    	'#default_value' => variable_get('nypl_advocacy_toolbox_page_text', ''),
   	);
 	$form['submit'] = array(
     	'#type' => 'submit', 
