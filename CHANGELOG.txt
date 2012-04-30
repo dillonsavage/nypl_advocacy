@@ -1,0 +1,13 @@
+CHANGELOG.txt
+
+CHANGES for 1.1
+---------------
+* added menu callback for thank you page -> nypl_advocacy_thankyou()
+* added admin form for thank you page text/links -> nypl_advocacy_admin_thankyou_form()
+* added borough field to letters data export -> nypl_advocacy_stats()
+* fixed logic for generating map markers in nypl_advocacy_letters_map()
+* added correct sorting for library branch options in nypl_advocacy_letters_form()
+* added file download for data export -> nypl_advocacy_letters_form()
+** FILE MODIFIED: nypl_advocacy.module
+* added helper function _nypl_advocacy_get_badge($sid)
+** FILE ADDED: includes/nypl_advocacy_helpers.inc
