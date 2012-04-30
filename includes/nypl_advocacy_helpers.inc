@@ -85,10 +85,11 @@ function _get_branches_page($city){
 
 function _download_image($symbol){
   global $base_url;
+  $new_name = time();
   $path = $base_url . '/sites/default/files/advocacy/badges/' . $symbol  . '.jpg';
   header('Content-Description: File Transfer');
   header('Content-type: application/octet-stream');
-  header("Content-Disposition: attachment; filename=" . basename($path));
+  header("Content-Disposition: attachment; filename=" . $new_name);
   header('Expires: 0');
   header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
   header('Pragma: public');
