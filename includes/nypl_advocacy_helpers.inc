@@ -76,20 +76,20 @@ function _get_branches_page($city){
 					   'branch_name' => $row['location_name'],
 					   'badge_image' => '<img src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $row['location_symbol'] . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>',
 					   'letter_download' => '<span class="letter-download">'. l('DOWNLOAD YOUR LETTER','') . "</span>",
-					   'badge_download' => '<span class="badge-download">'. l('DOWNLOAD', $base_url .'/speakout/toolbox/download/' . $row['location_symbol']) . "</span>",
+					   'badge_download' => '<span class="badge-download">'. l('DOWNLOAD', $base_url .'/speakout/toolbox/download/' . $row['location_symbol'] . '/' . $row['location_name']) . "</span>",
 					   ); 
   }
   db_set_active('default');
   return $list;
 }
 
-function _download_image($symbol){
+function _download_image($symbol, $location_name){
   global $base_url;
   $new_name = time();
   $path = $base_url . '/sites/default/files/advocacy/badges/' . $symbol  . '.jpg';
   header('Content-Description: File Transfer');
   header('Content-type: application/octet-stream');
-  header("Content-Disposition: attachment; filename=" . $new_name);
+  header("Content-Disposition: attachment; filename=" . strotolower(preg_replace('/ /', '_', $location_name)) . '.jpg');
   header('Expires: 0');
   header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
   header('Pragma: public');
