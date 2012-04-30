@@ -89,7 +89,7 @@ function _download_image($symbol, $location_name){
   $path = $base_url . '/sites/default/files/advocacy/badges/' . $symbol  . '.jpg';
   header('Content-Description: File Transfer');
   header('Content-type: application/octet-stream');
-  header("Content-Disposition: attachment; filename=" . strotolower(preg_replace('/ /', '_', $location_name)) . '.jpg');
+  header("Content-Disposition: attachment; filename=" . strtolower(preg_replace('/ /', '_', $location_name)) . '.jpg');
   header('Expires: 0');
   header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
   header('Pragma: public');
