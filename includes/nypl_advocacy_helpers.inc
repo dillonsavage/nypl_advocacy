@@ -56,15 +56,12 @@ function _nypl_advocacy_replace_pinterest($pinterest_code, $sid = NULL) {
   $img_search = 'REPLACE_WITH_RESPECTIVE_BRANCH_BUTTON';
   $txt_search = 'NYPL%27s%20LIBRARY_NAME';
   $badge_img = _nypl_advocacy_get_badge($sid);
-  dpm('badge img: ' . $badge_img);
   $badge_replace = $base_url . $badge_img; 
   $branch_symbol = str_replace('.jpg', '', array_pop(explode('/', $badge_img)));
-  dpm('branch symbol: ' . $branch_symbol);
   $branch_name_q = db_query("SELECT ls.name FROM {locations_spaces} ls
     JOIN {locations} l ON l.sid = ls.sid
     WHERE l.symbol = '%s'", $branch_symbol);
   if ($branch_name_r = db_result($branch_name_q)) {
-    dpm('branch_name_r: ' . $branch_name_r);
     $txt_replace = 'NYPL%27s%20' . tr_replace(' ', '_', strtoupper($branch_name_r));
   }
   else {
