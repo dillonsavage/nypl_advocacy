@@ -186,7 +186,7 @@ function nypl_advocacy_letters_map() {
     'controltype' => 'Micro',
     'zoom' => 12,
     'maxzoom' => 12,
-    //'beha'
+    'behavior ' => array('overview' => false),
     'markers' => $all_markers,
   );
   
