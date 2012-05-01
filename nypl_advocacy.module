@@ -595,7 +595,7 @@ function nypl_advocacy_thankyou() {
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button;
   $output .= '</div>';
-  $output .= '<h2>Spread the Word!</h2><div id="nypl-advocacy-thankyou-socialmedia">' . $email . $twitter . $fb . $pinterest . '</div>';
+  $output .= '<h2>Spread the Word!</h2><div id="nypl-advocacy-thankyou-socialmedia"><ul><li class="email">' . $email . '</li><li class="twitter">'. $twitter .'</li><li class="facebook">'. $fb .'</li><li class="pinterest">'. $pinterest . '</li></div>';
   if ($badge) {
     $output .= '<div id="nypl-advocacy-thankyou-badge"><img src="' . $badge . '" />' . $badge_link . '</div>';
   }
