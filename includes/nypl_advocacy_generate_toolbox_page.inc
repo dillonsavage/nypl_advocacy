@@ -31,7 +31,7 @@ function _generate_toolbox_page(){
   //Manhattan
   $content .= '<ul id="badges-manhattan" class="group"><a name="manhattan"><strong>'. t('Manhattan') . '</strong></a>';
   foreach($manhattan as $m){
-    if(array_keys($manhattan) != 'DLC'){
+    if(array_keys($m) != 'DLC'){
       $manhattan_string .= '<li>' . $m['badge_image'] . $m['badge_download'] . $m['pinterest'] . $m['branch_name'] . $m['letter_download'] . '</li>';
     }
   }
