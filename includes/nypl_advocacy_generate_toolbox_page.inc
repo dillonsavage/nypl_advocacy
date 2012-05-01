@@ -30,9 +30,8 @@ function _generate_toolbox_page(){
 
   //Manhattan
   $content .= '<ul id="badges-manhattan" class="group"><a name="manhattan"><strong>'. t('Manhattan') . '</strong></a>';
-  var_dump($manhattan);
   foreach($manhattan as $m){
-    if(array_keys($m) != 'DLC'){
+    if($m['branch_name'] != 'Donnell Library Center'){
       $manhattan_string .= '<li>' . $m['badge_image'] . $m['badge_download'] . $m['pinterest'] . $m['branch_name'] . $m['letter_download'] . '</li>';
     }
   }
