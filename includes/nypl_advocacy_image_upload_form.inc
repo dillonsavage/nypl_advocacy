@@ -24,8 +24,8 @@ function nypl_advocacy_admin_images_form($form_state) {
   $form['leading_branches']['show_branch_badges'] = array(
     '#type' => 'radios', 
     '#title' => t('Show Leading Library Badges?'), 
-    '#default_value' => variable_get('nypl_advocacy_show_branch_badges', 1), 
-    '#options' => array(t('Yes'), t('No')), 
+    '#default_value' => variable_get('nypl_advocacy_show_branch_badges', 0), 
+    '#options' => array(t('No'), t('Yes')), 
   );
   $form['leading_branches']['manhattan_branch'] = array(
     '#type' => 'select',
