@@ -66,7 +66,7 @@ function nypl_advocacy_admin_images_form($form_state) {
     '#type' => 'textarea', 
     '#title' => t('Donate Button Link'),  
     '#size' => 25,
-    '#default_value' => variable_get('nypl_advocacy_landing_donate_link', ''),
+    '#default_value' => variable_get('nypl_advocacy_donate_button_link', ''),
   );
   $form['campaign_assets']['write_button'] = array(
     '#type' => 'file',
@@ -81,7 +81,7 @@ function nypl_advocacy_admin_images_form($form_state) {
     '#type' => 'textarea', 
     '#title' => t('Write Button Link'),  
     '#size' => 25,
-    '#default_value' => variable_get('nypl_advocacy_write_donate_link', ''),
+    '#default_value' => variable_get('nypl_advocacy_write_button_link', ''),
   );
   $form['submit'] = array(
     '#type' => 'submit', 
