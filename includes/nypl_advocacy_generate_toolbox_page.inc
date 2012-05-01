@@ -12,7 +12,7 @@ function _generate_toolbox_page(){
   $content .= '<ul id ="toolbox-anchors"><li><a href="#bronx">Bronx</a></li> <li><a href="#manhattan">Manhattan</a></li> <li><a href="#staten-island">Staten Island</a></li></ul>';
 
   //All
-  $content .='<img src ="' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg alt="All Libraries"/> 
+  $content .='<img src ="' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg" alt="All Libraries"/> 
   <span class="badge-download">' . l('DOWNLOAD', $base_url . '/speakout/toolbox/download/Library.jpg') . '</span>
   All Libraries
   <span class="letter-download">' . l('DOWNLOAD LETTER', '') . '</span>';
