@@ -23,7 +23,7 @@ function _generate_toolbox_page(){
   //Bronx
   $content .= '<ul id="badges-bronx"><a name=bronx"><strong>'. t('Bronx') . '</strong></a>';
   foreach($bronx as $b){
-    $bronx_string .= '<li>'. $b['badge_image'] . $b['badge_download'] . $bronx['pinterest'] . $b['branch_name'] . $b['letter_download'] . '</li>';
+    $bronx_string .= '<li>'. $b['badge_image'] . $b['badge_download'] . $b['pinterest'] . $b['branch_name'] . $b['letter_download'] . '</li>';
   }
   $content .= $bronx_string . '</ul>';
 
