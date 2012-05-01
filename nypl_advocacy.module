@@ -88,7 +88,7 @@ function nypl_advocacy_menu() {
     'page arguments' => array('nypl_advocacy_admin_toolbox_form'),
     'access arguments' => array('administer NYPL advocacy'),
     'file' => 'includes/nypl_advocacy_toolbox_form.inc',
-	  'weight' => 52,
+	  'weight' => 52 ,
   );
   $items['speakout/toolbox'] = array(
     'title' => t('Advocacy Toolbox'),
@@ -183,9 +183,10 @@ function nypl_advocacy_letters_map() {
     'width' => '220px',
     'height' => '415px',
     'type' => 'Map',
-    'controltype' => 'None',
+    'controltype' => 'Small',
     'zoom' => 12,
     'maxzoom' => 12,
+    //'beha'
     'markers' => $all_markers,
   );
   
