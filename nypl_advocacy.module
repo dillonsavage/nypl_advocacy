@@ -150,16 +150,16 @@ function nypl_advocacy_letters_map() {
     $letters_sent = db_result($letters_sent_q) ?: 0;
 
     if ($letters_sent > 500 && $letters_sent <= 1000) {
-      $marker = 'small purple';
+      $marker = 'advocacy purple';
     }
     else if ($letters_sent > 1000 && $letters_sent <= 2000) {
-      $marker = 'blue';
+      $marker = 'advocacy blue';
     }
     else if ($letters_sent > 2000) {
-      $marker = 'green';
+      $marker = 'advocacy green';
     }
     else {
-      $marker = 'small red';
+      $marker = 'advocacy red';
     }
     
     $text = l(t($bounds->name), 'locations/tid/'. $bounds->tid) .'<br />';
