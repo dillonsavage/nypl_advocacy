@@ -21,6 +21,12 @@ function nypl_advocacy_admin_images_form($form_state) {
     '#collapsible' => FALSE, 
     '#collapsed' => FALSE,
   );
+  $form['leading_branches']['show_branch_badges'] = array(
+    '#type' => 'radios', 
+    '#title' => t('Show Leading Library Badges?'), 
+    '#default_value' => variable_get('nypl_advocacy_show_branch_badges', 1), 
+    '#options' => array(t('Yes'), t('No')), 
+  );
   $form['leading_branches']['manhattan_branch'] = array(
     '#type' => 'select',
     '#title' => t('Leading Manhattan Branch'),
@@ -47,6 +53,7 @@ function nypl_advocacy_admin_images_form($form_state) {
     '#collapsed' => FALSE,
     '#description' => t('Note: you must refresh the page in order to see the most recent button uploads.'),
   );
+
   $form['campaign_assets']['donate_button'] = array(
     '#type' => 'file',
     '#title' => t('"Donate" Button Image'),
@@ -81,11 +88,12 @@ function nypl_advocacy_admin_images_form($form_state) {
 function nypl_advocacy_admin_images_form_submit($form, $form_state) {
   if(isset($form_state['values'])){
     $form_values = $form_state['values'];
-    variable_set('nypl_advocacy_leading_manhattan_branch',$form_values['manhattan_branch']);
-    variable_set('nypl_advocacy_leading_bronx_branch',$form_values['bronx_branch']);
-    variable_set('nypl_advocacy_leading_staten_island_branch',$form_values['staten_island_branch']);
+    variable_set('nypl_advocacy_leading_manhattan_branch', $form_values['manhattan_branch']);
+    variable_set('nypl_advocacy_leading_bronx_branch', $form_values['bronx_branch']);
+    variable_set('nypl_advocacy_leading_staten_island_branch', $form_values['staten_island_branch']);
     variable_set('nypl_advocacy_donate_button_filename', $form_values['donate_button']);
     variable_set('nypl_advocacy_write_button_filename', $form_values['write_button']);	
+    variable_set('nypl_advocacy_show_branch_badges', $form_values['show_branch_badges']);
     $validators = array(
 			'file_validate_is_image' => array(), 
 			);
