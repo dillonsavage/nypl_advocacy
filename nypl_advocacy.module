@@ -580,6 +580,7 @@ function nypl_advocacy_stats($var_id) {
  * Thankyou page callback
  */
 function nypl_advocacy_thankyou() {
+  
   $body = variable_get('nypl_advocacy_ty_body', '');
   $donate_url = variable_get('nypl_advocacy_ty_donate', '');
   $buttons = _get_button_image();
@@ -590,14 +591,15 @@ function nypl_advocacy_thankyou() {
   $pinterest = variable_get('nypl_advocacy_ty_pinterest', '');
   $badge = _nypl_advocacy_get_badge($_GET['sid']);
   $badge_link = l(t('MORE BADGES'), 'speakout/toolbox');
+
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button;
-  $output .= '<span id="nypl-advocacy-learnmore">' . l('LEARN MORE', 'speakout') . '</span>';
   $output .= '</div>';
-  $output .= '<div id="nypl-advocacy-thankyou-socialmedia">' . $email . $twitter . $fb . $pinterest . '</div>';
+  $output .= '<h2>Spread the Word!</h2><div id="nypl-advocacy-thankyou-socialmedia">' . $email . $twitter . $fb . $pinterest . '</div>';
   if ($badge) {
     $output .= '<div id="nypl-advocacy-thankyou-badge"><img src="' . $badge . '" />' . $badge_link . '</div>';
   }
+  $output .= '<span id="nypl-advocacy-learnmore">Questions about this campaign? ' . l('Learn more!', 'speakout') . '</span>';
   return $output; 
 }
  
