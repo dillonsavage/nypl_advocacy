@@ -3,6 +3,7 @@
  * @file
  * helper functions for advocacy.
  */
+module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_branch_to_rep');
  
 function _get_button_image(){
 	$dir = variable_get('nypl_advocacy_img_path','');
@@ -92,13 +93,15 @@ function _get_branches_page($city){
   $result = db_query($sql, $city);
   $list = array();		
   while($row = db_fetch_array($result)){
-    $list[$row['location_symbol']] = array(
-					   'branch_name' => $row['location_name'],
-					   'badge_image' => '<img src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $row['location_symbol'] . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>',
-					   'letter_download' => '<span class="letter-download">'. l('DOWNLOAD YOUR LETTER','') . "</span>",
-					   'badge_download' => '<span class="badge-download">'. l('DOWNLOAD', $base_url .'/speakout/toolbox/download/' . $row['location_symbol'] . '/' . $row['location_name']) . "</span>",
-             'pinterest' => '<a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.nypl.org%2Fspeakout%2Fletter%3Futm_source%3Dpinterest.com%26amp%3Butm_medium%3Dreferral%26amp%3Butm_content%3DThankYouShare%26amp%3Butm_campaign%3DAdvocacy2012&media=' . $base_url . '/sites/default/files/advocacy/badges/' . $row['location_symbol'] . '.jpg&description=I%27ve%20written%20a%20letter%20to%20support%20NYPL&#39;s ' . $row['location_name'] . ' Library.%20You%20can%20too.%20Click%20the%20pin%20to%20get%20started." onClick="_gaq.push(["_trackEvent", "Advocacy", "Pinterest Share", this.href]);"><img src="http://assets.pinterest.com/images/PinExt.png"/></a>',
-					   ); 
+    if($row['location_symbol'] != 'DLC'){
+      $list[$row['location_symbol']] = array(
+        'branch_name' => $row['location_name'],
+        'badge_image' => '<img src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $row['location_symbol'] . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>',
+        'letter_download' => '<span class="letter-download">'. l('DOWNLOAD YOUR LETTER','') . "</span>",
+        'badge_download' => '<span class="badge-download">'. l('DOWNLOAD', $base_url .'/speakout/toolbox/download/' . $row['location_symbol'] . '/' . $row['location_name']) . "</span>",
+        'pinterest' => '<a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.nypl.org%2Fspeakout%2Fletter%3Futm_source%3Dpinterest.com%26amp%3Butm_medium%3Dreferral%26amp%3Butm_content%3DThankYouShare%26amp%3Butm_campaign%3DAdvocacy2012&media=' . $base_url . '/sites/default/files/advocacy/badges/' . $row['location_symbol'] . '.jpg&description=I%27ve%20written%20a%20letter%20to%20support%20NYPL&#39;s ' . $row['location_name'] . ' Library.%20You%20can%20too.%20Click%20the%20pin%20to%20get%20started." onClick="_gaq.push(["_trackEvent", "Advocacy", "Pinterest Share", this.href]);"><img src="http://assets.pinterest.com/images/PinExt.png"/></a>',
+			); 
+    }
   }
   db_set_active('default');
   return $list;
@@ -122,3 +125,5 @@ function _download_image($symbol, $location_name){
   readfile($path);
   exit;
 }
+
+
