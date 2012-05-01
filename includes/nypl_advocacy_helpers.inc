@@ -107,6 +107,7 @@ function _download_image($symbol, $location_name){
   global $base_url;
   if($symbol == 'all' && $location_name == 'all'){
     $symbol = 'Library';
+    $location_name = 'All Libraries';
   }
   $path = $base_url . '/sites/default/files/advocacy/badges/' . $symbol  . '.jpg';
   header('Content-Description: File Transfer');
