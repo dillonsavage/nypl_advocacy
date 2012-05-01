@@ -11,6 +11,12 @@ function _generate_toolbox_page(){
   $content .= '<p id ="toolbox-text">' . variable_get('nypl_advocacy_toolbox_page_text', '') . '</p>';
   $content .= '<ul id ="toolbox-anchors"><li><a href="#bronx">Bronx</a></li> <li><a href="#manhattan">Manhattan</a></li> <li><a href="#staten-island">Staten Island</a></li></ul>';
 
+  //All
+  $content .='<img src ="'.$base_url . 'sites/default/files/advocacy/badges/Library.jpg alt="All Libraries"/> 
+  <span class="badge-download">' . l('DOWNLOAD', $base_url) . '/speakout/toolbox/download/Library.jpg') . '</span>
+  All Libraries
+  <span class="letter-download">' . l('DOWNLOAD LETTER', '') . '</span>';
+
   //Bronx
   $content .= '<ul id="badges-bronx"><a name=bronx"><strong>'. t('Bronx') . '</strong></a>';
   foreach($bronx as $b){
@@ -19,7 +25,7 @@ function _generate_toolbox_page(){
   $content .= $bronx_string . '</ul>';
 
   //Manhattan
-  $content .= '<ul id="badges-bronx"><a name="manhattan"><strong>'. t('Manhattan') . '</strong></a>';
+  $content .= '<ul id="badges-manhattan"><a name="manhattan"><strong>'. t('Manhattan') . '</strong></a>';
   foreach($manhattan as $m){
     $manhattan_string .= '<li>' . $m['badge_image'] . $m['badge_download'] . $m['branch_name'] . $m['letter_download'] . '</li>';
   }
