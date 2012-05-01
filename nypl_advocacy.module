@@ -129,6 +129,7 @@ function nypl_advocacy_block($op = 'list', $delta = 0, $edit = array()) {
 /**
  * Generate a map of all locations with different markers based on amt of letters per location
  * Adapted from locations_gmap_all()
+ * see http://dev.new.nypl.org/help/gmap/array for documentation.
  */
 function nypl_advocacy_letters_map() {
   $campaign_name = variable_get('nypl_advocacy_campaign', '');
