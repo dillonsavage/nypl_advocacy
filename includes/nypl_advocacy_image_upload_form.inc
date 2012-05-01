@@ -53,7 +53,6 @@ function nypl_advocacy_admin_images_form($form_state) {
     '#collapsed' => FALSE,
     '#description' => t('Note: you must refresh the page in order to see the most recent button uploads.'),
   );
-
   $form['campaign_assets']['donate_button'] = array(
     '#type' => 'file',
     '#title' => t('"Donate" Button Image'),
@@ -63,6 +62,12 @@ function nypl_advocacy_admin_images_form($form_state) {
   $form['campaign_assets']['current_donate_button'] = array(
     '#value' =>  '<p>' . $button['donate-button']['tag'] . '</p>',
   );
+  $form['campaign_assets']['landing_donate_button_link'] = array(
+    '#type' => 'textarea', 
+    '#title' => t('Donate Button Link'),  
+    '#size' => 25,
+    '#default_value' => variable_get('nypl_advocacy_landing_donate_link', ''),
+  );
   $form['campaign_assets']['write_button'] = array(
     '#type' => 'file',
     '#title' => t('"Write" Button Image'),
@@ -71,6 +76,12 @@ function nypl_advocacy_admin_images_form($form_state) {
   );
   $form['campaign_assets']['current_write_button'] = array(
     '#value' => '<p>' . $button['write-button']['tag'] . '</p>',
+  );
+  $form['campaign_assets']['landing_write_button_link'] = array(
+    '#type' => 'textarea', 
+    '#title' => t('Write Button Link'),  
+    '#size' => 25,
+    '#default_value' => variable_get('nypl_advocacy_write_donate_link', ''),
   );
   $form['submit'] = array(
     '#type' => 'submit', 
@@ -94,6 +105,8 @@ function nypl_advocacy_admin_images_form_submit($form, $form_state) {
     variable_set('nypl_advocacy_donate_button_filename', $form_values['donate_button']);
     variable_set('nypl_advocacy_write_button_filename', $form_values['write_button']);	
     variable_set('nypl_advocacy_show_branch_badges', $form_values['show_branch_badges']);
+    variable_get('nypl_advocacy_donate_button_link', $form_values['landing_donate_button_link']);
+    variable_set('nypl_advocacy_write_button_link', $form_values['landing_write_button_link'])
     $validators = array(
 			'file_validate_is_image' => array(), 
 			);
