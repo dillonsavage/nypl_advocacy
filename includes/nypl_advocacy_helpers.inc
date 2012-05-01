@@ -105,7 +105,9 @@ function _get_branches_page($city){
 
 function _download_image($symbol, $location_name){
   global $base_url;
-  $new_name = time();
+  if($symbol == 'all' && $location_name == 'all'){
+    $symbol = 'Library'
+  }
   $path = $base_url . '/sites/default/files/advocacy/badges/' . $symbol  . '.jpg';
   header('Content-Description: File Transfer');
   header('Content-type: application/octet-stream');

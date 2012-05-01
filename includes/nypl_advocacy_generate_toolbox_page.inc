@@ -13,7 +13,7 @@ function _generate_toolbox_page(){
 
   //All
   $content .='<img src ="' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg" alt="All Libraries"/> 
-  <span class="badge-download">' . l('DOWNLOAD', $base_url . '/speakout/toolbox/download/Library.jpg') . '</span>
+  <span class="badge-download">' . l('DOWNLOAD', $base_url .'/speakout/toolbox/download/all/all') . '</span>
   All Libraries
   <span class="letter-download">' . l('DOWNLOAD LETTER', '') . '</span>';
 
