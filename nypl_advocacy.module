@@ -183,7 +183,7 @@ function nypl_advocacy_letters_map() {
     'width' => '220px',
     'height' => '415px',
     'type' => 'Map',
-    'controltype' => 'Small',
+    'controltype' => 'Full',
     'zoom' => 12,
     'maxzoom' => 12,
     //'beha'
