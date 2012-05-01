@@ -105,7 +105,7 @@ function nypl_advocacy_admin_images_form_submit($form, $form_state) {
     variable_set('nypl_advocacy_donate_button_filename', $form_values['donate_button']);
     variable_set('nypl_advocacy_write_button_filename', $form_values['write_button']);	
     variable_set('nypl_advocacy_show_branch_badges', $form_values['show_branch_badges']);
-    variable_get('nypl_advocacy_donate_button_link', $form_values['landing_donate_button_link']);
+    variable_set('nypl_advocacy_donate_button_link', $form_values['landing_donate_button_link']);
     variable_set('nypl_advocacy_write_button_link', $form_values['landing_write_button_link']);
     $validators = array(
 			'file_validate_is_image' => array(), 
