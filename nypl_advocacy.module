@@ -71,7 +71,7 @@ function nypl_advocacy_menu() {
     'page arguments' => array('nypl_advocacy_admin_images_form'),
     'access arguments' => array('administer NYPL advocacy'),
     'file' => 'includes/nypl_advocacy_image_upload_form.inc',
-	'weight' => 50,
+	  'weight' => 50,
   );
   $items['admin/settings/nypl_advocacy/thankyou'] = array(
     'title' => t('Thank You page'),
@@ -79,15 +79,16 @@ function nypl_advocacy_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('nypl_advocacy_admin_thankyou_form'),
     'access arguments' => array('administer NYPL advocacy'),
+    'weight' => 51,
   );
   $items['admin/settings/nypl_advocacy/toolbox'] = array(
-    'title' => t('Toolbox Node Settings'),
+    'title' => t('Toolbox Page Settings'),
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'drupal_get_form',
     'page arguments' => array('nypl_advocacy_admin_toolbox_form'),
     'access arguments' => array('administer NYPL advocacy'),
     'file' => 'includes/nypl_advocacy_toolbox_form.inc',
-	  'weight' => 50,
+	  'weight' => 52,
   );
   $items['speakout/toolbox'] = array(
     'title' => t('Advocacy Toolbox'),
@@ -95,7 +96,6 @@ function nypl_advocacy_menu() {
     'page callback' => '_generate_toolbox_page',
     'access arguments' => array('access NYPL advocacy'),
     'file' => 'includes/nypl_advocacy_generate_toolbox_page.inc',
-	  'weight' => 50,
   );
   $items['speakout/toolbox/download/%/%'] = array(
     'title' => t('Advocacy Toolbox Image Download'),
@@ -104,7 +104,6 @@ function nypl_advocacy_menu() {
     'page arguments' => array(3,4),
     'access arguments' => array('access NYPL advocacy'),
     'file' => 'includes/nypl_advocacy_helpers.inc',
-	  'weight' => 50,
   );
   return $items;
 }
