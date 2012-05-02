@@ -359,6 +359,12 @@ function nypl_advocacy_admin_thankyou_form() {
     '#default_value' => variable_get('nypl_advocacy_ty_pinterest', ''),
     '#rows' => 3,
   );
+  $form['ty_google_plus_code'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Google+ code'),
+    '#default_value' => variable_get('nypl_advocacy_ty_google_plus', ''),
+    '#rows' => 3,
+  );
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save'),
@@ -378,6 +384,7 @@ function nypl_advocacy_admin_thankyou_form_submit($form, &$form_state) {
   variable_set('nypl_advocacy_ty_twitter', $form_state['values']['ty_twitter_code']);
   variable_set('nypl_advocacy_ty_fb', $form_state['values']['ty_fb_code']);
   variable_set('nypl_advocacy_ty_pinterest', $form_state['values']['ty_pinterest_code']);
+  variable_set('nypl_advocacy_ty_google_plus', $form_state['values']['ty_google_plus_code']);
   drupal_set_message('Changes saved.');
 }
 
