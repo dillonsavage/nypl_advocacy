@@ -63,7 +63,7 @@ function _nypl_advocacy_replace_pinterest($pinterest_code, $sid = NULL) {
     JOIN {locations} l ON l.sid = ls.sid
     WHERE l.symbol = '%s'", $branch_symbol);
   if ($branch_name_r = db_result($branch_name_q)) {
-    $txt_replace = 'NYPL%27s%20' . str_replace(' ', '_', strtoupper($branch_name_r));
+    $txt_replace = 'NYPL%27s%20' . htmlentities($branch_name_r);
   }
   else {
     $txt_replace = 'NYPL';
