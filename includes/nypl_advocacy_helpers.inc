@@ -91,10 +91,10 @@ function _get_branches_page($city){
   $sql = _get_branch_sql();
   db_set_active('nypl');	
   $result = db_query($sql, $city);
-  $list = array();		
+  $list = array();	
+  $letter = _map_branch_to_rep();	
   while($row = db_fetch_array($result)){
     if($row['location_symbol'] != 'DLC'){
-      $letter = _map_branch_to_rep();
       $list[$row['location_symbol']] = array(
         'branch_name' => $row['location_name'],
         'badge_image' => '<img src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $row['location_symbol'] . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>',
