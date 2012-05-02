@@ -93,14 +93,20 @@ function _get_branches_page($city){
   $result = db_query($sql, $city);
   $list = array();	
   $letter = _map_branch_to_rep();	
+  $img_search = 'REPLACE_WITH_RESPECTIVE_BRANCH_BUTTON';
+  $txt_search = 'NYPL%27s%20LIBRARY_NAME';
+  $pinterest_code = variable_get('nypl_advocacy_ty_pinterest', '');
+ 
   while($row = db_fetch_array($result)){
     if($row['location_symbol'] != 'DLC'){
+      $url_replace = $base_url . '/sites/default/files/advocacy/badges/' .$row['location_symbol'] . '.jpg'; 
+      $pinterest_url = str_replace(array($img_search, $txt_search), array($url_replace, $row['location_name']), $pinterest_code);
       $list[$row['location_symbol']] = array(
         'branch_name' => $row['location_name'],
         'badge_image' => '<img src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $row['location_symbol'] . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>',
         'letter_download' => '<span class="letter-download">'. l('DOWNLOAD YOUR LETTER', $base_url . '/sites/default/files/advocacy/letters/Adult-English-' . $letter[$row['location_symbol']] . '.pdf') . "</span>",
         'badge_download' => '<span class="badge-download">'. l('DOWNLOAD YOUR BUTTON', $base_url .'/speakout/toolbox/download/' . $row['location_symbol'] . '/' . $row['location_name']) . "</span>",
-        'pinterest' => '<a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.nypl.org%2Fspeakout%2Fletter%3Futm_source%3Dpinterest.com%26amp%3Butm_medium%3Dreferral%26amp%3Butm_content%3DThankYouShare%26amp%3Butm_campaign%3DAdvocacy2012&media=' . $base_url . '/sites/default/files/advocacy/badges/' . $row['location_symbol'] . '.jpg&description=I%27ve%20written%20a%20letter%20to%20support%20NYPL&#39;s ' . $row['location_name'] . ' Library.%20You%20can%20too.%20Click%20the%20pin%20to%20get%20started." onClick="_gaq.push(["_trackEvent", "Advocacy", "Pinterest Share", this.href]);"><img src="http://assets.pinterest.com/images/PinExt.png"/></a>',
+        'pinterest' => $pinterest_url,
 			); 
     }
   }
