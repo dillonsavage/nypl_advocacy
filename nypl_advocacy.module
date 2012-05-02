@@ -580,7 +580,7 @@ function nypl_advocacy_stats($var_id) {
  * Thankyou page callback
  */
 function nypl_advocacy_thankyou() {
-  
+  $sid = $_GET['sid'] ?: NULL;
   $body = variable_get('nypl_advocacy_ty_body', '');
   $donate_url = variable_get('nypl_advocacy_ty_donate', '');
   $buttons = _get_button_image();
@@ -588,8 +588,8 @@ function nypl_advocacy_thankyou() {
   $email = variable_get('nypl_advocacy_ty_email', '');
   $twitter = variable_get('nypl_advocacy_ty_twitter', '');
   $fb = variable_get('nypl_advocacy_ty_fb', '');
-  $pinterest = variable_get('nypl_advocacy_ty_pinterest', '');
-  $badge = _nypl_advocacy_get_badge($_GET['sid']);
+  $pinterest = _nypl_advocacy_replace_pinterest(variable_get('nypl_advocacy_ty_pinterest', ''), $sid);
+  $badge = _nypl_advocacy_get_badge($sid);
   $badge_link = l(t('MORE BADGES'), 'speakout/toolbox');
 
   $output .= '<p>' . $body . '</p>';
