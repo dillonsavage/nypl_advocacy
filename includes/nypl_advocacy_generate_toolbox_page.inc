@@ -18,7 +18,7 @@ function _generate_toolbox_page(){
   $content .='<li><img src ="' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg" alt="All Libraries"/> 
   <span class="badge-download">' . l('DOWNLOAD YOUR BUTTON', $base_url .'/speakout/toolbox/download/all/all') . '</span>
   All Libraries
-  <a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.nypl.org%2Fspeakout%2Fletter%3Futm_source%3Dpinterest.com%26amp%3Butm_medium%3Dreferral%26amp%3Butm_content%3DThankYouShare%26amp%3Butm_campaign%3DAdvocacy2012&media=' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg&description=I%27ve%20written%20a%20letter%20to%20support%20NYPL&#39;s Main Library.%20You%20can%20too.%20Click%20the%20pin%20to%20get%20started." onClick="_gaq.push(["_trackEvent", "Advocacy", "Pinterest Share", this.href]);"><img src="http://assets.pinterest.com/images/PinExt.png"/>
+  <a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.nypl.org%2Fspeakout%2Fletter%3Futm_source%3Dpinterest.com%26amp%3Butm_medium%3Dreferral%26amp%3Butm_content%3DThankYouShare%26amp%3Butm_campaign%3DAdvocacy2012&media=' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg&description=I%27ve%20written%20a%20letter%20to%20support%20The%20New%20York%20Public%20Library.%20You%20can%20too.%20Click%20the%20pin%20to%20get%20started." onClick="_gaq.push(["_trackEvent", "Advocacy", "Pinterest Share", this.href]);"><img src="http://assets.pinterest.com/images/PinExt.png"/>
   <span class="letter-download">' . l('DOWNLOAD YOUR LETTER', $base_url . '/sites/default/files/advocacy/letters/Adult-English-Quinn.pdf') . '</span></li></ul>';
 
   //Bronx
