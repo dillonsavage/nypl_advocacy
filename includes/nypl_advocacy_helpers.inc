@@ -95,12 +95,13 @@ function _get_branches_page($city){
   $letter = _map_branch_to_rep();	
   $img_search = 'REPLACE_WITH_RESPECTIVE_BRANCH_BUTTON';
   $txt_search = 'NYPL%27s%20LIBRARY_NAME';
+  $link_search = 'pinterest button';
   $pinterest_code = variable_get('nypl_advocacy_ty_pinterest', '');
  
   while($row = db_fetch_array($result)){
     if($row['location_symbol'] != 'DLC'){
       $url_replace = $base_url . '/sites/default/files/advocacy/badges/' .$row['location_symbol'] . '.jpg'; 
-      $pinterest_url = str_replace(array($img_search, $txt_search), array($url_replace, $row['location_name']), $pinterest_code);
+      $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($url_replace,'<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL's " . $row['location_name'] . " Library"), $pinterest_code);
       $list[$row['location_symbol']] = array(
         'branch_name' => $row['location_name'],
         'badge_image' => '<img src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $row['location_symbol'] . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>',
