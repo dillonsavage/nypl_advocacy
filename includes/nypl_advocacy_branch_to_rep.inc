@@ -56,7 +56,7 @@ function _map_branch_to_rep(){
                'THR' => 'Oddo',
                'TV'  => 'Ignizio',
                'NB'  => 'Rose',
-               'AL'  => 'Vaca',
+               'AL'  => 'Vacca',
                'BAR' => 'Seabrook',
                'BER' => 'Rivera',
                'BLC' => 'Rivera',
