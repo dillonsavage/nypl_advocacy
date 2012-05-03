@@ -13,7 +13,7 @@ function nypl_advocacy_admin_toolbox_form($form_state){
 		'#type' => 'textarea', 
     '#title' => t('Add instructions to donate your profile image.'),
     '#size' => 25,
-    '#default_value' => variable_get('nypl_advocacy_toolbox_page_text', ''),
+    '#default_value' => variable_get('nypl_advocacy_toolbox_donate_instructions', ''),
   );
 	$form['submit'] = array(
     '#type' => 'submit', 

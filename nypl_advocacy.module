@@ -91,7 +91,7 @@ function nypl_advocacy_menu() {
 	  'weight' => 52 ,
   );
   $items['speakout/toolbox'] = array(
-    'title' => t('Spread the Word'),
+    'title' => t('Spread the Word!'),
     'type' => MENU_CALLBACK,
     'page callback' => '_generate_toolbox_page',
     'access arguments' => array('access NYPL advocacy'),
