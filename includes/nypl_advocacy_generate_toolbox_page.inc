@@ -14,11 +14,11 @@ function _generate_toolbox_page(){
   $content .= '<p id ="toolbox-text">' . t(variable_get('nypl_advocacy_toolbox_page_text', '')) . '</p>';
 
   //Top button.
-  $content .='<div><img src ="' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg" alt="All Libraries"/> 
+  $content .='<div id ="toolbox-preview-button"><img src ="' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg" alt="All Libraries"/> 
               <span class="button-caption"><a href="#all">'.t('Scroll down to find YOUR branch and help spread the word') .'</a></div>';
   
   //Anchor buttons.
-  $content .= '<div><p><ul id ="toolbox-anchors"><li><a href="#bronx">'. t('Bronx') .'</a></li> <li><a href="#manhattan">'. t('Manhattan'). '</a></li> <li><a href="#staten-island">' . t('Staten Island') . '</a></li></ul></p><p id="link-to-all-libraries-button"><a href="#all">'. t('or, download the "All Libraries" button') . '</a></p></div>';
+  $content .= '<div ="find-branch-buttons"><p id="find-your-branch">'. t('Find your branch'). '</p><ul id ="toolbox-anchors"><li><a href="#bronx">'. t('Bronx') .'</a></li> <li><a href="#manhattan">'. t('Manhattan'). '</a></li> <li><a href="#staten-island">' . t('Staten Island') . '</a></li></ul></p><p id="link-to-all-libraries-button"><a href="#all">'. t('or, download the "All Libraries" button') . '</a></div>';
 
   //Donate instructions.
   $content .= '<div id="donate-profilepic"><div>'.t(variable_get('nypl_advocacy_toolbox_donate_instructions','')).'</div></div>';
@@ -47,7 +47,7 @@ function _generate_toolbox_page(){
   $content .= $staten_island_string . '</ul>';
 
   //All libraries button
-  $content .='<div><a name="all"><strong>'.t('All Libraries').'</strong></a><li><img src ="' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg" alt="All Libraries"/> 
+  $content .='<ul id="badges-all-libraries"><a name="all"><strong>'.t('All Libraries').'</strong></a><li><img src ="' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg" alt="All Libraries"/> 
   <span class="badge-download">' . l('DOWNLOAD YOUR BUTTON', $base_url .'/speakout/toolbox/download/all/all') . '</span>
   All Libraries
   <a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.nypl.org%2Fspeakout%2Fletter%3Futm_source%3Dpinterest.com%26amp%3Butm_medium%3Dreferral%26amp%3Butm_content%3DThankYouShare%26amp%3Butm_campaign%3DAdvocacy2012&media=' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg&description=I%27ve%20written%20a%20letter%20to%20support%20The%20New%20York%20Public%20Library.%20You%20can%20too.%20Click%20the%20pin%20to%20get%20started." onClick="_gaq.push(["_trackEvent", "Advocacy", "Pinterest Share", this.href]);"><img src="http://assets.pinterest.com/images/PinExt.png"/>
