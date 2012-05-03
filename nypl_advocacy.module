@@ -599,11 +599,9 @@ function nypl_advocacy_thankyou() {
   $google_plus = variable_get('nypl_advocacy_ty_google_plus', '');
   $badge = _nypl_advocacy_get_badge($sid);
   $badge_link = l(t('DOWNLOAD YOUR BUTTON'), 'speakout/toolbox');
-
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button . '</div>';
-  $output .= '<div>
-              <h2>Spread the Word!</h2><p>Invite others to take a stand and ensure that your messsage is heard.</p><div id="nypl-advocacy-spread-the-word-steps"><ul>';
+  $output .= '<div><h2>Spread the Word!</h2><p>Invite others to take a stand and ensure that your messsage is heard.</p><div id="nypl-advocacy-spread-the-word-steps"><ol>';
   //$output .= '<li class="nypl-advocacy-thankyou-badge">GET YOUR BRANCH BUTTON</p><img src="' . $badge . '"/>' . $badge_link . '</li>';
   /*
   $output .= '<li class="nypl-advocacy-email">' . t('EMAIL A FRIEND') . $email . '</li>';
@@ -615,7 +613,7 @@ function nypl_advocacy_thankyou() {
   //Find out more.
   $output .= '<span id="nypl-advocacy-learnmore">' . t('Questions about this campaign?') . l('Learn more!', 'speakout') . '</span>';
   */
-  $output .='</ul></div></div>';
+  $output .='</ol></div></div>';
   return $output; 
 
 }
