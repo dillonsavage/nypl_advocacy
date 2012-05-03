@@ -2,24 +2,17 @@
 module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
 function _generate_toolbox_page(){
   global $base_url;
-
+  
   $content = '';
 
   $bronx = _get_branches_page('Bronx');
   $manhattan = _get_branches_page('New York');
   $staten_island = _get_branches_page('Staten Island');
   
-  $content .= '<ul id ="toolbox-anchors"><li><a href="#bronx">Bronx</a></li> <li><a href="#manhattan">Manhattan</a></li> <li><a href="#staten-island">Staten Island</a></li></ul>';
+  $content .= '<div><p><ul id ="toolbox-anchors"><li><a href="#bronx">'. t('Bronx') .'</a></li> <li><a href="#manhattan">'. t('Manhattan'). '</a></li> <li><a href="#staten-island">' . t('Staten Island') . '</a></li></ul></p><p id="link-to-all-libraries-button"><a href="#all">'. t('or, download the "All Libraries" button') . '</a></p></div>';
 
-  //All
   $content .= '<p id ="toolbox-text">' . variable_get('nypl_advocacy_toolbox_page_text', '') . '</p>';
-  
   $content .='<ul id="badges-all" class="group">';
-  $content .='<li><img src ="' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg" alt="All Libraries"/> 
-  <span class="badge-download">' . l('DOWNLOAD YOUR BUTTON', $base_url .'/speakout/toolbox/download/all/all') . '</span>
-  All Libraries
-  <a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.nypl.org%2Fspeakout%2Fletter%3Futm_source%3Dpinterest.com%26amp%3Butm_medium%3Dreferral%26amp%3Butm_content%3DThankYouShare%26amp%3Butm_campaign%3DAdvocacy2012&media=' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg&description=I%27ve%20written%20a%20letter%20to%20support%20The%20New%20York%20Public%20Library.%20You%20can%20too.%20Click%20the%20pin%20to%20get%20started." onClick="_gaq.push(["_trackEvent", "Advocacy", "Pinterest Share", this.href]);"><img src="http://assets.pinterest.com/images/PinExt.png"/>
-  <span class="letter-download">' . l('DOWNLOAD YOUR LETTER', $base_url . '/sites/default/files/advocacy/letters/Adult-English-Quinn.pdf') . '</span></li></ul>';
 
   //Bronx
   $content .= '<ul id="badges-bronx" class="group"><a name=bronx"><strong>'. t('Bronx') . '</strong></a>';
@@ -43,6 +36,13 @@ function _generate_toolbox_page(){
     $staten_island_string .= '<li>'. $s['badge_image'] . $s['badge_download'] . $s['pinterest'] . $s['branch_name'] . $s['letter_download'] . '</li>';
   }
   $content .= $staten_island_string . '</ul>';
+
+  //All libraries button
+  $content .='<div><a name="All">'.t('All Libraries').'</a><li><img src ="' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg" alt="All Libraries"/> 
+  <span class="badge-download">' . l('DOWNLOAD YOUR BUTTON', $base_url .'/speakout/toolbox/download/all/all') . '</span>
+  All Libraries
+  <a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.nypl.org%2Fspeakout%2Fletter%3Futm_source%3Dpinterest.com%26amp%3Butm_medium%3Dreferral%26amp%3Butm_content%3DThankYouShare%26amp%3Butm_campaign%3DAdvocacy2012&media=' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg&description=I%27ve%20written%20a%20letter%20to%20support%20The%20New%20York%20Public%20Library.%20You%20can%20too.%20Click%20the%20pin%20to%20get%20started." onClick="_gaq.push(["_trackEvent", "Advocacy", "Pinterest Share", this.href]);"><img src="http://assets.pinterest.com/images/PinExt.png"/>
+  <span class="letter-download">' . l('DOWNLOAD YOUR LETTER', $base_url . '/sites/default/files/advocacy/letters/Adult-English-Quinn.pdf') . '</span></li></ul></div>';
 
   return $content;
 }
