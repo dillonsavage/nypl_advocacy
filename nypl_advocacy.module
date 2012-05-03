@@ -609,6 +609,7 @@ function nypl_advocacy_thankyou() {
 
   //Facebook donate instructions.
   $content .= '<div id="donate-profilepic"><div>' . variable_get('nypl_advocacy_toolbox_donate_instructions','') . '</div></div>';
+
   //Find out more.
   $output .= '<span id="nypl-advocacy-learnmore">' . t('Questions about this campaign?') . l('Learn more!', 'speakout') . '</span>';
   $output .='</ol></div></div>';
