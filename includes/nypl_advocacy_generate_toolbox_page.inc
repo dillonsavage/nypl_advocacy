@@ -17,7 +17,7 @@ function _generate_toolbox_page(){
   $content .= '<div><p><ul id ="toolbox-anchors"><li><a href="#bronx">'. t('Bronx') .'</a></li> <li><a href="#manhattan">'. t('Manhattan'). '</a></li> <li><a href="#staten-island">' . t('Staten Island') . '</a></li></ul></p><p id="link-to-all-libraries-button"><a href="#all">'. t('or, download the "All Libraries" button') . '</a></p></div>';
 
   //Donate instructions.
-  $content .= '<div id="donate-profilepic"><div>'.t(variable_get('nypl_advocacy_donate_instructions','')).'</div></div>';
+  $content .= '<div id="donate-profilepic"><div>'.t(variable_get('nypl_advocacy_toolbox_donate_instructions','')).'</div></div>';
     
   //Bronx
   $content .= '<ul id="badges-bronx" class="group"><a name=bronx"><strong>'. t('Bronx') . '</strong></a>';
