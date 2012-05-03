@@ -599,7 +599,7 @@ function nypl_advocacy_thankyou() {
   $google_plus = variable_get('nypl_advocacy_ty_google_plus', '');
   $badge = _nypl_advocacy_get_badge($sid);
   $badge_link = l(t('DOWNLOAD YOUR BUTTON'), 'speakout/toolbox');
-
+  /*
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button;
   $output .= '</div>';
@@ -615,6 +615,6 @@ function nypl_advocacy_thankyou() {
 
   //Find out more.
   $output .= '<span id="nypl-advocacy-learnmore">' . t('Questions about this campaign?') . l('Learn more!', 'speakout') . '</span>';
-  return $output; 
+  return $output; */
 }
  
