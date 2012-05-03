@@ -599,16 +599,18 @@ function nypl_advocacy_thankyou() {
   $google_plus = variable_get('nypl_advocacy_ty_google_plus', '');
   $badge = _nypl_advocacy_get_badge($sid);
   $badge_link = l(t('DOWNLOAD YOUR BUTTON'), 'speakout/toolbox');
+  $fb_instructions =  variable_get('nypl_advocacy_toolbox_donate_instructions','');
+
+  //start output
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button . '</div>';
   $output .= '<div><h2>Spread the Word!</h2><p>Invite others to take a stand and ensure that your messsage is heard.</p><div id="nypl-advocacy-spread-the-word-steps"><ol>';
   $output .= '<li class="nypl-advocacy-thankyou-badge">GET YOUR BRANCH BUTTON</p><img src="' . $badge . '"/>' . $badge_link . '</li>';
-  
   $output .= '<li class="nypl-advocacy-email">' . t('EMAIL A FRIEND') . $email . '</li>';
   $output .= '<li class="nypl-advocay-thankyou-socialmedia">'.t('SHARE ON SOCIAL MEDIA') .'<div><ul><li class="twitter">'. $twitter .'</li><li class="facebook">'. $fb .'</li><li class="google-plus">'. $google_plus . '</li><li class="pinterest">'. $pinterest . '</li></ul></div></ol>';
 
   //Facebook donate instructions.
-  $content .= '<div id="donate-profilepic"><div>' . variable_get('nypl_advocacy_toolbox_donate_instructions','') . '</div></div>';
+  $content .= '<div id="donate-profilepic">' . $fb_instructions . '</div>';
 
   //Find out more.
   $output .= '<span id="nypl-advocacy-learnmore">' . t('Questions about this campaign?') . l('Learn more!', 'speakout') . '</span>';
