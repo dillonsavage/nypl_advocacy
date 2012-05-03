@@ -13,6 +13,10 @@ function _generate_toolbox_page(){
   //General instructions.
   $content .= '<p id ="toolbox-text">' . t(variable_get('nypl_advocacy_toolbox_page_text', '')) . '</p>';
 
+  //Top button.
+  $content .='<div><img src ="' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg" alt="All Libraries"/> 
+              <span class="button-caption"><a href="#all">'.t('Scroll down to find YOUR branch and help spread the word') .'</a></div>';
+  
   //Anchor buttons.
   $content .= '<div><p><ul id ="toolbox-anchors"><li><a href="#bronx">'. t('Bronx') .'</a></li> <li><a href="#manhattan">'. t('Manhattan'). '</a></li> <li><a href="#staten-island">' . t('Staten Island') . '</a></li></ul></p><p id="link-to-all-libraries-button"><a href="#all">'. t('or, download the "All Libraries" button') . '</a></p></div>';
 

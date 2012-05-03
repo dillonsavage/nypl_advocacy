@@ -121,7 +121,7 @@ function _download_image($symbol, $location_name){
     $symbol = 'Library';
     $location_name = 'All Libraries';
   }
-  $path = $base_url . '/sites/default/files/advocacy/badges/' . $symbol  . '.jpg';
+  $path = $base_url . '/sites/default/files/advocacy/badges-download/' . $symbol  . '.jpg';
   header('Content-Description: File Transfer');
   header('Content-type: application/octet-stream');
   header("Content-Disposition: attachment; filename=" . strtolower(preg_replace('/ /', '_', $location_name)) . '.jpg');
