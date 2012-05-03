@@ -607,14 +607,12 @@ function nypl_advocacy_thankyou() {
   $output .= '<div><h2>Spread the Word!</h2><p>Invite others to take a stand and ensure that your messsage is heard.</p><div id="nypl-advocacy-spread-the-word-steps"><ol>';
   $output .= '<li class="nypl-advocacy-thankyou-badge">GET YOUR BRANCH BUTTON</p><img src="' . $badge . '"/>' . $badge_link . '</li>';
   $output .= '<li class="nypl-advocacy-email">' . t('EMAIL A FRIEND') . $email . '</li>';
-  $output .= '<li class="nypl-advocay-thankyou-socialmedia">'.t('SHARE ON SOCIAL MEDIA') .'<div><ul><li class="twitter">'. $twitter .'</li><li class="facebook">'. $fb .'</li><li class="google-plus">'. $google_plus . '</li><li class="pinterest">'. $pinterest . '</li></ul></div></ol>';
-
+  $output .= '<li class="nypl-advocay-thankyou-socialmedia">'.t('SHARE ON SOCIAL MEDIA') .'<div><ul><li class="twitter">'. $twitter .'</li><li class="facebook">'. $fb .'</li><li class="google-plus">'. $google_plus . '</li><li class="pinterest">'. $pinterest . '</li></ul></div>';
+  $output .='</ol></div>';
   //Facebook donate instructions.
-  $content .= '<div id="donate-profilepic">' . $fb_instructions . '</div>';
-
-  //Find out more.
+  $output .= '<div id="donate-profilepic">' . $fb_instructions . '</div>';
   $output .= '<span id="nypl-advocacy-learnmore">' . t('Questions about this campaign?') . l('Learn more!', 'speakout') . '</span>';
-  $output .='</ol></div></div>';
+  $output .='</div>';
   return $output; 
 
 }
