@@ -616,5 +616,6 @@ function nypl_advocacy_thankyou() {
   //Find out more.
   $output .= '<span id="nypl-advocacy-learnmore">' . t('Questions about this campaign?') . l('Learn more!', 'speakout') . '</span>';
   return $output; */
+
 }
  
