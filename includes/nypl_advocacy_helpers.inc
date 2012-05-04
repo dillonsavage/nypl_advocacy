@@ -115,6 +115,27 @@ function _get_branches_page($city){
   return $list;
 }
 
+function _get_branch_name_sql(){
+  $sql = 'SELECT term_data.name AS location_name
+      FROM locations
+      JOIN locations_spaces ON locations.sid = locations_spaces.sid
+      JOIN locations_term ON locations.lid = locations_term.lid
+      JOIN term_hierarchy ON locations_term.tid = term_hierarchy.tid
+      JOIN term_data ON locations_term.tid = term_data.tid
+      WHERE locations.symbol = "%s"
+      AND term_hierarchy.parent = 0
+      AND locations_term.vid = 2';
+
+  return $sql;
+}
+
+function _get_branch_name($symbol){
+    $sql = _get_branch_name_sql();
+    $result = db_result(db_query($sql, $symbol));
+    return ucwords(preg_replace('/_/',' ',$result));
+
+}
+
 function _download_image($symbol, $location_name){
   global $base_url;
   if($symbol == 'all' && $location_name == 'all'){
