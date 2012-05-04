@@ -609,7 +609,7 @@ function nypl_advocacy_thankyou() {
   if(!isset($_GET['sid'])){
     $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/all/all'));
   }else{
-    $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/' . ));
+    $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/'));
   }
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button . '</div>';
