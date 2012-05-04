@@ -620,6 +620,7 @@ function nypl_advocacy_thankyou() {
   $output .= '<div id="donate-profilepic">' . $fb_instructions . '</div>';
   $output .= '<span id="nypl-advocacy-learnmore">' . t('Questions about this campaign? ') . l('Learn more!', 'speakout') . '</span>';
   $output .='</div>';
+  $output .= nypl_new_exact_target();
   $output .= $adwords_code;
   return $output; 
 }
