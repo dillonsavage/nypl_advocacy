@@ -620,8 +620,50 @@ function nypl_advocacy_thankyou() {
   $output .= '<div id="donate-profilepic">' . $fb_instructions . '</div>';
   $output .= '<span id="nypl-advocacy-learnmore">' . t('Questions about this campaign? ') . l('Learn more!', 'speakout') . '</span>';
   $output .='</div>';
-  $output .= nypl_new_exact_target();
+  $output .= nypl_advocacy_exact_target();
   $output .= $adwords_code;
   return $output; 
 }
- 
+
+/**
+ * Build Exact Target XML based on $_GET and $_COOKIE
+ */
+function nypl_advocacy_exact_target() {
+  $exacttarget_fields = array(
+    'j' => 'JobID',
+    'e' => 'SubscriberID',
+    'l' => 'ListID',
+    'jb' => 'BatchID',
+    'u' => 'UrlID',
+    'mid' => 'MemberID',
+  );
+  // if we didn't get any $_GET parameters, quit
+  $et_keys = array_keys($exacttarget_fields);
+  foreach ($et_keys as $i => $key) {
+    if (isset($_GET[$key]) || isset($_COOKIE[$key])) {
+      break;
+    }
+    else if ($i+1 == count($et_keys)) {
+      return NULL;
+    }
+  }
+  foreach ($exacttarget_fields as $et_key => $et_field) {
+    if (isset($_GET[$et_key]) && (!isset($_COOKIE[$et_key]) || $_COOKIE[$et_key] != $_GET[$et_key])) {
+      setcookie($et_key, $_GET[$et_key]);
+    }
+    $$et_field = $_COOKIE[$et_key] ?: $_GET[$et_key];
+  }
+  $strTP = '<img src=\'http://click.exacttarget.com/conversion.aspx?xml=';
+  $strTP .= '<system><system_name>tracking</system_name><action>conversion</action>';
+  $strTP .= '<member_id>'.$MemberID.'</member_id>';
+  $strTP .= '<job_id>'.$JobID.'</job_id><email>'.$SubscriberID.'</email>';
+  $strTP .= '<list>'.$ListID.'</list><BatchID>'.$BatchID.'</BatchID>';
+  $strTP .= '<original_link_id>'.$UrlID.'</original_link_id>';
+  $strTP .= '<conversion_link_id>1</conversion_link_id>';
+  $strTP .= '<link_alias>Alias</link_alias><display_order>1</display_order>';
+  $strTP .= '<data_set>';
+  $strTP .= '<data amt="100" unit="Dollars" accumulate="true" />';
+  $strTP .= '</data_set></system>\'';
+  $strTP .= ' width="1" height="1">';
+  return $strTP;
+}
