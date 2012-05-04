@@ -594,6 +594,7 @@ function nypl_advocacy_stats($var_id) {
  * Thankyou page callback
  */
 function nypl_advocacy_thankyou() {
+  global $base_url;
   $sid = $_GET['sid'] ?: NULL;
   $adwords_code = variable_get('nypl_advocacy_ty_adwords', '');
   $body = variable_get('nypl_advocacy_ty_body', '');
