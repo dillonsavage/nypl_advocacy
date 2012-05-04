@@ -365,6 +365,12 @@ function nypl_advocacy_admin_thankyou_form() {
     '#default_value' => variable_get('nypl_advocacy_ty_google_plus', ''),
     '#rows' => 3,
   );
+  $form['ty_adwords'] = array(
+    '#type' => 'textarea',
+    '#title' => t('AdWords conversion code'),
+    '#default_value' => variable_get('nypl_advocacy_ty_adwords', ''),
+    '#rows' => 3,
+  );
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save'),
@@ -385,6 +391,7 @@ function nypl_advocacy_admin_thankyou_form_submit($form, &$form_state) {
   variable_set('nypl_advocacy_ty_fb', $form_state['values']['ty_fb_code']);
   variable_set('nypl_advocacy_ty_pinterest', $form_state['values']['ty_pinterest_code']);
   variable_set('nypl_advocacy_ty_google_plus', $form_state['values']['ty_google_plus_code']);
+  variable_set('nypl_advocacy_ty_adwords', $form_state['values']['ty_adwords']);
   drupal_set_message('Changes saved.');
 }
 
@@ -588,6 +595,7 @@ function nypl_advocacy_stats($var_id) {
  */
 function nypl_advocacy_thankyou() {
   $sid = $_GET['sid'] ?: NULL;
+  $adwords_code = variable_get('nypl_advocacy_ty_adwords', '');
   $body = variable_get('nypl_advocacy_ty_body', '');
   $donate_code = variable_get('nypl_advocacy_ty_donate', '');
   $buttons = _get_button_image();
@@ -600,6 +608,7 @@ function nypl_advocacy_thankyou() {
   $badge = _nypl_advocacy_get_badge($sid);
   $badge_link = l(t('MORE BADGES'), 'speakout/toolbox');
 
+  $output .= $adwords_code;
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button;
   $output .= '</div>';
