@@ -607,9 +607,9 @@ function nypl_advocacy_thankyou() {
   $google_plus = variable_get('nypl_advocacy_ty_google_plus', '');
   $badge = _nypl_advocacy_get_badge($sid);
   if(!isset($_GET['sid'])){
-    $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/all/all'));
+    $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/all/all');
   }else{
-    $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/'));
+    $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/');
   }
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button . '</div>';
