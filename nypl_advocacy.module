@@ -609,13 +609,17 @@ function nypl_advocacy_thankyou() {
   $badge_link = l(t('MORE BADGES'), 'speakout/toolbox');
 
   $output .= '<p>' . $body . '</p>';
-  $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button;
-  $output .= '</div>';
-  $output .= '<h2>Spread the Word!</h2><div id="nypl-advocacy-thankyou-socialmedia"><ul><li class="email">' . $email . '</li><li class="twitter">'. $twitter .'</li><li class="facebook">'. $fb .'</li><li class="google-plus">'. $google_plus . '</li><li class="pinterest">'. $pinterest . '</li></div>';
-  if ($badge) {
-    $output .= '<div id="nypl-advocacy-thankyou-badge"><img src="' . $badge . '" />' . $badge_link . '</div>';
-  }
-  $output .= '<span id="nypl-advocacy-learnmore">Questions about this campaign? ' . l('Learn more!', 'speakout') . '</span>';
+  $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button . '</div>';
+  $output .= '<div><h2>Spread the Word!</h2><p>Invite others to take a stand and ensure that your messsage is heard.</p><div id="nypl-advocacy-spread-the-word-steps" class="group"><ol>';
+  $output .= '<li class="nypl-advocacy-thankyou-badge">GET YOUR BRANCH BUTTON</p><img src="' . $badge . '"/>' . $badge_link . '</li>';
+  $output .= '<li class="nypl-advocacy-email">' . t('EMAIL A FRIEND') . $email . '</li>';
+  $output .= '<li class="nypl-advocay-thankyou-socialmedia">'.t('SHARE ON SOCIAL MEDIA') .'<div><ul><li class="twitter">'. $twitter .'</li><li class="facebook">'. $fb .'</li><li class="google-plus">'. $google_plus . '</li><li class="pinterest">'. $pinterest . '</li></ul></div>';
+
+  $output .='</ol></div>';
+  //Facebook donate instructions.
+  $output .= '<div id="donate-profilepic">' . $fb_instructions . '</div>';
+  $output .= '<span id="nypl-advocacy-learnmore">' . t('Questions about this campaign?') . l('Learn more!', 'speakout') . '</span>';
+  $output .='</div>';
   $output .= $adwords_code;
   return $output; 
 }
