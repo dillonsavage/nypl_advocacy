@@ -81,8 +81,8 @@ function _get_branch_sql(){
 			JOIN term_data ON locations_term.tid = term_data.tid
 			WHERE locations_spaces.city = "%s"
 			AND term_hierarchy.parent = 0
-			AND locations_term.vid = 2';
-
+			AND locations_term.vid = 2
+      ORDER BY term_data.name';
   return $sql;
 }
 
