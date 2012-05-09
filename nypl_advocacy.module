@@ -451,6 +451,9 @@ function nypl_advocacy_tell_a_friend(&$form, &$form_state) {
       $form_state['values']['submitted']['email_to'] .= $email == end($emails_arr) ? $email : $email . ', ';
     }
   }
+  // render user-submitted portion of form as plaintext
+  $personalized = check_plain($form_state['values']['submitted']['personal_message']);
+  $form_state['values']['submitted']['personal_message'] = $personalized;  
 }
 
 /**
