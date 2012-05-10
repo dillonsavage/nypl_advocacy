@@ -612,20 +612,22 @@ function nypl_advocacy_thankyou() {
   $pinterest = _nypl_advocacy_replace_pinterest(variable_get('nypl_advocacy_ty_pinterest', ''), $sid);
   $google_plus = variable_get('nypl_advocacy_ty_google_plus', '');
   $badge = _nypl_advocacy_get_badge($sid);
+
+  $img_search = 'REPLACE_WITH_RESPECTIVE_BRANCH_BUTTON';
+  $txt_search = 'NYPL%27s%20LIBRARY_NAME';
+  $link_search = 'pinterest button';
+  $pinterest_code = variable_get('nypl_advocacy_ty_pinterest', '');
+  $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/'. $path['filename'] . '/' . $name);
+
   $fb_instructions = variable_get('nypl_advocacy_toolbox_donate_instructions','');
 
   if(!isset($_GET['sid'])){
     $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/all/all');
-    //$pinterest_url = '<a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.nypl.org%2Fspeakout%2Fletter%3Futm_source%3Dpinterest.com%26amp%3Butm_medium%3Dreferral%26amp%3Butm_content%3DThankYouShare%26amp%3Butm_campaign%3DAdvocacy2012&media=' . $base_url . '/sites/default/files/advocacy/badges/Library.jpg&description=I%27ve%20written%20a%20letter%20to%20support%20The%20New%20York%20Public%20Library.%20You%20can%20too.%20Click%20the%20pin%20to%20get%20started." onClick="_gaq.push(["_trackEvent", "Advocacy", "Pinterest Share", this.href]);"><img src="http://assets.pinterest.com/images/PinExt.png"/>';
+    $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($base_url . $badge,'<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL's " . $name . " Library"), $pinterest_code);
   }else{
     $path = pathinfo($badge);
     $name = _get_branch_name($path['filename']);
-    $img_search = 'REPLACE_WITH_RESPECTIVE_BRANCH_BUTTON';
-    $txt_search = 'NYPL%27s%20LIBRARY_NAME';
-    $link_search = 'pinterest button';
-    $pinterest_code = variable_get('nypl_advocacy_ty_pinterest', '');
-    $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/'. $path['filename'] . '/' . $name);
-    $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($base_url . $badge,'<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL's " . $name . " Library"), $pinterest_code);
+    $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($base_url . '/sites/default/files/advocacy/badges-download/Library.jpg','<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL"), $pinterest_code);
   }
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button . '</div>';
