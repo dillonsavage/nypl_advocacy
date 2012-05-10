@@ -610,12 +610,18 @@ function nypl_advocacy_thankyou() {
   $pinterest = _nypl_advocacy_replace_pinterest(variable_get('nypl_advocacy_ty_pinterest', ''), $sid);
   $google_plus = variable_get('nypl_advocacy_ty_google_plus', '');
   $badge = _nypl_advocacy_get_badge($sid);
+  $img_search = 'REPLACE_WITH_RESPECTIVE_BRANCH_BUTTON';
+  $txt_search = 'NYPL%27s%20LIBRARY_NAME';
+  $link_search = 'pinterest button';
+  $pinterest_code = variable_get('nypl_advocacy_ty_pinterest', '');
+
   if(!isset($_GET['sid'])){
     $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/all/all');
   }else{
     $path = pathinfo($badge);
     $name = _get_branch_name($path['filename']);
     $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/'. $path['filename'] . '/' . $name);
+      $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($url_replace,'<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL's " . $name . " Library"), $pinterest_code);
   }
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button . '</div>';
@@ -627,7 +633,8 @@ function nypl_advocacy_thankyou() {
   $output .='</ol></div>';
   //Facebook donate instructions.
   $output .= '<div id="donate-profilepic">' . $fb_instructions . '</div>';
-  $output .= '<span id="nypl-advocacy-learnmore">' . t('Questions about this campaign? ') . l('Learn more!', 'speakout') . '</span>';
+  $output .= '<span id="nypl-advocacy-learnmore">' . l('Return to the campaign home page.', 'speakout') . '</span>';
+  //$output .= '<span id="nypl-advocacy-learnmore">' . t('Questions about this campaign? ') . l('Learn more!', 'speakout') . '</span>';
   $output .='</div>';
   $output .= nypl_advocacy_exact_target();
   $output .= $adwords_code;
