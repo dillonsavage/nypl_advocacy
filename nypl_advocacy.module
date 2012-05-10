@@ -627,7 +627,7 @@ function nypl_advocacy_thankyou() {
   }else{
     $path = pathinfo($badge);
     $name = _get_branch_name($path['filename']);
-    $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($base_url . '/sites/default/files/advocacy/badges-download/Library.jpg','<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL"), $pinterest_code);
+    $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($base_url . '/sites/default/files/advocacy/badges-download/Library.jpg','<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL's Main Library"), $pinterest_code);
   }
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button . '</div>';
