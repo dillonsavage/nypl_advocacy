@@ -143,11 +143,17 @@ function nypl_advocacy_letters_map() {
      * 1000-2000: green
      * 2000+: blue
      */
-    $letters_sent_q = db_query("SELECT SUM(emails_sent)+SUM(letters_sent) AS letters_total
+    // get number of emails from webform table...
+    $emails_sent_q = db_query("SELECT COUNT(sid)
+      FROM {webform_submitted_data}
+      WHERE cid = 18
+      AND data = %d
+      AND nid = %d", $bounds->tid, variable_get('nypl_advocacy_city_council_nid', ''));
+    $letters_sent_q = db_query("SELECT SUM(letters_sent)+ AS letters_total
       FROM {nypl_advocacy}
       WHERE location = %d
       AND campaign_name = '%s'", $bounds->tid, $campaign_name);
-    $letters_sent = db_result($letters_sent_q) ?: 0;
+    $letters_sent = db_result($letters_sent_q) + db_result($emails_sent_q) ?: 0;
 
     if ($letters_sent > 500 && $letters_sent <= 1000) {
       $marker = 'advocacy purple';
@@ -568,14 +574,13 @@ function nypl_advocacy_stats($var_id) {
       }
     break;
     case 'letters':
-      fwrite($outstream, "Location,Borough,Physical letters,Emails,Total\n");
+      fwrite($outstream, "Location,Borough,Physical letters\n");
       $current_campaign = variable_get('nypl_advocacy_campaign', NULL);
       // need to add behavior for no campaign/nid entered?
       $letters_q = db_query("SELECT ls.name AS location_name,
         REPLACE(ls.city, 'New York', 'Manhattan') as borough,
         na.location AS location_tid,
         SUM(letters_sent) AS letters_sent,
-        SUM(emails_sent) AS emails_sent
         FROM {nypl_advocacy} na
         JOIN {locations_term} lt ON lt.tid = na.location
         JOIN {locations} l ON l.lid = lt.lid
@@ -583,10 +588,7 @@ function nypl_advocacy_stats($var_id) {
         WHERE na.campaign_name = '%s'
         GROUP BY location", $current_campaign);
       while ($letters_r = db_fetch_array($letters_q)) {
-        $letters_sent = $letters_r['letters_sent'];
-        $emails_sent = $letters_r['emails_sent'];
-        $total_sent = $letters_sent + $emails_sent;
-        fputcsv($outstream, array($letters_r['location_name'], $letters_r['borough'], $letters_sent, $emails_sent, $total_sent));
+        fputcsv($outstream, array($letters_r['location_name'], $letters_r['borough'], $letters_r['letters_sent']));
       }
     break;
   }
