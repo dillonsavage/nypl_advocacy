@@ -622,7 +622,7 @@ function nypl_advocacy_thankyou() {
     $link_search = 'pinterest button';
     $pinterest_code = variable_get('nypl_advocacy_ty_pinterest', '');
     $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/'. $path['filename'] . '/' . $name);
-    $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($base_url . $badge,'<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL's " . $name . " Library"), $pinterest_code);
+    //$pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($base_url . $badge,'<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL's " . $name . " Library"), $pinterest_code);
   }
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button . '</div>';
