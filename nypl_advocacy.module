@@ -149,11 +149,11 @@ function nypl_advocacy_letters_map() {
       WHERE cid = 18
       AND data = %d
       AND nid = %d", $bounds->tid, variable_get('nypl_advocacy_city_council_nid', ''));
-    $letters_sent_q = db_query("SELECT SUM(letters_sent)+ AS letters_total
+    $letters_sent_q = db_query("SELECT SUM(letters_sent)
       FROM {nypl_advocacy}
       WHERE location = %d
       AND campaign_name = '%s'", $bounds->tid, $campaign_name);
-    $letters_sent = db_result($letters_sent_q) + db_result($emails_sent_q) ?: 0;
+    $letters_sent = db_result($letters_sent_q) + db_result($emails_sent_q);
     watchdog('nypl_advocacy', 'letters sent for ' . $bounds->tid . ': ' . $letters_sent);
 
     if ($letters_sent > 500 && $letters_sent <= 1000) {
