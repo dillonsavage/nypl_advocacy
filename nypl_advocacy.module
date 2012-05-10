@@ -154,7 +154,6 @@ function nypl_advocacy_letters_map() {
       WHERE location = %d
       AND campaign_name = '%s'", $bounds->tid, $campaign_name);
     $letters_sent = db_result($letters_sent_q) + db_result($emails_sent_q);
-    watchdog('nypl_advocacy', 'letters sent for ' . $bounds->tid . ': ' . $letters_sent);
 
     if ($letters_sent > 500 && $letters_sent <= 1000) {
       $marker = 'advocacy purple';
