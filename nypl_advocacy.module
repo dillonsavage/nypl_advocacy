@@ -623,7 +623,7 @@ function nypl_advocacy_thankyou() {
     $path = pathinfo($badge);
     $name = _get_branch_name($path['filename']);
     $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/'. $path['filename'] . '/' . $name);
-    $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($url_replace,'<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL's " . $name . " Library"), $pinterest_code);
+    $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($badge,'<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL's " . $name . " Library"), $pinterest_code);
   }
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button . '</div>';
@@ -634,7 +634,7 @@ function nypl_advocacy_thankyou() {
   $output .='</ol></div>';
   $output .= '<div id="donate-profilepic"><div>' . variable_get('nypl_advocacy_toolbox_donate_instructions','') . '</div></div>';
   //Facebook donate instructions.
-  $output .= '<div id="donate-profilepic">' . $fb_instructions . '</div><br/>';
+  $output .= '<div id="donate-profilepic">' . $fb_instructions . '</div>';
   $output .= '<span id="nypl-advocacy-learnmore">' . l('Return to the campaign home page.', 'speakout') . '</span>';
   $output .='</div>';
   $output .= nypl_advocacy_exact_target();
