@@ -574,8 +574,9 @@ function nypl_advocacy_stats($var_id) {
       }
     break;
     case 'letters':
-      fwrite($outstream, "Location,Borough,Physical letters\n");
+      fwrite($outstream, "Location,Borough,Physical letters,Emails\n");
       $current_campaign = variable_get('nypl_advocacy_campaign', NULL);
+      $cc_nid = variable_get('nypl_advocacy_city_council_nid', '');
       // need to add behavior for no campaign/nid entered?
       $letters_q = db_query("SELECT ls.name AS location_name,
         REPLACE(ls.city, 'New York', 'Manhattan') as borough,
@@ -588,7 +589,13 @@ function nypl_advocacy_stats($var_id) {
         WHERE na.campaign_name = '%s'
         GROUP BY location", $current_campaign);
       while ($letters_r = db_fetch_array($letters_q)) {
-        fputcsv($outstream, array($letters_r['location_name'], $letters_r['borough'], $letters_r['letters_sent']));
+        $emails_q = db_query('SELECT COUNT(sid)
+          FROM {webform_submitted_data}
+          WHERE cid = 18
+          AND data = %d
+          AND nid = %d', $letters_r['location_tid'], $cc_nid);
+        $emails_sent = db_result($emails_q);
+        fputcsv($outstream, array($letters_r['location_name'], $letters_r['borough'], $letters_r['letters_sent']), $emails_sent);
       }
     break;
   }
