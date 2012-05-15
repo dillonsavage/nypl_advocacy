@@ -595,7 +595,7 @@ function nypl_advocacy_stats($var_id) {
           AND data = %d
           AND nid = %d', $letters_r['location_tid'], $cc_nid);
         $emails_sent = db_result($emails_q);
-        fputcsv($outstream, array($letters_r['location_name'], $letters_r['borough'], $letters_r['letters_sent']), $emails_sent);
+        fputcsv($outstream, array($letters_r['location_name'], $letters_r['borough'], $letters_r['letters_sent'], $emails_sent));
       }
     break;
   }
