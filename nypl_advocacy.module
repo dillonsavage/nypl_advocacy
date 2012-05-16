@@ -607,7 +607,7 @@ function nypl_advocacy_stats($var_id) {
  */
 function nypl_advocacy_thankyou() {
   global $base_url;
-  $sid = $_GET['sid'] ?: NULL;
+  $sid = $_GET['sid'] ? $_GET['sid']: NULL;
   $adwords_code = variable_get('nypl_advocacy_ty_adwords', '');
   $body = variable_get('nypl_advocacy_ty_body', '');
   $donate_code = variable_get('nypl_advocacy_ty_donate', '');
@@ -681,7 +681,7 @@ function nypl_advocacy_exact_target() {
     if (isset($_GET[$et_key]) && (!isset($_COOKIE[$et_key]) || $_COOKIE[$et_key] != $_GET[$et_key])) {
       setcookie($et_key, $_GET[$et_key]);
     }
-    $$et_field = $_COOKIE[$et_key] ?: $_GET[$et_key];
+    $$et_field = $_COOKIE[$et_key] ? $_COOKIE[$et_key] : $_GET[$et_key];
   }
   $strTP = '<img src=\'http://click.exacttarget.com/conversion.aspx?xml=';
   $strTP .= '<system><system_name>tracking</system_name><action>conversion</action>';
