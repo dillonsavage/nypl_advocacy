@@ -597,6 +597,12 @@ function nypl_advocacy_stats($var_id) {
         $emails_sent = db_result($emails_q);
         fputcsv($outstream, array($letters_r['location_name'], $letters_r['borough'], $letters_r['letters_sent'], $emails_sent));
       }
+      // add generic NYPL emails to export
+      $library_select_q = db_query("SELECT extra FROM {webform_component} WHERE form_key = 'library' AND nid = %d", $cc_nid);
+      if ($library_select_r = db_result($library_select_q)) {
+        $unserialized = unserialize($library_select_r);
+        watchdog('nypl_advocacy', '<pre>' . var_export($unserialized, true) . '</pre>');
+      }
     break;
   }
   fclose($outstream);
