@@ -610,7 +610,10 @@ function nypl_advocacy_stats($var_id) {
           AND data = %d
           AND nid = %d', $location_tid, $cc_nid);
         $emails_sent = db_result($emails_q);
-        fputcsv($outstream, array($location_data['name'], $location_data['borough'], $location_data['letters_sent'], $emails_sent));
+        // don't output generic data if no emails
+        if (!empty($emails_sent) || $location_tid != $generic_tid) {
+          fputcsv($outstream, array($location_data['name'], $location_data['borough'], $location_data['letters_sent'], $emails_sent));
+        }
       }
     break;
   }
