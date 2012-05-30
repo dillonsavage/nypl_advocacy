@@ -1,5 +1,10 @@
 CHANGELOG.txt
 
+CHANGES for 1.1.2
+-----------------
+* modified data export to pull email data from webform tables, and to pull in data for "generic" location emails
+** FILE MODIFIED: nypl_advocacy.module
+
 CHANGES for 1.1
 ---------------
 *  added menu callback for thank you page -> nypl_advocacy_thankyou()
