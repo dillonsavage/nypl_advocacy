@@ -588,20 +588,29 @@ function nypl_advocacy_stats($var_id) {
         JOIN {locations_spaces} ls ON ls.sid = l.sid
         WHERE na.campaign_name = '%s'
         GROUP BY location", $current_campaign);
+      // 'New York Public Library' select option
+      $generic_tid = 47;
+      $locations_r = array($generic_tid =>  array(
+          'name' => 'New York Public Library',
+          'borough' => 'Manhattan',
+          'letters_sent' => 0,
+        )
+      );
       while ($letters_r = db_fetch_array($letters_q)) {
+        $locations_r[$letters_r['location_tid']] = array(
+          'name' => $letters_r['location_name'],
+          'borough' => $letters_r['borough'],
+          'letters_sent' => $letters_r['letters_sent'],
+        );
+      }
+      foreach($locations_r as $location_tid => $location_data) {
         $emails_q = db_query('SELECT COUNT(sid)
           FROM {webform_submitted_data}
           WHERE cid = 18
           AND data = %d
-          AND nid = %d', $letters_r['location_tid'], $cc_nid);
+          AND nid = %d', $location_tid, $cc_nid);
         $emails_sent = db_result($emails_q);
-        fputcsv($outstream, array($letters_r['location_name'], $letters_r['borough'], $letters_r['letters_sent'], $emails_sent));
-      }
-      // add generic NYPL emails to export
-      $library_select_q = db_query("SELECT extra FROM {webform_component} WHERE form_key = 'library' AND nid = %d", $cc_nid);
-      if ($library_select_r = db_result($library_select_q)) {
-        $unserialized = unserialize($library_select_r);
-        watchdog('nypl_advocacy', '<pre>' . var_export($unserialized, true) . '</pre>');
+        fputcsv($outstream, array($location_data['location_name'], $location_data['borough'], $location_data['letters_sent'], $emails_sent));
       }
     break;
   }
