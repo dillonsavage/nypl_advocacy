@@ -7,7 +7,8 @@
  */
 
 module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
- 
+module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy.theme');
+
 /**
  * Implementation of hook_perm()
  */
@@ -124,6 +125,20 @@ function nypl_advocacy_block($op = 'list', $delta = 0, $edit = array()) {
     $block['content'] = nypl_advocacy_letters_map();
     return $block;
   }
+}
+
+/**
+ * Implementation of hook_theme()
+ */
+function nypl_advocacy_theme() {
+  return array(
+    'left_sidebar' => array(
+      'arguments' => array('node' => NULL),
+    ),
+    'right_sidebar' => array(
+      'arguments' => array('node' => NULL),
+    ),
+  );
 }
 
 /**

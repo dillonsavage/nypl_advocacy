@@ -10,7 +10,6 @@ module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
  * Implementation of hook_form()
  */
 function nypl_advocacy_admin_images_form($form_state) {
-  //variable_set('nypl_advocacy_img_path', '/Users/hcnewsom/Sites/drupal6/sites/default/files/advocacy');
   variable_set('nypl_advocacy_img_path', '/www/sites/new.nypl.org/sites/default/files/advocacy');
   $button = _get_button_image();
   $form = array('#attributes' => array('enctype' => 'multipart/form-data'));
@@ -95,9 +94,8 @@ function nypl_advocacy_admin_images_form($form_state) {
 /**
  * Submit handler
  */
-
 function nypl_advocacy_admin_images_form_submit($form, $form_state) {
-  if(isset($form_state['values'])){
+  if (isset($form_state['values'])) {
     $form_values = $form_state['values'];
     variable_set('nypl_advocacy_leading_manhattan_branch', $form_values['manhattan_branch']);
     variable_set('nypl_advocacy_leading_bronx_branch', $form_values['bronx_branch']);
@@ -109,7 +107,7 @@ function nypl_advocacy_admin_images_form_submit($form, $form_state) {
     variable_set('nypl_advocacy_write_button_link', $form_values['landing_write_button_link']);
     $validators = array(
 			'file_validate_is_image' => array(), 
-			);
+		);
     
     if ($file1 = file_save_upload('donate_button', $validators)) {	  
       //var_dump($form_state['values']['donate_button']->picture);
@@ -151,15 +149,13 @@ function nypl_advocacy_admin_images_form_submit($form, $form_state) {
   $form_state['values']['current_donate_button'] = $button_images['tag']['donate-button'];
 }
 
-function _get_branches_select_box($city){
+function _get_branches_select_box($city) {
   $sql = _get_branch_sql();
-	db_set_active('nypl');	
 	$result = db_query($sql, $city);
 	$list = array();		
-	while($row = db_fetch_array($result)){
+	while($row = db_fetch_array($result)) {
 		$list[$row['location_symbol']] = $row['location_name']; 
 	}
 	$location_list = array(array("id" => "all", "description" => "All Locations"));
-	db_set_active('default');
 	return array('none' => '--- Please Select ---') + $list;
 }

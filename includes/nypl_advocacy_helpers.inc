@@ -1,22 +1,24 @@
 <?php
+
 /**
  * @file
  * helper functions for advocacy.
  */
+ 
 module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_branch_to_rep');
  
-function _get_button_image(){
+function _get_button_image() {
 	$dir = variable_get('nypl_advocacy_img_path','');
-	$files = scandir($dir);	
+	$files = scandir($dir);
 	$my_files = array();
 	global $base_url;	
-	foreach($files as $img){
-		if(preg_match("/write-button/",$img) || preg_match("/donate-button/", $img)){
+	foreach ($files as $img) {
+		if (preg_match("/write-button/",$img) || preg_match("/donate-button/", $img)) {
 			$info[] = pathinfo($dir . "/" . $img);
 		}		
 	}
-	if(isset($info)){
-		foreach($info as $i){
+	if (isset($info)) {
+		foreach ($info as $i) {
 			$my_files[$i['filename']] = array(
 				'link' => $base_url . '/sites/default/files/advocacy/' . $i['basename'],
 				'tag' =>  '<img class="' . $i['filename'] . '" src = "'. $base_url . '/sites/default/files/advocacy/' . $i['basename'] . '" alt="' . $i['filename'] . '"/>',		
@@ -24,13 +26,13 @@ function _get_button_image(){
 		}
 		return $my_files;
 	}
-	else{
+	else {
 	  $empty_tag = '<img src="" alt="no-image"/>';
 	  return array('donate-button' => array('tag' => $empty_tag), 'write-button' => array('tag' => $empty_tag));
 	}
 }
 
-function _nypl_advocacy_leading_library_badge($city){
+function _nypl_advocacy_leading_library_badge($city) {
   global $base_url;
   $symbol = variable_get('nypl_advocacy_leading_'.$city.'_branch','default');
   return '<img class="' . preg_replace('/_/','-',$city) . '-badge" src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $symbol . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>';
@@ -72,21 +74,21 @@ function _nypl_advocacy_replace_pinterest($pinterest_code, $sid = NULL) {
   return $output;
 }
 
-function _get_branch_sql(){
+function _get_branch_sql() {
 	$sql = 'SELECT locations.symbol AS location_symbol, locations_term.vid, term_hierarchy.tid, term_data.name AS location_name
-			FROM locations
-			JOIN locations_spaces ON locations.sid = locations_spaces.sid
-			JOIN locations_term ON locations.lid = locations_term.lid
-			JOIN term_hierarchy ON locations_term.tid = term_hierarchy.tid
-			JOIN term_data ON locations_term.tid = term_data.tid
-			WHERE locations_spaces.city = "%s"
-			AND term_hierarchy.parent = 0
-			AND locations_term.vid = 2
-      ORDER BY term_data.name';
+		FROM locations
+		JOIN locations_spaces ON locations.sid = locations_spaces.sid
+		JOIN locations_term ON locations.lid = locations_term.lid
+		JOIN term_hierarchy ON locations_term.tid = term_hierarchy.tid
+		JOIN term_data ON locations_term.tid = term_data.tid
+		WHERE locations_spaces.city = "%s"
+		AND term_hierarchy.parent = 0
+		AND locations_term.vid = 2
+    ORDER BY term_data.name';
   return $sql;
 }
 
-function _get_branches_page($city){
+function _get_branches_page($city) {
   global $base_url;
   $sql = _get_branch_sql();
   db_set_active('nypl');	
@@ -98,8 +100,8 @@ function _get_branches_page($city){
   $link_search = 'pinterest button';
   $pinterest_code = variable_get('nypl_advocacy_ty_pinterest', '');
  
-  while($row = db_fetch_array($result)){
-    if($row['location_symbol'] != 'DLC'){
+  while($row = db_fetch_array($result)) {
+    if ($row['location_symbol'] != 'DLC') {
       $url_replace = $base_url . '/sites/default/files/advocacy/badges/' .$row['location_symbol'] . '.jpg'; 
       $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($url_replace,'<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL's " . $row['location_name'] . " Library"), $pinterest_code);
       $list[$row['location_symbol']] = array(
@@ -115,30 +117,28 @@ function _get_branches_page($city){
   return $list;
 }
 
-function _get_branch_name_sql(){
+function _get_branch_name_sql() {
   $sql = 'SELECT term_data.name AS location_name
-      FROM locations
-      JOIN locations_spaces ON locations.sid = locations_spaces.sid
-      JOIN locations_term ON locations.lid = locations_term.lid
-      JOIN term_hierarchy ON locations_term.tid = term_hierarchy.tid
-      JOIN term_data ON locations_term.tid = term_data.tid
-      WHERE locations.symbol = "%s"
-      AND term_hierarchy.parent = 0
-      AND locations_term.vid = 2';
-
+    FROM locations
+    JOIN locations_spaces ON locations.sid = locations_spaces.sid
+    JOIN locations_term ON locations.lid = locations_term.lid
+    JOIN term_hierarchy ON locations_term.tid = term_hierarchy.tid
+    JOIN term_data ON locations_term.tid = term_data.tid
+    WHERE locations.symbol = "%s"
+    AND term_hierarchy.parent = 0
+    AND locations_term.vid = 2';
   return $sql;
 }
 
-function _get_branch_name($symbol){
-    $sql = _get_branch_name_sql();
-    $result = db_result(db_query($sql, $symbol));
-    return ucwords(preg_replace('/_/',' ',$result));
-
+function _get_branch_name($symbol) {
+  $sql = _get_branch_name_sql();
+  $result = db_result(db_query($sql, $symbol));
+  return ucwords(preg_replace('/_/',' ',$result));
 }
 
-function _download_image($symbol, $location_name){
+function _download_image($symbol, $location_name) {
   global $base_url;
-  if($symbol == 'all' && $location_name == 'all'){
+  if ($symbol == 'all' && $location_name == 'all') {
     $symbol = 'Library';
     $location_name = 'All Libraries';
   }

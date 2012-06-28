@@ -1,6 +1,8 @@
 <?php
+
 module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
-function _generate_toolbox_page(){
+
+function _generate_toolbox_page() {
   global $base_url;
   
   $content = '';
@@ -26,15 +28,15 @@ function _generate_toolbox_page(){
     
   //Bronx
   $content .= '<ul id="badges-bronx" class="group"><a name=bronx"><strong>'. t('Bronx') . '</strong></a>';
-  foreach($bronx as $b){
+  foreach ($bronx as $b) {
     $bronx_string .= '<li>'. $b['badge_image'] . $b['badge_download'] . $b['pinterest'] . $b['branch_name'] . $b['letter_download'] . '</li>';
   }
   $content .= $bronx_string . '</ul>';
 
   //Manhattan
   $content .= '<ul id="badges-manhattan" class="group"><a name="manhattan"><strong>'. t('Manhattan') . '</strong></a>';
-  foreach($manhattan as $m){
-    if($m['branch_name'] != 'Donnell Library Center'){
+  foreach ($manhattan as $m) {
+    if ($m['branch_name'] != 'Donnell Library Center') {
       $manhattan_string .= '<li>' . $m['badge_image'] . $m['badge_download'] . $m['pinterest'] . $m['branch_name'] . $m['letter_download'] . '</li>';
     }
   }
@@ -42,7 +44,7 @@ function _generate_toolbox_page(){
 
   //Staten Island
   $content .= '<ul id="badges-staten-island" class="group"><a name="staten-island"><strong>'. t('Staten Island') . '</strong></a>';
-  foreach($staten_island as $s){
+  foreach ($staten_island as $s) {
     $staten_island_string .= '<li>'. $s['badge_image'] . $s['badge_download'] . $s['pinterest'] . $s['branch_name'] . $s['letter_download'] . '</li>';
   }
   $content .= $staten_island_string . '</ul>';
