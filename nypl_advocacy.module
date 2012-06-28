@@ -139,6 +139,10 @@ function nypl_advocacy_theme() {
       'arguments' => array('node' => NULL),
       'file' => 'includes/nypl_advocacy.theme.inc',
     ),
+    'node-advocacy_landing' => array(
+      'path' => drupal_get_path('module', 'nypl_advocacy'),
+      'template' => 'templates/node-advocacy_landing',
+    ),
   );
 }
 
@@ -662,11 +666,12 @@ function nypl_advocacy_thankyou() {
 
   $fb_instructions = variable_get('nypl_advocacy_toolbox_donate_instructions','');
 
-  if(!isset($_GET['sid'])){
+  if (!isset($_GET['sid'])) {
     $badge_link = l(t('DOWNLOAD YOUR BUTTON'), $base_url .'/speakout/toolbox/download/all/all');
     $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($base_url . '/sites/default/files/advocacy/badges-download/Library.jpg','<img src="http://assets.pinterest.com/images/PinExt.png"/>',"The New York Public Library"), $pinterest_code);
 
-  }else{
+  } 
+  else {
     $path = pathinfo($badge);
     $name = _get_branch_name($path['filename']);
     $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($base_url . $badge,'<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL's " . $name . " Library"), $pinterest_code);
