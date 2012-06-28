@@ -7,7 +7,6 @@
  */
 
 module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
-module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy.theme');
 
 /**
  * Implementation of hook_perm()
@@ -134,9 +133,11 @@ function nypl_advocacy_theme() {
   return array(
     'left_sidebar' => array(
       'arguments' => array('node' => NULL),
+      'file' => 'includes/nypl_advocacy.theme.inc',
     ),
     'right_sidebar' => array(
       'arguments' => array('node' => NULL),
+      'file' => 'includes/nypl_advocacy.theme.inc',
     ),
   );
 }
