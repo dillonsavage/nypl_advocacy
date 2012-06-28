@@ -147,7 +147,7 @@ function nypl_advocacy_theme() {
   );
 }
 
-function nypl_advocacy_preprocess_page(&$vars) {
+function nypl_advocacy_preprocess_node(&$vars) {
   if ($vars['node']->type == 'advocacy_landing') {
     var_dump(drupal_get_path('module', 'nypl_advocacy') . '/templates/advocacy_landing');
     $vars['template_files'][] = drupal_get_path('module', 'nypl_advocacy') . '/templates/advocacy-landing';
