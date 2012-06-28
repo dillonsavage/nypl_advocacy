@@ -22,9 +22,7 @@ if ($node->image_gallery && $node->image_gallery['position'] == 'top') {
 	print $node->image_gallery['content'];
 }
 ?>
-<?php
-watchdog('nypl_advocacy', 'hit advocacy template');
-?>
+<?php echo('hello'); ?>
 <div class="content">
   <?php print $field_advocacy_intro[0]['value']; ?>
   <!--  write/donate buttons -->
@@ -32,15 +30,15 @@ watchdog('nypl_advocacy', 'hit advocacy template');
   <?php print variable_get('nypl_advocacy_donate_button_link',''); print $advocacy_buttons['donate-button']['tag'];?></a>
   <?php print $content; ?>
   <!-- branch badges -->
-      <?php if (variable_get('nypl_advocacy_show_branch_badges', 1) == TRUE){?>
-        <p id="advocacy-most-letters-message">Most Letters So Far</p>
-        <ul id="advocacy-speakout-badges" class="group">
-          <li><?php print _nypl_advocacy_leading_library_badge('bronx'); ?><p class="badge-borough">Bronx</p></li>
-          <li><?php print _nypl_advocacy_leading_library_badge('manhattan'); ?><p class="badge-borough">Manhattan</p></li>
-          <li><?php print _nypl_advocacy_leading_library_badge('staten_island'); ?><p class="badge-borough">Staten Island</p></li>
-        </ul>
-      <?php }?>
-    <?php print $field_advocacy_txt_bottom[0]['value']; ?>
+  <?php if (variable_get('nypl_advocacy_show_branch_badges', 1) == TRUE){?>
+    <p id="advocacy-most-letters-message">Most Letters So Far</p>
+    <ul id="advocacy-speakout-badges" class="group">
+      <li><?php print _nypl_advocacy_leading_library_badge('bronx'); ?><p class="badge-borough">Bronx</p></li>
+      <li><?php print _nypl_advocacy_leading_library_badge('manhattan'); ?><p class="badge-borough">Manhattan</p></li>
+      <li><?php print _nypl_advocacy_leading_library_badge('staten_island'); ?><p class="badge-borough">Staten Island</p></li>
+    </ul>
+  <?php }?>
+  <?php print $field_advocacy_txt_bottom[0]['value']; ?>
 </div>
   <!-- social media -->
   <?php
