@@ -22,7 +22,9 @@ if ($node->image_gallery && $node->image_gallery['position'] == 'top') {
 	print $node->image_gallery['content'];
 }
 ?>
-
+<?php
+watchdog('nypl_advocacy', 'hit advocacy template');
+?>
 <div class="content">
   <?php print $field_advocacy_intro[0]['value']; ?>
   <!--  write/donate buttons -->

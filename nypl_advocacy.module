@@ -140,6 +140,7 @@ function nypl_advocacy_theme() {
       'file' => 'includes/nypl_advocacy.theme.inc',
     ),
     'nypl_advocacy_node' => array(
+      'arguments' => array('node' => NULL),
       'path' => drupal_get_path('module', 'nypl_advocacy'),
       'template' => 'templates/node-advocacy_landing',
     ),
