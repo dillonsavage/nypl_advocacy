@@ -45,6 +45,17 @@ function nypl_advocacy_install() {
     node_save($node);
     content_insert($node);
   }
+  
+  // create advocacy_landing content type
+  $cc_filename = drupal_get_path('module', 'nypl_advocacy') . '/includes/nypl_advocacy.install.inc';
+  $content = implode('', file($cc_filename));
+  $cc_form_state = array(
+    'values' => array(
+      'type_name' => '<create>',
+      'macro' => $content,
+    ),
+  );
+  drupal_execute('content_copy_import_form', $cc_form_state);
 }
 
 function nypl_advocacy_schema() {
