@@ -2,8 +2,7 @@
 // $Id$
 
 function nypl_advocacy_install() {
-  include 'includes/nyc_council_members.inc';
-  include 'includes/webform_nodes.inc';
+  include 'includes/nypl_advocacy.install.inc'
 
   drupal_install_schema('nypl_advocacy');
   
@@ -28,6 +27,24 @@ function nypl_advocacy_install() {
   variable_set('nypl_advocacy_city_council_nid', $cc_nid);
   variable_set('nypl_advocacy_tell_friend_nid', $tf_nid);
   variable_set('nypl_advocacy_districts_key', 'dab838a64853702416d25e052d3174ae:17:65636627');
+    
+  // create advocacy_landing content type
+  $landing_form_state = array(
+    'values' => array(
+      'type_name' => '<create>',
+      'macro' => $landing_page,
+    ),
+  );
+  drupal_execute('content_copy_import_form', $landing_form_state);
+  
+  //create council member content type
+  $council_member_form_state = array(
+    'values' => array(
+      'type_name' => '<create>',
+      'macro' => $council_member,
+    ),
+  );
+  drupal_execute('content_copy_import_form', $council_member_form_state);
   
   // create council member nodes
   foreach ($council_members as $district => $cm_data) {
@@ -45,17 +62,6 @@ function nypl_advocacy_install() {
     node_save($node);
     content_insert($node);
   }
-  
-  // create advocacy_landing content type
-  $cc_filename = drupal_get_path('module', 'nypl_advocacy') . '/includes/nypl_advocacy.install.inc';
-  $content = implode('', file($cc_filename));
-  $cc_form_state = array(
-    'values' => array(
-      'type_name' => '<create>',
-      'macro' => $content,
-    ),
-  );
-  drupal_execute('content_copy_import_form', $cc_form_state);
 }
 
 function nypl_advocacy_schema() {
