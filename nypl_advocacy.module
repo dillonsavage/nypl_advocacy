@@ -162,6 +162,7 @@ function nypl_advocacy_preprocess_node(&$vars) {
  */
 function nypl_advocacy_preprocess_page(&$vars) {
   if ($vars['node']->type == 'advocacy_landing') {
+    drupal_add_css(drupal_get_path('module', 'nypl_advocacy') . '/advocacy2012.css');
     $vars['left'] = theme('nypl_advocacy_left_sidebar', $vars['node']);
     $vars['right'] = theme('nypl_advocacy_right_sidebar', $vars['node']);
   }
