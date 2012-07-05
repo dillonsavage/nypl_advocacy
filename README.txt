@@ -15,6 +15,8 @@ NYPL Advocacy can be installed and enabled in the manner described here: http://
 
 When it's enabled for the first time, the module creates two content types, City Council member and Advocacy Landing Page. It creates a node for each Council member (N.B. as of 2012) and two Webform nodes, "Advocacy Form" and "Tell a Friend". It creates the nypl_advocacy database table, which stores the physical letter data. Finally, the module specifies the pages 'speakout/thankyou' (where the user is redirected after filling out the City Council form) and 'speakout/toolbox' (where the user can download icons for use in social media).
 
+The Webform nodes created by NYPL Advocacy's installation script are not meant to be used in production. Before deploying them to a production setting, a site administrator should make any campaign-specific modifications that might be necessary. Perhaps most importantly, in order for City Council form submissions to arrive at their destinations, the City Council Webform must contain an email setting whose "email to" value pulls from the CC form's hidden "email to" field.
+
 CONFIGURATION
 -------------
 When the module is enabled, a number of configuration options are available at admin/settings/nypl_advocacy. Additionally, staff can enter physical letter statistics and export data by clicking the appropriate tabs on this page.
