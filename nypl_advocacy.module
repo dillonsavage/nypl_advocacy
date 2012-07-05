@@ -146,9 +146,20 @@ function nypl_advocacy_theme() {
   );
 }
 
+/**
+ * Implementation of hook_preprocess_node()
+ */
 function nypl_advocacy_preprocess_node(&$vars) {
   if ($vars['node']->type == 'advocacy_landing') {
     $vars['content'] = theme('nypl_advocacy_landing', $vars);
+  }
+}
+
+/**
+ * Implementation of hook_preprocess_page()
+ */
+function nypl_advocacy_preprocess_page(&$vars) {
+  if ($vars['node']->type == 'advocacy_landing') {
     $vars['left'] = theme('nypl_advocacy_left_sidebar', $vars['node']);
     $vars['right'] = theme('nypl_advocacy_right_sidebar', $vars['node']);
   }
