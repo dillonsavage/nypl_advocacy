@@ -166,18 +166,6 @@ function nypl_advocacy_preprocess_page(&$vars) {
 }
 
 /**
- * Implementation of hook_webform_mail_headers()
- */
-function nypl_advocacy_webform_mail_headers($node, $submission, $email) {
-  $headers = array();
-  $tell_a_friend = variable_get('nypl_advocacy_tell_friend_nid', '');
-  if ($node->nid == $tell_a_friend) {
-    $headers['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
-  }
-  return $headers;
-}
-
-/**
  * Generate a map of all locations with different markers based on amt of letters per location
  * Adapted from locations_gmap_all()
  * see http://dev.new.nypl.org/help/gmap/array for documentation.
