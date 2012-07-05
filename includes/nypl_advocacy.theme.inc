@@ -51,3 +51,38 @@ function theme_nypl_advocacy_right_sidebar($node) {
   return $output;
 }
 
+/**
+ * main content for landing page
+ */
+function theme_nypl_advocacy_landing($vars) {
+  $advocacy_buttons = _get_button_image();
+  $twitter = variable_get('nypl_advocacy_ty_twitter', '');
+  $fb = variable_get('nypl_advocacy_ty_fb', '');
+  $pinterest = _nypl_advocacy_replace_pinterest(variable_get('nypl_advocacy_ty_pinterest', ''));
+  $google_plus =  variable_get('nypl_advocacy_ty_google_plus', '');
+  $output = $vars['field_advocacy_intro'][0]['value'];
+  $output .= variable_get('nypl_advocacy_write_button_link','');
+  $output .= $advocacy_buttons['write-button']['tag'];
+  $output .= variable_get('nypl_advocacy_donate_button_link','');
+  $output .= $advocacy_buttons['donate-button']['tag'];
+  $output .= $vars['content'];
+  if (variable_get('nypl_advocacy_show_branch_badges', 1) == TRUE) {
+    $output .= '<p id="advocacy-most-letters-message">Most Letters So Far</p>';
+    $output .= '<ul id="advocacy-speakout-badges" class="group">';
+    $output .= '<li>' . _nypl_advocacy_leading_library_badge('bronx') . '<p class="badge-borough">Bronx</p></li>';
+    $output .= '<li>' . _nypl_advocacy_leading_library_badge('manhattan') . '<p class="badge-borough">Manhattan</p></li>';
+    $output .= '<li>' . _nypl_advocacy_leading_library_badge('staten_island') . '<p class="badge-borough">Staten Island</p></li>';
+    $output .= '</ul>';
+  }
+  $output .= $vars['field_advocacy_txt_bottom'][0]['value'];
+  $output .= '</div>'; // content
+  if ($twitter && $fb && $pinterest && $google_plus) {
+    $output .= '<ul id="advocacy-speakout-socialmedia" class="group">FOLLOW US ON';
+    $output .= '<li class="advocacy-speakout-twitter">' . $twitter . '</li>';
+    $output .= '<li class="advocacy-speakout-facebook">' . $fb . '</li>';
+    $output .= '<li class="advocacy-speakout-pinterest">' . $pinterest . '</li>';
+    $output .= '<li class="advocacy-speakout-google-plus">' . $google_plus . '</li>';
+    $output .= '</ul>';
+  }
+  return $output;
+}
