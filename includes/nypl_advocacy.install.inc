@@ -76,7 +76,7 @@ $council_member = "\$content['type']  = array (
     'pattern' => '',
   ),
 );
-$content['fields']  = array (
+\$content['fields']  = array (
   0 => 
   array (
     'label' => 'District',
@@ -242,7 +242,7 @@ $content['fields']  = array (
     ),
   ),
 );
-$content['extra']  = array (
+\$content['extra']  = array (
   'title' => '-5',
   'revision_information' => '20',
   'comment_settings' => '30',
@@ -329,7 +329,7 @@ $landing_page = "\$content['type']  = array (
     'pattern' => '',
   ),
 );
-$content['groups']  = array (
+\$content['groups']  = array (
   0 => 
   array (
     'label' => 'Press release',
@@ -549,7 +549,7 @@ $content['groups']  = array (
     'group_name' => 'group_advocacy_press_past',
   ),
 );
-$content['fields']  = array (
+\$content['fields']  = array (
   0 => 
   array (
     'label' => 'Intro text',
@@ -1616,7 +1616,7 @@ $content['fields']  = array (
     ),
   ),
 );
-$content['extra']  = array (
+\$content['extra']  = array (
   'title' => '-5',
   'body_field' => '-2',
   'revision_information' => '8',
