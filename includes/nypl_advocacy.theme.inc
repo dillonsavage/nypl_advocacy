@@ -75,7 +75,6 @@ function theme_nypl_advocacy_landing($vars) {
     $output .= '</ul>';
   }
   $output .= $vars['field_advocacy_txt_bottom'][0]['value'];
-  $output .= '</div>'; // content
   if ($twitter && $fb && $pinterest && $google_plus) {
     $output .= '<ul id="advocacy-speakout-socialmedia" class="group">FOLLOW US ON';
     $output .= '<li class="advocacy-speakout-twitter">' . $twitter . '</li>';
