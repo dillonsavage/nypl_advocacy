@@ -50,6 +50,13 @@ function nypl_advocacy_menu() {
     'page arguments' => array('nypl_advocacy_admin_form'),
     'access arguments' => array('administer NYPL advocacy'),
   );
+  $items['admin/settings/nypl_advocacy/basic'] = array(
+    'title' => t('Basic settings'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('nypl_advocacy_admin_form'),
+    'access arguments' => array('administer NYPL advocacy'),
+  );
   $items['admin/settings/nypl_advocacy/letters'] = array(
     'title' => t('Enter statistics'),
     'type' => MENU_LOCAL_TASK,
