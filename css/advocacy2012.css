@@ -1,0 +1,411 @@
+/* BANNER POSITIONING OVERRIDE */
+body.node-type-advocacy-landing-1 #primary-links {
+	margin-bottom: 0;
+}
+
+
+/* LAYOUT WIDTH OVERRIDES */
+body.node-type-advocacy-landing-1 #container {
+padding: 2em 210px 2em 240px;
+}
+
+body.node-type-advocacy-landing-1 #local-nav {
+width: 220px;
+margin: 0 0 0 -240px;
+}
+
+body.node-type-advocacy-landing-1 #aux-content .block {
+margin: 0 0 2em;
+}
+
+/* potentially shared text styles */
+body.node-type-advocacy-landing-1 h1.title,
+body.page-speakout-1 h1.title {
+	font-weight: bold;
+}
+
+/* LISTS: remove list-style-img, float left */
+
+ul#advocacy-speakout-socialmedia li, /* SM icons on Landing pg */
+ul#advocacy-speakout-badges li, /* 3 badges on Landing pg */
+ul#toolbox-anchors li, /* boro list on Toolbox pg */
+ul[id|="badges"] li, /* badges on Toolbox pg */
+#nypl-advocacy-thankyou-socialmedia li /* SM on Thankyou pg */
+{
+	list-style: none;
+	float: left;
+}
+
+/* ***********************************************LANDING PG */
+body.node-type-advocacy-landing-1 #local-nav {
+	border: 1px solid #ccc;
+}
+
+/* left col */
+/* map */
+#advocacy-progress-bar h3, 
+#advocacy-progress-map h3 {
+	background: #887F6F;
+	color: white;
+	font-size: 98%;
+	letter-spacing: 0.1em;
+	padding: 2px 5px;	
+}
+
+#advocacy-progress-bar h3 {
+	margin-top: 0;
+}
+
+.advocacy-progress-map-markers {
+    color: #000000;
+    display: inline-block;
+    font-size: 8px;
+    margin: 10px 0;
+}
+
+.advocacy-progress-map-markers img {
+    padding: 0 2px;
+    }
+
+
+
+/* content area */
+/* buttons */
+.write-button, .donate-button {
+/*
+	-webkit-box-shadow: 0px 0px 10px 3px #B4AEA9;
+	box-shadow: 0px 0px 10px 3px #B4AEA9;
+*/
+	margin-right: 30px;
+	margin-bottom: 1.5em;
+}
+
+p.letter-link {
+    font-size: 110%;
+    margin-bottom: 2em;
+}
+
+p#advocacy-most-letters-message {
+    font-size: 85%;
+    font-weight: bold;
+    margin: 2em 0 0;
+    text-transform: uppercase;
+}
+
+
+/* badges */
+ul#advocacy-speakout-badges {
+	margin-left: 0;
+	width: 100%;
+}
+ul#advocacy-speakout-badges li {
+	margin-right: 10px;
+	text-align: center;
+}
+
+ul#advocacy-speakout-badges li img {
+    height: auto;
+    width: 100px;
+}
+
+
+
+
+a.supercallout {
+	color: #B52126;
+	font-weight: bold;
+}
+
+/* social media "Follow Us" */
+ul#advocacy-speakout-socialmedia {
+    font-size: 95%;
+    font-weight: bold;
+    line-height: 30px;
+    margin-top: 3em;
+    padding-left: 0;
+    width: 265px;
+}
+
+ul#advocacy-speakout-socialmedia li {
+	float: right;
+}
+
+ul#advocacy-speakout-socialmedia li a {
+text-indent: 100%;
+white-space: nowrap;
+overflow: hidden;
+
+    border: 2px solid #CBC8C1;
+    display: inline-block;
+    float: none;
+    height: 25px;
+    margin-right: 10px;
+    width: 25px;
+    
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;    
+}
+
+ul#advocacy-speakout-socialmedia li.advocacy-speakout-twitter a {
+background: url(../images/footer/twitter_small.jpg) no-repeat;
+}
+ul#advocacy-speakout-socialmedia li.advocacy-speakout-facebook a {
+background: url(../images/footer/facebook_small.jpg) no-repeat;
+}
+ul#advocacy-speakout-socialmedia li.advocacy-speakout-pinterest a {
+background: url(../images/footer/pinterest.jpg) no-repeat;
+}
+ul#advocacy-speakout-socialmedia li.advocacy-speakout-google-plus a {
+background: url(../images/footer/googleplus_small.jpg) no-repeat;
+}
+
+
+
+/* right col */
+/* video */
+#advocacy-video p.title {
+    margin: 1em 0 0.5em;
+}
+
+/* quote */
+#advocacy-press-blurb {
+	background: #dddbd4;
+	padding: 10px;
+	margin: 30px 0;
+}
+
+/* links */
+#advocacy-press-past h3 {
+	font-weight: bold;
+}
+
+#advocacy-press-past p {
+
+}
+
+#advocacy-press-past p a {
+	display:block;
+}
+
+
+/* ***********************************************TOOLBOX PAGE */
+/* preview button */
+div#toolbox-preview-button {
+    float: right;
+    width: 150px;
+}
+
+span.button-caption {
+    display: block;
+    text-align: center;
+}
+span.button-caption a {
+    font-size: 80%;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;	
+}
+
+
+
+/* boro list */
+div#find-branch-buttons {
+background: #F2EDE6;
+border: 1px dotted #887F6F;
+margin: 2em 0;
+padding: 10px 20px 0;
+width: 595px;
+
+border-radius: 4px;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+}
+
+p#find-your-branch {
+    font-size: 95%;
+    text-transform: uppercase;
+}
+
+p#link-to-all-libraries-button {
+    font-size: 80%;
+    margin-top: 1em;
+}
+
+ul#toolbox-anchors {
+display: table;
+margin: 0 auto;
+}
+
+ul#toolbox-anchors li {
+text-transform: uppercase;
+font-size: 150%;
+font-weight: bold;
+}
+
+ul#toolbox-anchors li a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 5px 11px;
+    color: #fff;
+    margin-right: 40px;
+    
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;    
+    box-shadow: 2px 2px 10px #756d60;
+    -moz-box-shadow: 2px 2px 10px #756d60;
+    -webkit-box-shadow: 2px 2px 10px #756d60;
+}
+
+ul#toolbox-anchors li a[href="#bronx"] {
+    background: #5fbdef;
+}
+ul#toolbox-anchors li a[href="#manhattan"] {
+background: #ff933a;
+}
+ul#toolbox-anchors li a[href="#staten-island"] {
+	background: #a0b41c;
+}
+
+
+
+/* badges */
+ul[id|="badges"] a[name] {
+    display: block;
+    font-size: 150%;
+    padding: 5px;
+    text-transform: uppercase;
+}
+
+ul[id|="badges"] li {
+	font-weight: bold;
+	height: 250px;
+	margin: 10px 20px 10px 0;
+	width: 150px;
+	text-align: center;
+}
+
+ul[id|="badges"] li span {
+	font-size: 65%;
+	display: block;
+}
+
+/* Pinterest button  */
+ul[id|="badges"] a[href^="http://pinterest.com"] {
+	display: block;
+}
+
+ul#badges-all {
+	margin: 0 auto;
+	width: 150px;
+}
+
+ul#badges-all li span, ul#badges-all li a {
+    margin: 5px 0;
+}
+
+
+/* ***********************************************THANK YOU PAGE */
+div#nypl-advocacy-thankyou-donate {
+    margin: 0 auto;
+    width: 165px;
+}
+
+
+/* spread the word steps */
+div#nypl-advocacy-spread-the-word-steps {
+    margin-bottom: 40px;
+}
+
+div#nypl-advocacy-spread-the-word-steps > ol > li {
+    float: left;
+    font-size: 85%;
+    font-weight: bold;
+    height: 200px;
+    margin-right: 40px;
+    width: 170px;
+}
+
+/* badge button */
+div#nypl-advocacy-spread-the-word-steps li.nypl-advocacy-thankyou-badge > a {
+    display: block;
+}
+
+div#nypl-advocacy-spread-the-word-steps li.nypl-advocacy-thankyou-badge > a[href^="http://pinterest.com"] {
+margin: 10px 0 0 50px;
+}
+
+
+
+/* SM icons */
+div#nypl-advocacy-spread-the-word-steps > ol > li.nypl-advocacy-thankyou-socialmedia {
+margin-right: 0;
+width: 230px;
+}
+div#nypl-advocacy-spread-the-word-steps > ol > li.nypl-advocacy-thankyou-socialmedia ul {
+padding: 0;
+}
+
+div#nypl-advocacy-spread-the-word-steps li.nypl-advocacy-thankyou-socialmedia ul li{
+	float: left;
+	list-style: none;
+}
+
+div#nypl-advocacy-spread-the-word-steps li.nypl-advocacy-thankyou-socialmedia ul li a {
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	display: inline-block;
+	height: 47px;
+	width: 47px;
+	margin-right: 5px;
+}
+
+.badge-download-link a{
+    font-size: 65%;
+    display: block;
+}
+
+div#nypl-advocacy-spread-the-word-steps li.nypl-advocacy-thankyou-socialmedia ul li.twitter a {
+	background: url("../images/social-media-icons/twitter-47.png") no-repeat scroll;
+}
+div#nypl-advocacy-spread-the-word-steps li.nypl-advocacy-thankyou-socialmedia ul li.facebook a {
+	background: url("../images/social-media-icons/facebook-47.png") no-repeat scroll;
+}
+div#nypl-advocacy-spread-the-word-steps li.nypl-advocacy-thankyou-socialmedia ul li.google-plus a {
+	background: url("../images/social-media-icons/gplus-47.png") no-repeat scroll;
+}
+div#nypl-advocacy-spread-the-word-steps li.nypl-advocacy-thankyou-socialmedia ul li.pinterest a {
+	background: url("../images/social-media-icons/pinterest-47.png") no-repeat scroll;
+}
+
+div#nypl-advocacy-spread-the-word-steps li.nypl-advocacy-email a {
+	background: url("../images/email-47.png") no-repeat scroll;
+	
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	display: block;
+	margin: 10px 0 0 20px;
+	height: 47px;
+	width: 47px;
+}
+
+
+span#nypl-advocacy-learnmore {
+    clear: left;
+    display: block;
+    margin-top: 3em;
+}
+
+
+/* FB/Twitter instructions */
+#aux-content ol.advocacy-instructions li {
+    list-style: decimal outside none;
+}
+
+.nypl-advocacy-become-advocate a{
+    color: #B52126;
+    font-weight: bold;
+}

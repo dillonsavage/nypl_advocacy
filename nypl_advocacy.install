@@ -37,7 +37,7 @@ function nypl_advocacy_install() {
   );
   drupal_execute('content_copy_import_form', $landing_form_state);
   
-  //create council member content type
+  // create council member content type
   $council_member_form_state = array(
     'values' => array(
       'type_name' => '<create>',
