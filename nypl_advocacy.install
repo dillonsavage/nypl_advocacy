@@ -2,7 +2,7 @@
 // $Id$
 
 function nypl_advocacy_install() {
-  include 'includes/nypl_advocacy.install.inc'
+  include 'includes/nypl_advocacy.install.inc';
 
   drupal_install_schema('nypl_advocacy');
   
