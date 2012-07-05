@@ -149,6 +149,8 @@ function nypl_advocacy_theme() {
 function nypl_advocacy_preprocess_node(&$vars) {
   if ($vars['node']->type == 'advocacy_landing') {
     $vars['content'] = theme('nypl_advocacy_landing', $vars);
+    $vars['left'] = theme('nypl_advocacy_left_sidebar', $variables['node']);
+    $vars['right'] = theme('nypl_advocacy_right_sidebar', $variables['node']);
   }
 }
 
