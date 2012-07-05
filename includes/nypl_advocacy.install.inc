@@ -1,6 +1,6 @@
 <?php
 
-$council_member = "$content['type']  = array (
+$council_member = "\$content['type']  = array (
   'name' => 'City Council member',
   'type' => 'council_member',
   'description' => '',
@@ -254,7 +254,7 @@ $content['extra']  = array (
   'nodewords' => '10',
 );";
 
-$landing_page = "$content['type']  = array (
+$landing_page = "\$content['type']  = array (
   'name' => 'Advocacy Landing Page',
   'type' => 'advocacy_landing',
   'description' => 'Thank-you landing page for advocacy campaign.',
