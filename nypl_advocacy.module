@@ -166,6 +166,20 @@ function nypl_advocacy_preprocess_page(&$vars) {
 }
 
 /**
+ * Implementation of hook_preprocess_webform_form()
+ */
+function nypl_advocacy_preprocess_webform_form(&$vars) {
+  if ($vars['form']['#node']->nid == variable_get('nypl_advocacy_city_council_nid', NULL)) {
+    $et_keys = array('j', 'e', 'l', 'jb', 'u', 'mid');
+    foreach ($et_keys as $key) {
+      if (isset($_GET[$key]) && (!isset($_COOKIE[$key]) || $_COOKIE[$key] != $_GET[$key])) {
+        setcookie($key, $_GET[$key]);
+      }
+    }
+  }
+}
+
+/**
  * Generate a map of all locations with different markers based on amt of letters per location
  * Adapted from locations_gmap_all()
  * see http://dev.new.nypl.org/help/gmap/array for documentation.
