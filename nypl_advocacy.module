@@ -16,6 +16,13 @@ function nypl_advocacy_perm() {
 }
 
 /**
+ * Implementation of hook_init()
+ */
+function nypl_advocacy_init() {
+  drupal_add_css(drupal_get_path('module', 'nypl_advocacy') . '/advocacy2012.css');
+}
+
+/**
  * Implementation of hook_menu()
  *
  * @return $items
@@ -152,7 +159,7 @@ function nypl_advocacy_theme() {
 function nypl_advocacy_preprocess_node(&$vars) {
   if ($vars['node']->type == 'advocacy_landing') {
     // make sure gmap scripts are included - see http://drupal.org/node/978504
-    theme('gmap', NULL);
+    theme('gmap', NULL);  
     $vars['content'] = theme('nypl_advocacy_landing', $vars);
   }
 }
@@ -162,7 +169,6 @@ function nypl_advocacy_preprocess_node(&$vars) {
  */
 function nypl_advocacy_preprocess_page(&$vars) {
   if ($vars['node']->type == 'advocacy_landing') {
-    drupal_add_css(drupal_get_path('module', 'nypl_advocacy') . '/advocacy2012.css');
     $vars['left'] = theme('nypl_advocacy_left_sidebar', $vars['node']);
     $vars['right'] = theme('nypl_advocacy_right_sidebar', $vars['node']);
   }
