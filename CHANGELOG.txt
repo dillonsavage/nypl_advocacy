@@ -1,5 +1,32 @@
 CHANGELOG.txt
 
+CHANGES for 1.2.0
+-----------------
+* incorporated advocacy-related code originally implemented in nypl_new theme
+** FILE MODIFIED: nypl_advocacy.module
+** FILE MODIFIED: nypl_advocacy.install
+** FILE ADDED: includes/nypl_advocacy.install.inc
+** FILE ADDED: includes/nypl_advocacy.theme.inc
+** FILE ADDED: advocacy2012.css
+** DIR ADDED: img/socialmedia
+** FILES REMOVED: includes/nyc_council_members.inc, includes/webform_nodes.inc (contents moved to nypl_advocacy.install.inc)
+* cleaned up code style
+** FILE MODIFIED: includes/nypl_advocacy_branch_to_rep.inc
+** FILE MODIFIED: includes/nypl_advocacy_generate_toolbox_page.inc
+** FILE MODIFIED: includes/nypl_advocacy_helpers.inc
+** FILE MODIFIED: includes/nypl_advocacy_image_upload_form.inc
+* added documentation
+** FILE ADDED: README.txt
+
+CHANGES for 1.2.0
+-----------------
+* incorporated advocacy-related code originally implemented in nypl_new theme
+** FILE MODIFIED: nypl_advocacy.module
+** FILE MODIFIED: nypl_advocacy.install
+** FILE ADDED: includes/nypl_advocacy.install.inc
+** FILE ADDED: advocacy2012.css
+** FILE ADDED: README.txt
+
 CHANGES for 1.1.2
 -----------------
 * modified data export to pull email data from webform tables, and to pull in data for "generic" location emails
