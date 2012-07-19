@@ -57,13 +57,13 @@ function nypl_advocacy_menu() {
     'page arguments' => array('nypl_advocacy_admin_form'),
     'access arguments' => array('administer NYPL advocacy'),
   );
-  $items['admin/settings/nypl_advocacy/letters'] = array(
+  /*$items['admin/settings/nypl_advocacy/letters'] = array(
     'title' => t('Enter statistics'),
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'drupal_get_form',
     'page arguments' => array('nypl_advocacy_letters_form'),
     'access arguments' => array('administer NYPL advocacy'),
-  );
+  );*/
   $items['admin/settings/nypl_advocacy/data_export/newsletter'] = array(
     'title' => t('Newsletter opt-in export'),
     'type' => MENU_LOCAL_TASK,
@@ -78,7 +78,7 @@ function nypl_advocacy_menu() {
     'page arguments' => array(4),
     'access arguments' => array('administer NYPL advocacy'),
   );
-  $items['admin/settings/nypl_advocacy/images'] = array(
+  /*$items['admin/settings/nypl_advocacy/images'] = array(
     'title' => t('Advocacy Images'),
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'drupal_get_form',
@@ -86,7 +86,7 @@ function nypl_advocacy_menu() {
     'access arguments' => array('administer NYPL advocacy'),
     'file' => 'includes/nypl_advocacy_image_upload_form.inc',
 	  'weight' => 50,
-  );
+  );*/
   $items['admin/settings/nypl_advocacy/thankyou'] = array(
     'title' => t('Thank You page'),
     'type' => MENU_LOCAL_TASK,
@@ -104,13 +104,13 @@ function nypl_advocacy_menu() {
     'file' => 'includes/nypl_advocacy_toolbox_form.inc',
 	  'weight' => 52 ,
   );
-  $items['speakout/toolbox'] = array(
+  /*$items['speakout/toolbox'] = array(
     'title' => t('Advocacy Toolbox'),
     'type' => MENU_CALLBACK,
     'page callback' => '_generate_toolbox_page',
     'access arguments' => array('access NYPL advocacy'),
     'file' => 'includes/nypl_advocacy_generate_toolbox_page.inc',
-  );
+  );*/
   $items['speakout/toolbox/download/%/%'] = array(
     'title' => t('Advocacy Toolbox Image Download'),
     'type' => MENU_CALLBACK,
@@ -124,7 +124,7 @@ function nypl_advocacy_menu() {
 
 /**
  * Implementation of hook_block()
- */
+ *
 function nypl_advocacy_block($op = 'list', $delta = 0, $edit = array()) {
   if ($op == 'list') {
     $blocks[0] = array(
@@ -139,6 +139,7 @@ function nypl_advocacy_block($op = 'list', $delta = 0, $edit = array()) {
     return $block;
   }
 }
+*/
 
 /**
  * Implementation of hook_theme()
@@ -185,19 +186,12 @@ function nypl_advocacy_preprocess_page(&$vars) {
  * Generate a map of all locations with different markers based on amt of letters per location
  * Adapted from locations_gmap_all()
  * see http://dev.new.nypl.org/help/gmap/array for documentation.
- */
 function nypl_advocacy_letters_map() {
   $campaign_name = variable_get('nypl_advocacy_campaign', '');
   $locations_gis = _locations_get_bounds();
   $all_markers = array();
 
   foreach ($locations_gis as $key => $bounds) {
-    /**
-     * 0-500: small red
-     * 500-1000: small purple
-     * 1000-2000: green
-     * 2000+: blue
-     */
     // get number of emails from webform table...
     $emails_sent_q = db_query("SELECT COUNT(sid)
       FROM {webform_submitted_data}
@@ -255,6 +249,7 @@ function nypl_advocacy_letters_map() {
   
   return theme('gmap', array('#settings' => $locations_all_map)); 
 }
+*/
 
 /**
  * Advocacy admin area
@@ -316,7 +311,7 @@ function nypl_advocacy_admin_form_submit($form, &$form_state) {
 
 /**
  * Form for entering advocacy letters statistics
- */
+ *
 function nypl_advocacy_letters_form() {
   $form = array();
   
@@ -363,10 +358,11 @@ function nypl_advocacy_letters_form() {
   
   return $form;
 }
+*/
 
 /**
  * Stats form submission
- */
+ *
 function nypl_advocacy_letters_form_submit($form, &$form_state) {
   $form_values = $form_state['values'];
   $campaign_name = variable_get('nypl_advocacy_campaign', '');
@@ -377,6 +373,7 @@ function nypl_advocacy_letters_form_submit($form, &$form_state) {
   db_query($insert_sql, $campaign_name, $date, $location, $letters_sent);
   drupal_set_message('Changes saved.');
 }
+*/
 
 /**
  * Form for entering thankyou page stuff
@@ -628,7 +625,7 @@ function nypl_advocacy_stats($var_id) {
         } 
       }
     break;
-    case 'letters':
+    /*case 'letters':
       fwrite($outstream, "Location,Borough,Physical letters,Emails\n");
       $current_campaign = variable_get('nypl_advocacy_campaign', NULL);
       $cc_nid = variable_get('nypl_advocacy_city_council_nid', '');
@@ -671,6 +668,7 @@ function nypl_advocacy_stats($var_id) {
         }
       }
     break;
+    */
   }
   fclose($outstream);
 }
@@ -689,9 +687,9 @@ function nypl_advocacy_thankyou() {
   $email = variable_get('nypl_advocacy_ty_email', '');
   $twitter = variable_get('nypl_advocacy_ty_twitter', '');
   $fb = variable_get('nypl_advocacy_ty_fb', '');
-  $pinterest = _nypl_advocacy_replace_pinterest(variable_get('nypl_advocacy_ty_pinterest', ''), $sid);
+  //$pinterest = _nypl_advocacy_replace_pinterest(variable_get('nypl_advocacy_ty_pinterest', ''), $sid);
   $google_plus = variable_get('nypl_advocacy_ty_google_plus', '');
-  $badge = _nypl_advocacy_get_badge($sid);
+  //$badge = _nypl_advocacy_get_badge($sid);
 
   $img_search = 'REPLACE_WITH_RESPECTIVE_BRANCH_BUTTON';
   $txt_search = 'NYPL%27s%20LIBRARY_NAME';
@@ -707,16 +705,17 @@ function nypl_advocacy_thankyou() {
 
   } 
   else {
-    $path = pathinfo($badge);
+    /* $path = pathinfo($badge);
     $name = _get_branch_name($path['filename']);
-    $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($base_url . $badge,'<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL's " . $name . " Library"), $pinterest_code);
+    $pinterest_url = str_replace(array($img_search, $link_search, $txt_search), array($base_url . $badge,'<img src="http://assets.pinterest.com/images/PinExt.png"/>',"NYPL's " . $name . " Library"), $pinterest_code); */
   }
   $output .= '<p>' . $body . '</p>';
   $output .= '<div id="nypl-advocacy-thankyou-donate">' . $donate_button . '</div>';
   $output .= '<div><h2>Spread the Word!</h2><p>Invite others to take a stand and ensure that your messsage is heard.</p><div id="nypl-advocacy-spread-the-word-steps" class="group"><ol>';
-  $output .= '<li class="nypl-advocacy-thankyou-badge">GET YOUR BRANCH BUTTON</p><img src="' . $badge . '"/><span class="badge-download-link">' . $badge_link .'</span>' . $pinterest_url . '</li>';
+  //$output .= '<li class="nypl-advocacy-thankyou-badge">GET YOUR BRANCH BUTTON</p><img src="' . $badge . '"/><span class="badge-download-link">' . $badge_link .'</span>' . $pinterest_url . '</li>';
   $output .= '<li class="nypl-advocacy-email">' . t('EMAIL A FRIEND') . $email . '</li>';
-  $output .= '<li class="nypl-advocacy-thankyou-socialmedia">'.t('SHARE ON SOCIAL MEDIA') .'<div><ul><li class="twitter">'. $twitter .'</li><li class="facebook">'. $fb .'</li><li class="google-plus">'. $google_plus . '</li><li class="pinterest">'. $pinterest . '</li></ul></div>';
+  //$output .= '<li class="nypl-advocacy-thankyou-socialmedia">'.t('SHARE ON SOCIAL MEDIA') .'<div><ul><li class="twitter">'. $twitter .'</li><li class="facebook">'. $fb .'</li><li class="google-plus">'. $google_plus . '</li><li class="pinterest">'. $pinterest . '</li></ul></div>';
+  $output .= '<li class="nypl-advocacy-thankyou-socialmedia">'.t('SHARE ON SOCIAL MEDIA') .'<div><ul><li class="twitter">'. $twitter .'</li><li class="facebook">'. $fb .'</li><li class="google-plus">'. $google_plus . '</li></ul></div>';
   $output .= '<li class="nypl-advocacy-become-advocate">' . l('Become an Advocate', 'speakout/toolbox') . '</li>';
   $output .='</ol></div>';
 

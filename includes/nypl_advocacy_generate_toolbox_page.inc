@@ -2,6 +2,7 @@
 
 module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
 
+/*
 function _generate_toolbox_page() {
   global $base_url;
   
@@ -58,3 +59,4 @@ function _generate_toolbox_page() {
 
   return $content;
 }
+*/

@@ -2,14 +2,14 @@
 
 /**
  * @file
- * @brief theming callbacks for advocacy
+ * @brief theme callbacks for advocacy
  */
-
+ 
 /**
  * left sidebar content for landing page
  */
 function theme_nypl_advocacy_left_sidebar($node) {
-  $gmap = module_invoke('nypl_advocacy', 'block', 'view', 0);
+  //$gmap = module_invoke('nypl_advocacy', 'block', 'view', 0);
   $donate_filepath = $node->field_donate_bar[0]['filepath'];
   $letters_filepath = $node->field_letters_bar[0]['filepath'];
   $output = '<div id="advocacy-progress-bar"><h3>YOUR HELP SO FAR</h3>';

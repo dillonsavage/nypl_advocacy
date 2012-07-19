@@ -8,7 +8,7 @@ module_load_include('inc', 'nypl_advocacy', 'includes/nypl_advocacy_helpers');
 
 /**
  * Implementation of hook_form()
- */
+ *
 function nypl_advocacy_admin_images_form($form_state) {
   variable_set('nypl_advocacy_img_path', '/www/sites/new.nypl.org/sites/default/files/advocacy');
   $button = _get_button_image();
@@ -90,10 +90,11 @@ function nypl_advocacy_admin_images_form($form_state) {
   );
   return $form;
 }
+*/
 
 /**
  * Submit handler
- */
+ *
 function nypl_advocacy_admin_images_form_submit($form, $form_state) {
   if (isset($form_state['values'])) {
     $form_values = $form_state['values'];
@@ -159,3 +160,4 @@ function _get_branches_select_box($city) {
 	$location_list = array(array("id" => "all", "description" => "All Locations"));
 	return array('none' => '--- Please Select ---') + $list;
 }
+*/

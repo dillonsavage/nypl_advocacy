@@ -38,6 +38,7 @@ function _nypl_advocacy_leading_library_badge($city) {
   return '<img class="' . preg_replace('/_/','-',$city) . '-badge" src = "'. $base_url . '/sites/default/files/advocacy/badges/' . $symbol . '.jpg" alt="Leading library in ' . ucwords(preg_replace('/_/',' ',$city)) . '"/>';
 }
 
+/*
 function _nypl_advocacy_get_badge($sid = NULL) {
   $symbol_sql = 'SELECT symbol FROM {locations} l
     LEFT JOIN {locations_term} lt ON l.lid = lt.lid
@@ -53,7 +54,9 @@ function _nypl_advocacy_get_badge($sid = NULL) {
   }
   return $badge_filename;
 }
+*/
 
+/*
 function _nypl_advocacy_replace_pinterest($pinterest_code, $sid = NULL) {
   global $base_url;
   $img_search = 'REPLACE_WITH_RESPECTIVE_BRANCH_BUTTON';
@@ -73,7 +76,9 @@ function _nypl_advocacy_replace_pinterest($pinterest_code, $sid = NULL) {
   $output = str_replace(array($img_search, $txt_search), array($badge_replace, $txt_replace), $pinterest_code);
   return $output;
 }
+*/
 
+/*
 function _get_branch_sql() {
 	$sql = 'SELECT locations.symbol AS location_symbol, locations_term.vid, term_hierarchy.tid, term_data.name AS location_name
 		FROM locations
@@ -87,7 +92,9 @@ function _get_branch_sql() {
     ORDER BY term_data.name';
   return $sql;
 }
+*/
 
+/*
 function _get_branches_page($city) {
   global $base_url;
   $sql = _get_branch_sql();
@@ -116,7 +123,9 @@ function _get_branches_page($city) {
   db_set_active('default');
   return $list;
 }
+*/
 
+/*
 function _get_branch_name_sql() {
   $sql = 'SELECT term_data.name AS location_name
     FROM locations
@@ -129,12 +138,15 @@ function _get_branch_name_sql() {
     AND locations_term.vid = 2';
   return $sql;
 }
+*/
 
+/*
 function _get_branch_name($symbol) {
   $sql = _get_branch_name_sql();
   $result = db_result(db_query($sql, $symbol));
   return ucwords(preg_replace('/_/',' ',$result));
 }
+*/
 
 function _download_image($symbol, $location_name) {
   global $base_url;
