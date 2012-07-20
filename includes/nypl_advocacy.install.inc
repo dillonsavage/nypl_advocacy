@@ -1859,6 +1859,7 @@ $city_council = array(
   'av_content' => array(
     'position' => 'bottom',
   ),
+  'path' => 'speakout/letter',
   'webform' => array(
     'confirmation' => '',
     'teaser' => '0',
@@ -2852,37 +2853,6 @@ ZW|Zimbabwe',
   'comment_count' => '0',
   'taxonomy' => array(),
   'page_title' => FALSE,
-  'nodewords' => array(
-    'abstract' => array(
-      'value' => '',
-    ),
-    'canonical' => array(
-      'value' => '',
-    ),
-    'copyright' => array(
-      'value' => '© 2010 The New York Public Library ',
-    ),
-    'description' => array(
-      'value' => '',
-    ),
-    'keywords' => array(
-      'value' => 'NYPL, The New York Public Library, Manhattan, Bronx, Staten Island',
-    ),
-    'revisit-after' => array(
-      'value' => '1',
-    ),
-    'robots' => array(
-      'value' => array(
-        'noarchive' => 0,
-        'nofollow' => 0,
-        'noindex' => 0,
-        'noodp' => 0,
-        'nosnippet' => 0,
-        'noydir' => 0,
-      ),
-      'use_default' => 0,
-    ),
-  ),
   'menu' => array(
     'link_title' => '',
     'mlid' => 0,
@@ -2920,6 +2890,7 @@ $tell_a_friend = array(
   'av_content' => array(
     'position' => 'bottom',
   ),
+  'path' => 'speakout/tell-a-friend',
   'webform' => array(
     'confirmation' => '',
     'teaser' => '0',
@@ -3193,37 +3164,6 @@ Donate.
   'comment_count' => '0',
   'taxonomy' => array(),
   'page_title' => FALSE,
-  'nodewords' => array(
-    'abstract' => array(
-      'value' => '',
-    ),
-    'canonical' => array(
-      'value' => '',
-    ),
-    'copyright' => array(
-      'value' => '© 2010 The New York Public Library ',
-    ),
-    'description' => array(
-      'value' => '',
-    ),
-    'keywords' => array(
-      'value' => 'NYPL, The New York Public Library, Manhattan, Bronx, Staten Island',
-    ),
-    'revisit-after' => array(
-      'value' => '1',
-    ),
-    'robots' => array(
-      'value' => array(
-        'noarchive' => 0,
-        'nofollow' => 0,
-        'noindex' => 0,
-        'noodp' => 0,
-        'nosnippet' => 0,
-        'noydir' => 0,
-      ),
-      'use_default' => 0,
-    ),
-  ),
   'menu' => array(
     'link_title' => '',
     'mlid' => 0,
@@ -3238,6 +3178,69 @@ Donate.
     'customized' => 0,
     'parent_depth_limit' => 8,
   ),
+);
+
+$landing_page = array(
+  'nid' => '134642',
+  'type' => 'advocacy_landing',
+  'language' => 'en',
+  'status' => '1',
+  'created' => '1335803760',
+  'changed' => '1336157062',
+  'comment' => '0',
+  'promote' => '0',
+  'moderate' => '0',
+  'sticky' => '0',
+  'tnid' => '0',
+  'translate' => '0',
+  'vid' => '252872',
+  'revision_uid' => '7',
+  'title' => 'PROTECT YOUR BRANCH!',
+  'body' => '<strong>Without your help:</strong>
+<ul><li>Thousands of job and computer classes cancelled</li>
+<li>Books and DVDs cut by a third</li>
+<li>Hundreds of librarians and other staff laid off</li>
+<li>up to 12 branches closed; the rest open only 4 days</li></ul>
+<p class="letter-link"><strong><a href="http://www.nypl.org/speakout/letter" onclick="_gaq.push([\'_setCustomVar\', 5, \'Advocacy\', \'Landing Page Letter Intent Speak Up\', 2]);_gaq.push([\'_trackEvent\', \'Advocacy\', \'Landing Page Letter Intent Speak Up\', this.href]);">Speak up for your library now!</a></strong></p>',
+  'teaser' => '<strong>Without your help:</strong>
+<ul><li>Thousands of job and computer classes cancelled</li>
+<li>Books and DVDs cut by a third</li>
+<li>Hundreds of librarians and other staff laid off</li>
+<li>up to 12 branches closed; the rest open only 4 days</li></ul>
+<p class="letter-link"><strong><a href="http://www.nypl.org/speakout/letter" onclick="_gaq.push([\'_setCustomVar\', 5, \'Advocacy\', \'Landing Page Letter Intent Speak Up\', 2]);_gaq.push([\'_trackEvent\', \'Advocacy\', \'Landing Page Letter Intent Speak Up\', this.href]);">Speak up for your library now!</a></strong></p>',
+  'log' => '',
+  'revision_timestamp' => '1336157062',
+  'format' => '1',
+  'picture' => '',
+  'data' => 'a:6:{s:6:"signup";a:1:{i:127652;i:0;}s:13:"form_build_id";s:37:"form-3fc5cb5c3eca784a9d91bb0e433c9517";s:14:"picture_delete";s:0:"";s:14:"picture_upload";s:0:"";s:5:"block";a:1:{s:4:"user";a:1:{i:3;i:1;}}s:21:"force_password_change";i:0;}',
+  'field_press_link' => array(),
+  'field_press_link_past' => array(),
+  'signup' => 0,
+  '_workflow' => FALSE,
+  'av_content' => array(
+    'position' => 'bottom',
+  ),
+  'path' => 'speakout',
+  'last_comment_timestamp' => '1335803760',
+  'last_comment_name' => NULL,
+  'comment_count' => '0',
+  'taxonomy' => array(),
+  'page_title' => FALSE,
+  'menu' => array(
+    'link_title' => '',
+    'mlid' => 0,
+    'plid' => 0,
+    'menu_name' => 'primary-links',
+    'weight' => 0,
+    'options' => array(),
+    'module' => 'menu',
+    'expanded' => 0,
+    'hidden' => 0,
+    'has_children' => 0,
+    'customized' => 0,
+    'parent_depth_limit' => 8,
+  ),
+  '#_export_node_encode_object' => '1',
 );
 
 ?>
