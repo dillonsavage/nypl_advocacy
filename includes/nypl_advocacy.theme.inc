@@ -55,7 +55,7 @@ function theme_nypl_advocacy_right_sidebar($node) {
  * main content for landing page
  */
 function theme_nypl_advocacy_landing($vars) {
-  $advocacy_buttons = _get_button_image();
+  //$advocacy_buttons = _get_button_image();
   $twitter = variable_get('nypl_advocacy_ty_twitter', '');
   $fb = variable_get('nypl_advocacy_ty_fb', '');
   $pinterest = _nypl_advocacy_replace_pinterest(variable_get('nypl_advocacy_ty_pinterest', ''));
