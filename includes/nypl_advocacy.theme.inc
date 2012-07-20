@@ -69,9 +69,9 @@ function theme_nypl_advocacy_landing($vars) {
   if (variable_get('nypl_advocacy_show_branch_badges', 1) == TRUE) {
     $output .= '<p id="advocacy-most-letters-message">Most Letters So Far</p>';
     $output .= '<ul id="advocacy-speakout-badges" class="group">';
-    $output .= '<li>' . _nypl_advocacy_leading_library_badge('bronx') . '<p class="badge-borough">Bronx</p></li>';
-    $output .= '<li>' . _nypl_advocacy_leading_library_badge('manhattan') . '<p class="badge-borough">Manhattan</p></li>';
-    $output .= '<li>' . _nypl_advocacy_leading_library_badge('staten_island') . '<p class="badge-borough">Staten Island</p></li>';
+    //$output .= '<li>' . _nypl_advocacy_leading_library_badge('bronx') . '<p class="badge-borough">Bronx</p></li>';
+    //$output .= '<li>' . _nypl_advocacy_leading_library_badge('manhattan') . '<p class="badge-borough">Manhattan</p></li>';
+    //$output .= '<li>' . _nypl_advocacy_leading_library_badge('staten_island') . '<p class="badge-borough">Staten Island</p></li>';
     $output .= '</ul>';
   }
   $output .= $vars['field_advocacy_txt_bottom'][0]['value'];
