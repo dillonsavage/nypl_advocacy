@@ -9,8 +9,13 @@ function nypl_advocacy_install() {
   // create the city council and tell a friend forms
   $cc_node = (object)$city_council;
   $tf_node = (object)$tell_a_friend;
+  $lp_node = (object)$landing_page;
+  $cc_node = node_submit($cc_node);
   node_save($cc_node);
+  $tf_node = node_submit($tf_node);
   node_save($tf_node);
+  $lp_node = node_submit($lp_node);
+  node_save($lp_node);
   $latest_nids_q = db_query('SELECT nid FROM {node} ORDER BY nid DESC LIMIT 2');
   $i = 0;
   while ($nids = db_fetch_array($latest_nids_q)) {
@@ -55,12 +60,9 @@ function nypl_advocacy_install() {
     $node->title = $cm_name;
     $node->field_cc_email[0]['email'] = $cm_email;
     $node->field_council_district[0]['value'] = $district;
-    $node->name = 'dillonsavage@nypl.org';
-    $node->uid = 1069;
     $node->op = t('Save');
-    content_presave($node);
+    $node = node_submit($node);
     node_save($node);
-    content_insert($node);
   }
 }
 
