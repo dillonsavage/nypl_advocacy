@@ -3180,7 +3180,7 @@ Donate.
   ),
 );
 
-$landing_page = array(
+$default_landing_page = array(
   'type' => 'advocacy_landing',
   'language' => 'en',
   'status' => '1',

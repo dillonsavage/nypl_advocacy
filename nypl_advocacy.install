@@ -18,7 +18,7 @@ function nypl_advocacy_install() {
   // create the city council and tell a friend forms
   $cc_node = (object)$city_council;
   $tf_node = (object)$tell_a_friend;
-  $lp_node = (object)$landing_page;
+  $lp_node = (object)$default_landing_page;
   $cc_node = node_submit($cc_node);
   node_save($cc_node);
   $tf_node = node_submit($tf_node);
