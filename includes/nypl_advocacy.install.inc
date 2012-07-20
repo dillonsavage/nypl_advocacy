@@ -3181,7 +3181,6 @@ Donate.
 );
 
 $landing_page = array(
-  'nid' => '134642',
   'type' => 'advocacy_landing',
   'language' => 'en',
   'status' => '1',
