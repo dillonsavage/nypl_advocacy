@@ -71,13 +71,13 @@ function nypl_advocacy_menu() {
     'page arguments' => array(4),
     'access arguments' => array('administer NYPL advocacy'),
   );
-  $items['admin/settings/nypl_advocacy/data_export/letters'] = array(
+  /*$items['admin/settings/nypl_advocacy/data_export/letters'] = array(
     'title' => t('Letters export'),
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'nypl_advocacy_stats',
     'page arguments' => array(4),
     'access arguments' => array('administer NYPL advocacy'),
-  );
+  );*/
   /*$items['admin/settings/nypl_advocacy/images'] = array(
     'title' => t('Advocacy Images'),
     'type' => MENU_LOCAL_TASK,
@@ -679,6 +679,7 @@ function nypl_advocacy_stats($var_id) {
 function nypl_advocacy_thankyou() {
   global $base_url;
   $sid = $_GET['sid'] ? $_GET['sid']: NULL;
+  $cc_nid = variable_get('nypl_advocacy_city_council_nid', '');
   $adwords_code = variable_get('nypl_advocacy_ty_adwords', '');
   $body = variable_get('nypl_advocacy_ty_body', '');
   $donate_code = variable_get('nypl_advocacy_ty_donate', '');
@@ -719,9 +720,10 @@ function nypl_advocacy_thankyou() {
   $output .= '<li class="nypl-advocacy-become-advocate">' . l('Become an Advocate', 'speakout/toolbox') . '</li>';
   $output .='</ol></div>';
 
-  //Facebook donate instructions.
+  // Facebook donate instructions.
+  $cc_url = 
   $output .= '<div id="donate-profilepic">' . $fb_instructions . '</div>';
-  $output .= '<span id="nypl-advocacy-learnmore">' . l('Return to the campaign home page.', 'speakout') . '</span>';
+  $output .= '<span id="nypl-advocacy-learnmore">' . l('Return to the campaign home page.', 'node/' . $cc_nid) . '</span>';
   $output .='</div>';
   $output .= nypl_advocacy_exact_target();
   $output .= $adwords_code;
