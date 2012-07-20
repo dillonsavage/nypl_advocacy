@@ -58,7 +58,7 @@ function theme_nypl_advocacy_landing($vars) {
   //$advocacy_buttons = _get_button_image();
   $twitter = variable_get('nypl_advocacy_ty_twitter', '');
   $fb = variable_get('nypl_advocacy_ty_fb', '');
-  $pinterest = _nypl_advocacy_replace_pinterest(variable_get('nypl_advocacy_ty_pinterest', ''));
+  //$pinterest = _nypl_advocacy_replace_pinterest(variable_get('nypl_advocacy_ty_pinterest', ''));
   $google_plus =  variable_get('nypl_advocacy_ty_google_plus', '');
   $output = $vars['field_advocacy_intro'][0]['value'];
   $output .= variable_get('nypl_advocacy_write_button_link','');
