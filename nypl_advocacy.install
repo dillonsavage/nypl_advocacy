@@ -6,6 +6,15 @@ function nypl_advocacy_install() {
 
   drupal_install_schema('nypl_advocacy');
   
+  // create advocacy_landing content type
+  $landing_form_state = array(
+    'values' => array(
+      'type_name' => '<create>',
+      'macro' => $landing_page,
+    ),
+  );
+  drupal_execute('content_copy_import_form', $landing_form_state);
+  
   // create the city council and tell a friend forms
   $cc_node = (object)$city_council;
   $tf_node = (object)$tell_a_friend;
@@ -32,16 +41,7 @@ function nypl_advocacy_install() {
   variable_set('nypl_advocacy_city_council_nid', $cc_nid);
   variable_set('nypl_advocacy_tell_friend_nid', $tf_nid);
   variable_set('nypl_advocacy_districts_key', 'dab838a64853702416d25e052d3174ae:17:65636627');
-    
-  // create advocacy_landing content type
-  $landing_form_state = array(
-    'values' => array(
-      'type_name' => '<create>',
-      'macro' => $landing_page,
-    ),
-  );
-  drupal_execute('content_copy_import_form', $landing_form_state);
-  
+      
   // create council member content type
   $council_member_form_state = array(
     'values' => array(

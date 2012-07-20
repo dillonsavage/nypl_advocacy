@@ -3184,16 +3184,12 @@ $landing_page = array(
   'type' => 'advocacy_landing',
   'language' => 'en',
   'status' => '1',
-  'created' => '1335803760',
-  'changed' => '1336157062',
   'comment' => '0',
   'promote' => '0',
   'moderate' => '0',
   'sticky' => '0',
   'tnid' => '0',
   'translate' => '0',
-  'vid' => '252872',
-  'revision_uid' => '7',
   'title' => 'PROTECT YOUR BRANCH!',
   'body' => '<strong>Without your help:</strong>
 <ul><li>Thousands of job and computer classes cancelled</li>
@@ -3208,7 +3204,6 @@ $landing_page = array(
 <li>up to 12 branches closed; the rest open only 4 days</li></ul>
 <p class="letter-link"><strong><a href="http://www.nypl.org/speakout/letter" onclick="_gaq.push([\'_setCustomVar\', 5, \'Advocacy\', \'Landing Page Letter Intent Speak Up\', 2]);_gaq.push([\'_trackEvent\', \'Advocacy\', \'Landing Page Letter Intent Speak Up\', this.href]);">Speak up for your library now!</a></strong></p>',
   'log' => '',
-  'revision_timestamp' => '1336157062',
   'format' => '1',
   'picture' => '',
   'data' => 'a:6:{s:6:"signup";a:1:{i:127652;i:0;}s:13:"form_build_id";s:37:"form-3fc5cb5c3eca784a9d91bb0e433c9517";s:14:"picture_delete";s:0:"";s:14:"picture_upload";s:0:"";s:5:"block";a:1:{s:4:"user";a:1:{i:3;i:1;}}s:21:"force_password_change";i:0;}',
@@ -3220,8 +3215,6 @@ $landing_page = array(
     'position' => 'bottom',
   ),
   'path' => 'speakout',
-  'last_comment_timestamp' => '1335803760',
-  'last_comment_name' => NULL,
   'comment_count' => '0',
   'taxonomy' => array(),
   'page_title' => FALSE,
