@@ -20,6 +20,11 @@ function nypl_advocacy_perm() {
  */
 function nypl_advocacy_init() {
   drupal_add_css(drupal_get_path('module', 'nypl_advocacy') . '/advocacy2012.css');
+  // set default image path, if the user didn't specify one in config
+  if (!$img_path = variable_get('nypl_advocacy_img_path', NULL)) {
+    $default_img_path = drupal_get_path('module', 'nypl_advocacy') . '/img';
+    variable_set('nypl_advocacy_img_path', $default_img_path);
+  }
 }
 
 /**
