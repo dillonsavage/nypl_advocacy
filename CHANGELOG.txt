@@ -1,5 +1,11 @@
 CHANGELOG.txt
 
+CHANGES for 1.2.0-non-nypl
+--------------------------
+* commented out NYPL-specific code
+* modified README
+* modified nypl_advocacy.info
+
 CHANGES for 1.2.0
 -----------------
 * incorporated advocacy-related code originally implemented in nypl_new theme
@@ -16,15 +22,6 @@ CHANGES for 1.2.0
 ** FILE MODIFIED: includes/nypl_advocacy_helpers.inc
 ** FILE MODIFIED: includes/nypl_advocacy_image_upload_form.inc
 * added documentation
-** FILE ADDED: README.txt
-
-CHANGES for 1.2.0
------------------
-* incorporated advocacy-related code originally implemented in nypl_new theme
-** FILE MODIFIED: nypl_advocacy.module
-** FILE MODIFIED: nypl_advocacy.install
-** FILE ADDED: includes/nypl_advocacy.install.inc
-** FILE ADDED: advocacy2012.css
 ** FILE ADDED: README.txt
 
 CHANGES for 1.1.2
