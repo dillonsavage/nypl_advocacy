@@ -560,14 +560,17 @@ function _advocacy_get_council_member($address_form_values) {
     }
   }
   $geocode = gmap_geocode($addr_full);
+  var_dump('geocode', $geocode);
   // if we got a geocode result, send lat and lng to nytimes API to get district info
   if ($geocode['status'] == 200) {
     $lat = $geocode['latitude'];
     $lng = $geocode['longitude'];
     $nyt_districts_api_key = variable_get('nypl_advocacy_districts_key', '');
+    var_dump('api key', $nyt_districts_api_key);
     $nyt_districts_api_url = 'http://api.nytimes.com/svc/politics/v2/districts.json?lat=' . $lat . '&lng=' . $lng . '&api-key=' . $nyt_districts_api_key;
     $http_response = drupal_http_request($nyt_districts_api_url);
     $response_obj = json_decode($http_response->data);
+    var_dump('response obj', $response_obj);
     // have to look at each result, since we don't know what position city council will be in
     foreach ($response_obj->results as $json_result) {
       if ($json_result->level == 'City Council') {
