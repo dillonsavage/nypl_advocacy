@@ -19,12 +19,12 @@ function nypl_advocacy_install() {
   $cc_node = (object)$city_council;
   $tf_node = (object)$tell_a_friend;
   $lp_node = (object)$default_landing_page;
+  $lp_node = node_submit($lp_node);
+  node_save($lp_node);
   $cc_node = node_submit($cc_node);
   node_save($cc_node);
   $tf_node = node_submit($tf_node);
   node_save($tf_node);
-  $lp_node = node_submit($lp_node);
-  node_save($lp_node);
   $latest_nids_q = db_query('SELECT nid FROM {node} ORDER BY nid DESC LIMIT 2');
   $i = 0;
   while ($nids = db_fetch_array($latest_nids_q)) {
