@@ -3196,13 +3196,13 @@ $default_landing_page = array(
 <li>Books and DVDs cut by a third</li>
 <li>Hundreds of librarians and other staff laid off</li>
 <li>up to 12 branches closed; the rest open only 4 days</li></ul>
-<p class="letter-link"><strong><a href="http://www.nypl.org/speakout/letter" onclick="_gaq.push([\'_setCustomVar\', 5, \'Advocacy\', \'Landing Page Letter Intent Speak Up\', 2]);_gaq.push([\'_trackEvent\', \'Advocacy\', \'Landing Page Letter Intent Speak Up\', this.href]);">Speak up for your library now!</a></strong></p>',
+<p class="letter-link"><strong><a href="/speakout/letter" onclick="_gaq.push([\'_setCustomVar\', 5, \'Advocacy\', \'Landing Page Letter Intent Speak Up\', 2]);_gaq.push([\'_trackEvent\', \'Advocacy\', \'Landing Page Letter Intent Speak Up\', this.href]);">Speak up for your library now!</a></strong></p>',
   'teaser' => '<strong>Without your help:</strong>
 <ul><li>Thousands of job and computer classes cancelled</li>
 <li>Books and DVDs cut by a third</li>
 <li>Hundreds of librarians and other staff laid off</li>
 <li>up to 12 branches closed; the rest open only 4 days</li></ul>
-<p class="letter-link"><strong><a href="http://www.nypl.org/speakout/letter" onclick="_gaq.push([\'_setCustomVar\', 5, \'Advocacy\', \'Landing Page Letter Intent Speak Up\', 2]);_gaq.push([\'_trackEvent\', \'Advocacy\', \'Landing Page Letter Intent Speak Up\', this.href]);">Speak up for your library now!</a></strong></p>',
+<p class="letter-link"><strong><a href="/speakout/letter" onclick="_gaq.push([\'_setCustomVar\', 5, \'Advocacy\', \'Landing Page Letter Intent Speak Up\', 2]);_gaq.push([\'_trackEvent\', \'Advocacy\', \'Landing Page Letter Intent Speak Up\', this.href]);">Speak up for your library now!</a></strong></p>',
   'log' => '',
   'format' => '1',
   'picture' => '',
