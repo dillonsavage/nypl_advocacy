@@ -1854,12 +1854,12 @@ $city_council = array(
   'log' => '',
   'format' => '4',
   'picture' => '',
+  'path' => 'speakout/letter',
   'signup' => 0,
   '_workflow' => FALSE,
   'av_content' => array(
     'position' => 'bottom',
   ),
-  'path' => 'speakout/letter',
   'webform' => array(
     'confirmation' => '',
     'teaser' => '0',
