@@ -100,7 +100,7 @@ function nypl_advocacy_menu() {
     'access arguments' => array('administer NYPL advocacy'),
     'weight' => 51,
   );
-  $items['admin/settings/nypl_advocacy/toolbox'] = array(
+  /*$items['admin/settings/nypl_advocacy/toolbox'] = array(
     'title' => t('Toolbox Page Settings'),
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'drupal_get_form',
@@ -108,7 +108,7 @@ function nypl_advocacy_menu() {
     'access arguments' => array('administer NYPL advocacy'),
     'file' => 'includes/nypl_advocacy_toolbox_form.inc',
 	  'weight' => 52 ,
-  );
+  );*/
   /*$items['speakout/toolbox'] = array(
     'title' => t('Advocacy Toolbox'),
     'type' => MENU_CALLBACK,
@@ -191,6 +191,7 @@ function nypl_advocacy_preprocess_page(&$vars) {
  * Generate a map of all locations with different markers based on amt of letters per location
  * Adapted from locations_gmap_all()
  * see http://dev.new.nypl.org/help/gmap/array for documentation.
+ *
 function nypl_advocacy_letters_map() {
   $campaign_name = variable_get('nypl_advocacy_campaign', '');
   $locations_gis = _locations_get_bounds();
@@ -563,7 +564,7 @@ function _advocacy_get_council_member($address_form_values) {
   if ($geocode['status'] == 200) {
     $lat = $geocode['latitude'];
     $lng = $geocode['longitude'];
-    $nyt_districts_api_key = variable_get('nypl_advocacy_districts_key', 'dab838a64853702416d25e052d3174ae:17:65636627');
+    $nyt_districts_api_key = variable_get('nypl_advocacy_districts_key', '');
     $nyt_districts_api_url = 'http://api.nytimes.com/svc/politics/v2/districts.json?lat=' . $lat . '&lng=' . $lng . '&api-key=' . $nyt_districts_api_key;
     $http_response = drupal_http_request($nyt_districts_api_url);
     $response_obj = json_decode($http_response->data);

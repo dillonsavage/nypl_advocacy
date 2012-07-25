@@ -9,6 +9,8 @@ ABOUT THIS MODULE
 -----------------
 The NYPL Advocacy module was written in 2012 by Dillon Savage and Clint Newsom to facilitate the New York Public Library's efforts to reduce the City's annual cut to the Library's budget. The module allows website users to write to the mayor and members of the City Council with a customizable message of support for the Library, and/or to suggest that others do the same via a "Tell a Friend" form. It also allows Library staff with the correct permissions to enter information about physical letters sent from library branches, and to export physical and electronic letter submission data.
 
+As originally written, the module relied heavily on custom NYPL code. This release excludes NYPL-specific functionality, and should install and run cleanly on a Drupal 6 site with the appropriate external dependencies.
+
 INSTALLATION
 ------------
 NYPL Advocacy can be installed and enabled in the manner described here: http://drupal.org/node/70151.

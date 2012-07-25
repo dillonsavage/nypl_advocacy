@@ -40,7 +40,6 @@ function nypl_advocacy_install() {
   variable_set('nypl_advocacy_campaign', '2012');
   variable_set('nypl_advocacy_city_council_nid', $cc_nid);
   variable_set('nypl_advocacy_tell_friend_nid', $tf_nid);
-  variable_set('nypl_advocacy_districts_key', 'dab838a64853702416d25e052d3174ae:17:65636627');
       
   // create council member content type
   $council_member_form_state = array(
