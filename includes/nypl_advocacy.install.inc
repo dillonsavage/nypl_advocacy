@@ -2886,11 +2886,11 @@ $tell_a_friend = array(
   'format' => '4',
   'picture' => '',
   'signup' => 0,
+  'path' => 'speakout/tell-a-friend',
   '_workflow' => FALSE,
   'av_content' => array(
     'position' => 'bottom',
   ),
-  'path' => 'speakout/tell-a-friend',
   'webform' => array(
     'confirmation' => '',
     'teaser' => '0',
