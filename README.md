@@ -31,29 +31,29 @@ A couple of the module's features require custom theme code. These are described
 
 1. To enable Tell a Friend emails to be sent as HTML, append the following code to your theme's template.php:
 
-    /**
-     * Implementation of hook_webform_mail_headers()
-     */
-    function nypl_new_webform_mail_headers($node, $submission, $email) {
-      $headers = array();
-      $tell_a_friend = variable_get('nypl_advocacy_tell_friend_nid', '');
-      if ($node->nid == $tell_a_friend) {
-        $headers['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
-      }
-      return $headers;
-    }
+        /**
+         * Implementation of hook_webform_mail_headers()
+         */
+        function nypl_new_webform_mail_headers($node, $submission, $email) {
+          $headers = array();
+          $tell_a_friend = variable_get('nypl_advocacy_tell_friend_nid', '');
+          if ($node->nid == $tell_a_friend) {
+            $headers['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+          }
+          return $headers;
+        }
 
 2. To enable Exact Target conversion tracking, add the following code to Webform's default webform-form.tpl.php file, then add the resulting template to your custom theme:
 
-    <?php
-    // get Exact Target metadata, if this is the advocacy city council form
-    $advocacy_form_nid = variable_get('nypl_advocacy_city_council_nid', NULL);
-    if ($form['#node']->nid == $advocacy_form_nid) {
-      $et_keys = array('j', 'e', 'l', 'jb', 'u', 'mid');
-      foreach ($et_keys as $key) {
-        if (isset($_GET[$key]) && (!isset($_COOKIE[$key]) || $_COOKIE[$key] != $_GET[$key])) {
-          setcookie($key, $_GET[$key]);
+        <?php
+        // get Exact Target metadata, if this is the advocacy city council form
+        $advocacy_form_nid = variable_get('nypl_advocacy_city_council_nid', NULL);
+        if ($form['#node']->nid == $advocacy_form_nid) {
+          $et_keys = array('j', 'e', 'l', 'jb', 'u', 'mid');
+          foreach ($et_keys as $key) {
+            if (isset($_GET[$key]) && (!isset($_COOKIE[$key]) || $_COOKIE[$key] != $_GET[$key])) {
+              setcookie($key, $_GET[$key]);
+            }
+          }
         }
-      }
-    }
-    ?>
+        ?>
