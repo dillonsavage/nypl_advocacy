@@ -91,11 +91,6 @@ function nypl_advocacy_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
-      'emails_sent' => array(
-        'type' => 'int',
-        'not null' => TRUE,
-        'default' => 0,
-      ),
     ),
     'primary key' => array('sid'),
   );
