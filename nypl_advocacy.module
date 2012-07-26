@@ -689,8 +689,8 @@ function nypl_advocacy_thankyou() {
   $adwords_code = variable_get('nypl_advocacy_ty_adwords', '');
   $body = variable_get('nypl_advocacy_ty_body', '');
   $donate_code = variable_get('nypl_advocacy_ty_donate', '');
-  $buttons = _get_button_image();
-  $donate_button = $donate_code . $buttons['donate-button']['tag'] . '</a>';
+  //$buttons = _get_button_image();
+  //$donate_button = $donate_code . $buttons['donate-button']['tag'] . '</a>';
   $email = variable_get('nypl_advocacy_ty_email', '');
   $twitter = variable_get('nypl_advocacy_ty_twitter', '');
   $fb = variable_get('nypl_advocacy_ty_fb', '');
