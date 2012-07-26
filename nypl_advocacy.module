@@ -727,7 +727,6 @@ function nypl_advocacy_thankyou() {
   $output .='</ol></div>';
 
   // Facebook donate instructions.
-  $cc_url = 
   $output .= '<div id="donate-profilepic">' . $fb_instructions . '</div>';
   $output .= '<span id="nypl-advocacy-learnmore">' . l('Return to the campaign home page.', 'node/' . $cc_nid) . '</span>';
   $output .='</div>';
